@@ -49,9 +49,20 @@ def _try_import(name: str):
         return None
 
 
+def _parse_metric(value: str) -> float | None:
+    """nvidia-smi reports fields like utilization.gpu as "[N/A]" on MIG
+    slices even when other fields (e.g. power.draw) are valid - parse each
+    field independently so one unavailable field doesn't discard the rest."""
+    try:
+        return float(value.strip())
+    except ValueError:
+        return None
+
+
 def query_gpu_metrics() -> tuple[float | None, float | None]:
-    """Returns (utilization_percent, power_watts) via nvidia-smi, or
-    (None, None) if no NVIDIA GPU/driver is present - e.g. in this sandbox.
+    """Returns (utilization_percent, power_watts) via nvidia-smi. Either or
+    both may be None if no NVIDIA GPU/driver is present, or if a given field
+    is unavailable (e.g. utilization.gpu under MIG).
     """
     import subprocess
     try:
@@ -65,7 +76,7 @@ def query_gpu_metrics() -> tuple[float | None, float | None]:
             timeout=2,
         ).decode().strip()
         util_str, power_str = out.split(",")
-        return float(util_str.strip()), float(power_str.strip())
+        return _parse_metric(util_str), _parse_metric(power_str)
     except (FileNotFoundError, subprocess.CalledProcessError, subprocess.TimeoutExpired, ValueError):
         return None, None
 

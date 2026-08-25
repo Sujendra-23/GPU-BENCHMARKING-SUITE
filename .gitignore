@@ -1,1 +1,7 @@
 .rocketride/
+matmul_cuda
+kernels/opencl/matmul_opencl
+kernels/stencil/jacobi_*
+benchmark_report.csv
+power_log.csv
+__pycache__/
