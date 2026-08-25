@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps { checkout scm }
+        }
+
+        stage('Lint / Syntax') {
+            steps {
+                sh 'python3 -m py_compile harness/*.py training/*.py'
+            }
+        }
+
+        // These stages run on any Jenkins agent, GPU or not - they're the
+        // deterministic, hardware-independent regression checks that
+        // should gate every commit.
+        stage('Validation Gate Self-Test') {
+            steps {
+                sh 'python3 harness/validate.py --self-test'
+            }
+        }
+
+        stage('OpenCL Kernel Correctness') {
+            steps {
+                sh 'cd kernels/opencl && make run'
+            }
+        }
+
+        stage('Compiler Comparison (informational)') {
+            steps {
+                sh 'cd kernels/stencil && make compare'
+            }
+        }
+
+        // Only runs on agents labeled 'gpu' - a real cluster would have a
+        // dedicated node pool with NVIDIA drivers/CUDA toolkit installed.
+        stage('CUDA Build + Benchmark') {
+            agent { label 'gpu' }
+            steps {
+                sh 'nvcc -O3 -o kernels/cuda/matmul_cuda kernels/cuda/matmul.cu'
+                sh 'kernels/cuda/matmul_cuda 1024 1024 1024'
+                sh 'python3 harness/benchmark.py --model resnet50 --batch-sizes 1,8,32,64 --precisions fp32,fp16'
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: '**/*.csv', allowEmptyArchive: true
+        }
+    }
+}

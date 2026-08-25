@@ -1,0 +1,20 @@
+Bootstrap: docker
+From: nvcr.io/nvidia/pytorch:24.05-py3
+
+%files
+    harness /workspace/harness
+    training /workspace/training
+    kernels /workspace/kernels
+    requirements.txt /workspace/requirements.txt
+
+%post
+    cd /workspace
+    pip install --no-cache-dir -r requirements.txt
+    nvcc -O3 -o /usr/local/bin/matmul_cuda kernels/cuda/matmul.cu
+
+%runscript
+    exec python3 /workspace/harness/benchmark.py "$@"
+
+%help
+    GPU benchmarking suite. Run with --nv to expose the host GPU:
+        singularity run --nv gpu-suite.sif --model resnet50 --batch-sizes 1,8,32
