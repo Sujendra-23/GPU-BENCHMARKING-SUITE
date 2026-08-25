@@ -17,13 +17,13 @@ import os
 def export_to_onnx(checkpoint_path: str, onnx_path: str, batch_size: int) -> None:
     import torch
 
-    model = torch.load(checkpoint_path, map_location="cpu")
+    model = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     model.eval()
     dummy_input = torch.randn(batch_size, 3, 224, 224)
     torch.onnx.export(
         model, dummy_input, onnx_path,
         input_names=["input"], output_names=["output"],
-        opset_version=17,
+        opset_version=17, external_data=False,
     )
     print(f"exported ONNX model to {onnx_path}")
 
@@ -33,7 +33,7 @@ def build_tensorrt_engine(onnx_path: str, engine_path: str, precision: str, batc
 
     logger = trt.Logger(trt.Logger.WARNING)
     builder = trt.Builder(logger)
-    network = builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH))
+    network = builder.create_network()  # explicit batch is the only mode since TensorRT 10
     parser = trt.OnnxParser(network, logger)
 
     with open(onnx_path, "rb") as f:
@@ -43,7 +43,7 @@ def build_tensorrt_engine(onnx_path: str, engine_path: str, precision: str, batc
             raise RuntimeError("failed to parse ONNX model")
 
     config = builder.create_builder_config()
-    config.max_workspace_size = 1 << 30  # 1 GB scratch space for kernel selection
+    config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, 1 << 30)  # 1 GB scratch space for kernel selection
 
     if precision == "fp16":
         config.set_flag(trt.BuilderFlag.FP16)
@@ -53,9 +53,9 @@ def build_tensorrt_engine(onnx_path: str, engine_path: str, precision: str, batc
         # omitted here since calibration data is deployment-specific.
         raise NotImplementedError("INT8 requires an IInt8Calibrator wired to real calibration data")
 
-    engine = builder.build_engine(network, config)
+    serialized_engine = builder.build_serialized_network(network, config)
     with open(engine_path, "wb") as f:
-        f.write(engine.serialize())
+        f.write(serialized_engine)
     print(f"built TensorRT engine ({precision}, batch={batch_size}) -> {engine_path}")
 
 

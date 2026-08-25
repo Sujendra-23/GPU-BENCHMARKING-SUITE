@@ -165,6 +165,11 @@ def build_tensorrt_runner(model_name: str, batch_size: int, precision: str):
         engine = runtime.deserialize_cuda_engine(f.read())
     context = engine.create_execution_context()
 
+    # TensorRT 10+ addresses tensors by name (execute_async_v3) rather than
+    # a positional bindings list (execute_async_v2, removed in TensorRT 10).
+    input_name = engine.get_tensor_name(0)
+    output_name = engine.get_tensor_name(1)
+
     input_shape = (batch_size, 3, 224, 224)
     h_input = np.random.randn(*input_shape).astype(np.float32)
     d_input = cuda.mem_alloc(h_input.nbytes)
@@ -173,9 +178,12 @@ def build_tensorrt_runner(model_name: str, batch_size: int, precision: str):
     d_output = cuda.mem_alloc(h_output.nbytes)
     stream = cuda.Stream()
 
+    context.set_tensor_address(input_name, int(d_input))
+    context.set_tensor_address(output_name, int(d_output))
+
     def run_once():
         cuda.memcpy_htod_async(d_input, h_input, stream)
-        context.execute_async_v2(bindings=[int(d_input), int(d_output)], stream_handle=stream.handle)
+        context.execute_async_v3(stream_handle=stream.handle)
         cuda.memcpy_dtoh_async(h_output, d_output, stream)
         stream.synchronize()
 

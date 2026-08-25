@@ -5,3 +5,6 @@ kernels/stencil/jacobi_*
 benchmark_report.csv
 power_log.csv
 __pycache__/
+engines/
+*.onnx
+*.onnx.data

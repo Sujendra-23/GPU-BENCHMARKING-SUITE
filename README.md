@@ -105,24 +105,77 @@ output from that run, not an estimate.
   logging power/temperature/clocks to `power_log.csv`; power draw tracked
   the benchmark load (idle ~95W, up to ~300W under the resnet50 sweep above).
 
-**Bug found and fixed:** `harness/benchmark.py`'s `query_gpu_metrics()`
-originally parsed `nvidia-smi`'s two CSV fields together and discarded
-*both* on any parse failure. On this MIG-enabled GPU, `utilization.gpu`
-reports the literal string `[N/A]`, which threw a `ValueError` that silently
-zeroed out the adjacent, perfectly valid `power.draw` reading too. Fixed by
-parsing each field independently (`_parse_metric()`) so an unavailable field
-no longer discards a valid one alongside it — visible above in
-`gpu_power_watts` being populated on every row despite `gpu_util_percent`
-staying empty.
+- **`training/export_tensorrt.py`** — installed the TensorRT Python bindings
+  and ran the full pipeline end-to-end against a real checkpoint: PyTorch
+  model → ONNX export → parsed TensorRT engine, at fp32:
+  ```
+  $ python export_tensorrt.py --checkpoint model.pt --precision fp32 --batch-size 8 --out engines/resnet18_fp32_bs8.trt
+  exported ONNX model to engines/resnet18_fp32_bs8.onnx
+  built TensorRT engine (fp32, batch=8) -> engines/resnet18_fp32_bs8.trt
+  ```
+  That `.trt` engine was then loaded and run through `harness/benchmark.py`'s
+  real `build_tensorrt_runner()` path (not skipped/mocked):
+  ```
+  BenchResult(framework='tensorrt', batch_size=8, precision='fp32', mean_latency_ms=1.9565, throughput_samples_per_sec=4088.98, gpu_power_watts=98.24)
+  ```
+  fp16/int8 engine builds are not currently supported by this script:
+  TensorRT 10+ removed `BuilderFlag.FP16`/`INT8` in favor of a
+  "strongly-typed network" precision model (precision now comes from the
+  ONNX graph's own tensor dtypes, set via `NetworkDefinitionCreationFlag.STRONGLY_TYPED`,
+  rather than a global builder flag) — a real design change, not a rename,
+  so it's left as a follow-up rather than papered over.
 
-**Not exercised in this run (needs additional hardware/setup beyond a
-single GPU pod):**
+- **`training/train_distributed.py`** — this pod has a single GPU (one MIG
+  slice), so true multi-GPU NCCL all-reduce across separate devices can't be
+  exercised here — that part of the JD requirement still needs a multi-GPU
+  box. Everything else in the script *was* run for real via
+  `torchrun --standalone --nproc_per_node=1`: `dist.init_process_group(backend="nccl")`,
+  DDP-wrapping a real pretrained resnet50, a `DistributedSampler`-backed
+  `DataLoader`, and a real training step with loss computed:
+  ```
+  epoch 0: 0.63s, ~25.4 samples/sec across 1 GPUs, loss=1.1075
+  ```
 
-- The `tensorrt` code path in `benchmark.py` — real code, conditionally
-  imported, but the `tensorrt` Python package isn't installed in this
-  environment
-- `training/train_distributed.py` — NCCL multi-GPU training needs 2+ GPUs;
-  this pod has one
-- `training/export_tensorrt.py` — requires the TensorRT Python bindings
-- `docker/Dockerfile`, `docker/gpu-suite.def` — standard patterns against
-  NVIDIA's official base images; no Docker/Singularity daemon in this pod
+- **`docker/Dockerfile`** — attempted a real `docker build` against it (not
+  just a syntax read). Installed Docker in this pod and started `dockerd`;
+  it fails with `Error response from daemon: unshare: operation not
+  permitted` when BuildKit tries to create the namespace for the build
+  step. This pod's own container doesn't have the `CAP_SYS_ADMIN`/netlink
+  privileges Docker-in-Docker needs (bridge network creation also failed
+  with `operation not permitted` before that) — a real, structural
+  restriction of running Docker nested inside another container without
+  `--privileged`, not something fixable from inside the pod. `gpu-suite.def`
+  (Singularity) has the same blocker: no daemon, and building one needs
+  privileges this environment doesn't grant either.
+
+**Bugs found and fixed while getting all of the above running:**
+
+- `harness/benchmark.py`'s `query_gpu_metrics()` originally parsed
+  `nvidia-smi`'s two CSV fields together and discarded *both* on any parse
+  failure. On this MIG-enabled GPU, `utilization.gpu` reports the literal
+  string `[N/A]`, which threw a `ValueError` that silently zeroed out the
+  adjacent, perfectly valid `power.draw` reading too. Fixed by parsing each
+  field independently (`_parse_metric()`) so an unavailable field no longer
+  discards a valid one alongside it — visible above in `gpu_power_watts`
+  being populated on every row despite `gpu_util_percent` staying empty.
+- `harness/validate.py` and `training/export_tensorrt.py` both called
+  `torch.load(checkpoint_path, map_location="cpu")` to load a full pickled
+  model object. Since PyTorch 2.6, `torch.load` defaults to
+  `weights_only=True`, which rejects exactly that (it's meant for tensor
+  state dicts, not arbitrary pickled classes) and raises instead of loading.
+  Fixed by passing `weights_only=False` explicitly, matching what both
+  scripts' checkpoint format actually requires.
+- `training/export_tensorrt.py`'s TensorRT builder code used the TensorRT
+  8.x API (`NetworkDefinitionCreationFlag.EXPLICIT_BATCH`,
+  `config.max_workspace_size`, `builder.build_engine(...).serialize()`),
+  all removed in TensorRT 10+. Updated to the current API
+  (`create_network()` with implicit explicit-batch, `set_memory_pool_limit`,
+  `build_serialized_network`). Also added `external_data=False` to the ONNX
+  export call — newer `torch.onnx.export` defaults to writing weights to a
+  separate `.onnx.data` file, which TensorRT's ONNX parser failed to import
+  cleanly here.
+- `harness/benchmark.py`'s `build_tensorrt_runner()` called
+  `context.execute_async_v2(bindings=[...])`, also removed in TensorRT 10+
+  in favor of `execute_async_v3`, which addresses tensors by name via
+  `set_tensor_address()` instead of a positional bindings list. Updated
+  accordingly.
