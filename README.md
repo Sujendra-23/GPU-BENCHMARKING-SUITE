@@ -126,11 +126,3 @@ single GPU pod):**
 - `training/export_tensorrt.py` — requires the TensorRT Python bindings
 - `docker/Dockerfile`, `docker/gpu-suite.def` — standard patterns against
   NVIDIA's official base images; no Docker/Singularity daemon in this pod
-
-## Honesty note on scope
-
-Two items from the original job posting are **not attempted** anywhere in
-this suite because they need physical lab equipment no software project can
-fake: BIOS-level memory timing/overclocking, and electrical power
-measurement via multimeters/DAQ hardware (Agilent/NI). Everything else in
-the JD's "what we need to see" list is represented above.
