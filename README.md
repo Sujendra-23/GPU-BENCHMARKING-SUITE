@@ -21,6 +21,7 @@ docker/Dockerfile             CUDA-base image packaging
 docker/gpu-suite.def          Singularity definition (JD explicitly lists this)
 docker/Jenkinsfile            CI: hardware-independent checks + GPU-gated stage
 dashboard/                    results dashboard + the same CPU reference, compiled to WASM, verifying live in-browser
+orchestration/                Airflow DAG + docker-compose orchestrating benchmark -> validate -> export
 ```
 
 ## What was actually run and verified
@@ -212,3 +213,108 @@ Emscripten SDK, e.g. `brew install emscripten`):
 ```
 ./kernels/reference/build_wasm.sh
 ```
+
+## Orchestration (Airflow)
+
+`orchestration/` turns three separate, manually-run CLI scripts -
+`harness/benchmark.py`, `harness/validate.py`, `training/export_tensorrt.py`
+- into one dependency-aware Airflow DAG
+(`orchestration/dags/gpu_suite_pipeline.py`): `run_benchmark` -> `run_validation`
+-> `run_tensorrt_export`, each gated on the previous task's real exit code
+(Airflow's default `trigger_rule=all_success` - no extra config needed for
+"only run validation if the benchmark succeeded"). It's a self-contained
+local dev setup using Airflow's official docker-compose quick-start
+(CeleryExecutor, Airflow 3.3.1), kept entirely inside `orchestration/` so it
+doesn't touch the rest of the repo; the actual repo is bind-mounted into the
+containers at `/gpu_suite` so the DAG runs the real scripts by their real
+paths and real CLI arguments, not reimplementations of their logic.
+`orchestration/.env` itself isn't committed (it holds a host-specific UID
+and a generated Fernet key) - `orchestration/.env.example` is, with
+instructions for generating your own.
+
+Manually triggered only (`schedule=None`) - this is a benchmarking suite run
+on demand against whatever hardware is attached, not a recurring production
+job.
+
+### Running it locally
+
+```
+cd orchestration
+cp .env.example .env             # fill in AIRFLOW_UID and a generated FERNET_KEY
+                                  # (instructions inline in .env.example) - not committed, see below
+docker compose up airflow-init   # one-time DB init + admin user
+docker compose up -d             # postgres, redis, apiserver, scheduler,
+                                  # dag-processor, worker, triggerer
+```
+
+Open http://localhost:8080 (airflow/airflow), unpause `gpu_suite_pipeline`,
+and trigger it - or from the CLI:
+
+```
+docker compose exec airflow-scheduler airflow dags trigger gpu_suite_pipeline
+docker compose exec airflow-scheduler airflow tasks states-for-dag-run \
+    gpu_suite_pipeline <run_id>   # run_id printed by the trigger command
+```
+
+`docker compose down` to stop; add `-v` only if you also want to discard the
+Postgres metadata volume.
+
+### What was actually run and verified here
+
+This DAG was triggered for real against the live CeleryExecutor stack above
+(not `airflow dags test`, which fakes the executor) - real task queuing,
+a real worker picking it up, real subprocess execution of the actual
+scripts, on this machine (no NVIDIA GPU). Every run produces the same
+result:
+
+```
+run_benchmark         success
+run_validation        success
+run_tensorrt_export   failed
+```
+
+- **`run_benchmark`** genuinely succeeds: `harness/benchmark.py` detects no
+  `torch`/`tensorrt` GPU runners are available and falls through to its own
+  documented numpy CPU self-test path - a real code path in that script, not
+  something this DAG fakes - and writes a real
+  `orchestration/output/benchmark_report.csv`.
+- **`run_validation`** genuinely succeeds: `--self-test` runs the actual
+  pass/accuracy-fail/latency-fail/both-fail decision-logic checks in
+  `harness/validate.py` and all four match. This DAG always uses
+  `--self-test` rather than a real `--checkpoint`, because
+  `validate.py`'s real-checkpoint path (`evaluate_real_model()`) raises
+  `NotImplementedError` by design - its docstring says the dataset-specific
+  `DataLoader` wiring was deliberately left abstract. That's a limitation of
+  the script itself, not something this orchestration layer works around.
+- **`run_tensorrt_export`** genuinely fails, every time, with
+  `ModuleNotFoundError: No module named 'torch'` - this container has no
+  GPU frameworks installed. Even with `torch` installed, it would still
+  fail: no trained checkpoint (`model.pt`) is committed to this repo, and
+  this environment has no NVIDIA GPU or TensorRT bindings either. All three
+  gaps are real and independent of each other; fixing one doesn't fix this
+  task without the others.
+
+**A real bug was found and fixed by actually running this**, distinct from
+the ones already listed under "What was actually run and verified": the
+first DAG run failed at `run_benchmark` itself, before ever reaching the
+self-test fallback, with `PermissionError: [Errno 13] Permission denied:
+'nvidia-smi'` - not the `FileNotFoundError` `query_gpu_metrics()` in
+`harness/benchmark.py` already caught. Airflow's official image runs as a
+non-root UID with no access to `/root/bin`, which is first on `$PATH`; when
+glibc's PATH search for `nvidia-smi` hits a directory it can't even `stat`,
+it surfaces `EACCES` (`PermissionError`) instead of `ENOENT`
+(`FileNotFoundError`), even though `nvidia-smi` doesn't exist anywhere on
+the system. Fixed by widening the caught exception to `OSError` (which
+covers both, and other exec failures) rather than enumerating subtypes.
+This is exactly the kind of thing a real non-root container environment
+surfaces that a bare-metal or root-shell test run doesn't - see the
+comment above `query_gpu_metrics()` in `harness/benchmark.py`.
+
+**Not verified, and not claimed:** a real GPU-backed run of this same DAG
+(where `run_benchmark` would exercise the `torch`/`tensorrt` runners for
+real and `run_tensorrt_export` could actually build an engine) needs the
+same NVIDIA GPU + CUDA + TensorRT setup described earlier in this README,
+plus a committed or externally-supplied model checkpoint - none of which
+this local orchestration environment has. The DAG's structure, dependency
+wiring, and non-GPU code paths are verified; the GPU code paths are not,
+and this section says so rather than implying otherwise.

@@ -77,7 +77,13 @@ def query_gpu_metrics() -> tuple[float | None, float | None]:
         ).decode().strip()
         util_str, power_str = out.split(",")
         return _parse_metric(util_str), _parse_metric(power_str)
-    except (FileNotFoundError, subprocess.CalledProcessError, subprocess.TimeoutExpired, ValueError):
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired, ValueError):
+        # OSError (not just FileNotFoundError) matters here: if any earlier
+        # PATH entry exists but isn't traversable by the current user - e.g.
+        # a non-root container UID that can't stat a root-owned directory
+        # like /root/bin, as happens running this under Airflow's official
+        # image - glibc's PATH search surfaces the last error it saw, EACCES,
+        # as PermissionError, even though nvidia-smi itself is simply absent.
         return None, None
 
 
