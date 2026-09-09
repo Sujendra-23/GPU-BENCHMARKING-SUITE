@@ -43,7 +43,7 @@ def evaluate_real_model(checkpoint_path: str, val_data_path: str) -> tuple[float
     import torch
     import time
 
-    model = torch.load(checkpoint_path, map_location="cpu")
+    model = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     model.eval()
 
     # In a real run this would be a DataLoader over the held-out set; kept

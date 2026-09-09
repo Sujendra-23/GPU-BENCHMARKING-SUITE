@@ -20,9 +20,10 @@
     <section class="panel">
       <h2>Recorded benchmark runs</h2>
       <p class="subtle">
-        Every row here was actually compiled and executed - see
-        <a href="../README.md">README.md "Verification notes"</a> for the raw
-        session output this table is built from. Nothing is estimated.
+        Every row here was actually compiled and run on a real NVIDIA GPU
+        (RunPod RTX PRO 6000 Blackwell, reached over SSH) - see
+        <a href="../README.md">README.md "What was actually run and verified"</a>
+        for the raw session output this table is built from. Nothing is estimated.
       </p>
       <table id="recorded-table">
         <thead>
@@ -102,8 +103,8 @@
       <ul class="subtle">
         <li>The WASM correctness check confirms the compiled reference implements the documented naive algorithm correctly on your machine, right now - it does not depend on trusting a server.</li>
         <li>It says nothing about the CUDA or OpenCL kernel's correctness on <em>this</em> run - that was checked separately, offline, on the hardware listed in the recorded table above, at the time it ran.</li>
-        <li>Live WASM timing and the recorded native CPU timing are not a controlled comparison: different machine, different day, and WASM/JS engine overhead vs a native binary. Use it as a sanity check on order-of-magnitude, not a precise benchmark.</li>
-        <li>No CUDA numbers exist in this repo yet because this project has never been built or run on a machine with an NVIDIA GPU.</li>
+        <li>Live WASM timing and the recorded native CPU timing are not a controlled comparison: the recorded numbers came from a different physical machine (a RunPod GPU pod) on a different day, and WASM/JS carries engine overhead a native binary doesn't. Use it as a sanity check on order-of-magnitude, not a precise benchmark.</li>
+        <li>The 2048×2048×2048 CUDA row can't be reproduced interactively here - this page caps matrix size at 768 so the naive O(n³) reference stays responsive on a browser's main thread. It's shown in the table because it's a real recorded result, not because you can re-run it live.</li>
       </ul>
     </section>
   </main>

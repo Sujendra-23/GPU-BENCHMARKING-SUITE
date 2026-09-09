@@ -1,28 +1,50 @@
 {
   "reference_source": "kernels/reference/matmul_ref.c",
-  "reference_note": "Single naive-triple-loop CPU implementation, shared by every correctness check in this repo (CUDA host program, OpenCL host program, and this dashboard's WASM build) - not three copies of the same logic.",
+  "reference_note": "Single naive-triple-loop CPU implementation, shared by every correctness check in this repo (CUDA host program, OpenCL host program, and this dashboard's WASM build) - not separate copies of the same logic.",
+  "hardware_note": "All GPU numbers below are from one RunPod GPU pod: NVIDIA RTX PRO 6000 Blackwell Server Edition, 1g.24gb MIG slice, driver 580.178.04, CUDA 13.0 - reached over SSH, not this machine. See README.md 'What was actually run and verified' for the raw session output this table is built from.",
   "recorded_runs": [
     {
-      "id": "opencl-pocl-512",
-      "kernel_file": "kernels/opencl/matmul.cl",
-      "kernel_label": "OpenCL, tiled (TILE_SIZE=16)",
-      "device": "pocl (CPU-backed OpenCL) on cpu-skylake-avx512-Intel(R) Xeon(R) Processor @ 2.10GHz",
-      "device_is_gpu": false,
+      "id": "cuda-512",
+      "kernel_file": "kernels/cuda/matmul.cu",
+      "kernel_label": "CUDA, tiled (TILE_SIZE=16)",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition (1g.24gb MIG slice)",
+      "device_is_gpu": true,
       "size": { "M": 512, "N": 512, "K": 512 },
-      "kernel_time_ms": 554.1826,
-      "cpu_reference_time_ms": 156.3003,
+      "kernel_time_ms": 0.3427,
+      "cpu_reference_time_ms": 225.24,
       "max_abs_diff": 0.001953,
       "verdict": "PASS",
       "verified": true,
-      "note": "This was actually compiled and run (gcc -lOpenCL, pocl device) - see README.md 'Verification notes'. pocl runs OpenCL kernels on the CPU, so the CPU reference beating the 'OpenCL' time here is expected, not a bug: it says nothing about real discrete-GPU performance."
-    }
-  ],
-  "not_available": [
+      "note": "~657x faster than the single-threaded CPU reference at this size."
+    },
     {
+      "id": "cuda-2048",
       "kernel_file": "kernels/cuda/matmul.cu",
       "kernel_label": "CUDA, tiled (TILE_SIZE=16)",
-      "reason": "Never compiled or run in this project's dev environment - no NVIDIA GPU and no nvcc installed.",
-      "status": "pending a run on real GPU hardware"
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition (1g.24gb MIG slice)",
+      "device_is_gpu": true,
+      "size": { "M": 2048, "N": 2048, "K": 2048 },
+      "kernel_time_ms": 8.0587,
+      "cpu_reference_time_ms": 51786.157,
+      "max_abs_diff": 0.003906,
+      "verdict": "PASS",
+      "verified": true,
+      "note": "~6426x faster than the single-threaded CPU reference at this size."
+    },
+    {
+      "id": "opencl-gpu-512",
+      "kernel_file": "kernels/opencl/matmul.cl",
+      "kernel_label": "OpenCL, tiled (TILE_SIZE=16)",
+      "device": "NVIDIA RTX PRO 6000 Blackwell Server Edition MIG 1g.24gb (via NVIDIA's OpenCL ICD)",
+      "device_is_gpu": true,
+      "size": { "M": 512, "N": 512, "K": 512 },
+      "kernel_time_ms": 0.587,
+      "cpu_reference_time_ms": 229.5449,
+      "max_abs_diff": 0.001953,
+      "verdict": "PASS",
+      "verified": true,
+      "note": "Same physical GPU as the CUDA row above - CUDA runs ~1.7x faster than OpenCL here on identical hardware."
     }
-  ]
+  ],
+  "not_available": []
 }
