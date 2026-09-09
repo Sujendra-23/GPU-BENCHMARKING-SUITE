@@ -10,6 +10,7 @@ packaging with GPU power/utilization monitoring.
 ```
 kernels/cuda/matmul.cu        tiled matmul CUDA kernel
 kernels/opencl/matmul.cl      the same algorithm in OpenCL, + C host program
+kernels/reference/matmul_ref.c  the one CPU reference every kernel above is checked against
 kernels/stencil/jacobi.c      GCC vs Clang compiler-comparison benchmark
 harness/benchmark.py          cross-framework inference benchmarking harness
 harness/validate.py           accuracy/latency deploy gate
@@ -19,7 +20,40 @@ training/export_tensorrt.py   ONNX export + TensorRT engine build
 docker/Dockerfile             CUDA-base image packaging
 docker/gpu-suite.def          Singularity definition (JD explicitly lists this)
 docker/Jenkinsfile            CI: hardware-independent checks + GPU-gated stage
+dashboard/                    results dashboard + the same CPU reference, compiled to WASM, verifying live in-browser
 ```
+
+## Results dashboard
+
+`dashboard/` is a small static page showing recorded benchmark results, plus
+a live correctness check that runs in the browser: `kernels/reference/matmul_ref.c`
+(the single naive-matmul implementation every kernel above is checked
+against — the CUDA and OpenCL host programs both `#include` it now, rather
+than each keeping their own copy) is compiled with Emscripten to
+`dashboard/wasm/matmul_ref.{js,wasm}`. The page lets you pick a matrix size
+and runs that exact reference client-side, cross-checking its output against
+an independent plain-JS reimplementation of the same algorithm.
+
+To view it locally (must be served over HTTP, not `file://`, since browsers
+block `fetch()` of local files under `file://`):
+
+```
+cd dashboard && python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+To rebuild the WASM module after editing `matmul_ref.c` (requires the
+Emscripten SDK, e.g. `brew install emscripten`):
+
+```
+./kernels/reference/build_wasm.sh
+```
+
+The dashboard's recorded-results table only contains the OpenCL-vs-CPU-reference
+numbers actually measured in this sandbox (see "Verification notes" below) —
+there is no CUDA row with numbers in it, because `matmul.cu` has never been
+compiled or run here. The dashboard says so explicitly rather than omitting
+the kernel or filling in a placeholder number.
 
 ## What was actually run and verified in this sandbox
 

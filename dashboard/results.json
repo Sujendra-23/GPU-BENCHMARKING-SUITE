@@ -1,0 +1,28 @@
+{
+  "reference_source": "kernels/reference/matmul_ref.c",
+  "reference_note": "Single naive-triple-loop CPU implementation, shared by every correctness check in this repo (CUDA host program, OpenCL host program, and this dashboard's WASM build) - not three copies of the same logic.",
+  "recorded_runs": [
+    {
+      "id": "opencl-pocl-512",
+      "kernel_file": "kernels/opencl/matmul.cl",
+      "kernel_label": "OpenCL, tiled (TILE_SIZE=16)",
+      "device": "pocl (CPU-backed OpenCL) on cpu-skylake-avx512-Intel(R) Xeon(R) Processor @ 2.10GHz",
+      "device_is_gpu": false,
+      "size": { "M": 512, "N": 512, "K": 512 },
+      "kernel_time_ms": 554.1826,
+      "cpu_reference_time_ms": 156.3003,
+      "max_abs_diff": 0.001953,
+      "verdict": "PASS",
+      "verified": true,
+      "note": "This was actually compiled and run (gcc -lOpenCL, pocl device) - see README.md 'Verification notes'. pocl runs OpenCL kernels on the CPU, so the CPU reference beating the 'OpenCL' time here is expected, not a bug: it says nothing about real discrete-GPU performance."
+    }
+  ],
+  "not_available": [
+    {
+      "kernel_file": "kernels/cuda/matmul.cu",
+      "kernel_label": "CUDA, tiled (TILE_SIZE=16)",
+      "reason": "Never compiled or run in this project's dev environment - no NVIDIA GPU and no nvcc installed.",
+      "status": "pending a run on real GPU hardware"
+    }
+  ]
+}

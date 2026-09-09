@@ -8,6 +8,7 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
+#include "../reference/matmul_ref.h"
 
 static char* read_file(const char* path, size_t* out_len) {
     FILE* f = fopen(path, "rb");
@@ -27,19 +28,6 @@ static double now_seconds(void) {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     return ts.tv_sec + ts.tv_nsec / 1e9;
-}
-
-// Naive reference implementation, used only to check correctness.
-static void matmul_cpu_reference(const float* A, const float* B, float* C, int M, int N, int K) {
-    for (int i = 0; i < M; i++) {
-        for (int j = 0; j < N; j++) {
-            float acc = 0.0f;
-            for (int k = 0; k < K; k++) {
-                acc += A[i * K + k] * B[k * N + j];
-            }
-            C[i * N + j] = acc;
-        }
-    }
 }
 
 int main(int argc, char** argv) {

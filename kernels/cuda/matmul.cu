@@ -1,16 +1,20 @@
 // Tiled matrix multiplication: C = A * B, A is (M x K), B is (K x N).
 // Same algorithm as kernels/opencl/matmul.cl (shared memory tiling), so the
-// two can be benchmarked head-to-head against the same CPU reference.
+// two can be benchmarked head-to-head against the same CPU reference
+// (kernels/reference/matmul_ref.c - also the one compiled to WASM for
+// dashboard/, so the browser check and this correctness check run the
+// identical reference code).
 //
 // Requires the CUDA toolkit (nvcc) and an NVIDIA GPU - not available in the
 // sandbox this repo was built in, see ../../README.md "Verification notes".
-// Build: nvcc -O3 -o matmul_cuda matmul.cu
+// Build: nvcc -O3 -I../reference -o matmul_cuda matmul.cu ../reference/matmul_ref.c
 
 #include <cuda_runtime.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
 #include <ctime>
+#include "../reference/matmul_ref.h"
 
 #define TILE_SIZE 16
 
@@ -44,15 +48,6 @@ __global__ void matmul_tiled(const float* A, const float* B, float* C, int M, in
     if (row < M && col < N) {
         C[row * N + col] = acc;
     }
-}
-
-static void matmul_cpu_reference(const float* A, const float* B, float* C, int M, int N, int K) {
-    for (int i = 0; i < M; i++)
-        for (int j = 0; j < N; j++) {
-            float acc = 0.0f;
-            for (int k = 0; k < K; k++) acc += A[i * K + k] * B[k * N + j];
-            C[i * N + j] = acc;
-        }
 }
 
 #define CUDA_CHECK(call) do { \

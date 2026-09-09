@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GPU Benchmark Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>GPU Benchmarking Suite — Results Dashboard</h1>
+    <p class="subtle">
+      Recorded kernel benchmarks, plus a live correctness check: the exact CPU
+      reference matmul used to verify every kernel in this repo, compiled to
+      WebAssembly and run in your browser right now.
+    </p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Recorded benchmark runs</h2>
+      <p class="subtle">
+        Every row here was actually compiled and executed - see
+        <a href="../README.md">README.md "Verification notes"</a> for the raw
+        session output this table is built from. Nothing is estimated.
+      </p>
+      <table id="recorded-table">
+        <thead>
+          <tr>
+            <th>Kernel</th>
+            <th>Device</th>
+            <th>Size (M×N×K)</th>
+            <th>Kernel time</th>
+            <th>CPU ref time</th>
+            <th>Max abs diff</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="unavailable-list"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Live verification (WASM)</h2>
+      <p class="subtle">
+        <code>kernels/reference/matmul_ref.c</code> — the same naive
+        triple-loop reference the CUDA and OpenCL host programs check
+        themselves against — compiled with Emscripten to
+        <code>matmul_ref.wasm</code> and loaded on this page. Pick a matrix
+        size, generate random inputs with a seeded PRNG, and it runs
+        <code>matmul_cpu_reference()</code> right here in your browser, then
+        cross-checks the WASM output against an independent plain-JS
+        implementation of the identical algorithm.
+      </p>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="size-m">M</label>
+          <input type="number" id="size-m" value="256" min="2" max="768" />
+        </div>
+        <div class="field">
+          <label for="size-n">N</label>
+          <input type="number" id="size-n" value="256" min="2" max="768" />
+        </div>
+        <div class="field">
+          <label for="size-k">K</label>
+          <input type="number" id="size-k" value="256" min="2" max="768" />
+        </div>
+        <div class="field">
+          <label for="seed">Seed</label>
+          <input type="number" id="seed" value="42" />
+        </div>
+        <button id="run-btn">Run in browser</button>
+      </div>
+      <p class="note">Sizes above 768 are blocked here - the naive O(n³) reference gets slow to run twice (WASM + JS cross-check) on the main thread of a browser tab.</p>
+
+      <div id="verify-status"></div>
+      <div class="result-grid" id="result-grid" hidden>
+        <div class="stat">
+          <div class="label">WASM compute time</div>
+          <div class="value" id="stat-wasm-time">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">JS cross-check time</div>
+          <div class="value" id="stat-js-time">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Max abs diff (WASM vs JS)</div>
+          <div class="value" id="stat-diff">—</div>
+        </div>
+        <div class="stat">
+          <div class="label">Verdict</div>
+          <div class="value" id="stat-verdict">—</div>
+        </div>
+      </div>
+      <div id="recorded-comparison" class="note"></div>
+    </section>
+
+    <section class="panel">
+      <h2>What this does and doesn't prove</h2>
+      <ul class="subtle">
+        <li>The WASM correctness check confirms the compiled reference implements the documented naive algorithm correctly on your machine, right now - it does not depend on trusting a server.</li>
+        <li>It says nothing about the CUDA or OpenCL kernel's correctness on <em>this</em> run - that was checked separately, offline, on the hardware listed in the recorded table above, at the time it ran.</li>
+        <li>Live WASM timing and the recorded native CPU timing are not a controlled comparison: different machine, different day, and WASM/JS engine overhead vs a native binary. Use it as a sanity check on order-of-magnitude, not a precise benchmark.</li>
+        <li>No CUDA numbers exist in this repo yet because this project has never been built or run on a machine with an NVIDIA GPU.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Source: <a href="https://github.com/Sujendra-23/GPU-BENCHMARKING-SUITE" target="_blank" rel="noopener">GPU-BENCHMARKING-SUITE</a> ·
+    Reference implementation: <code>kernels/reference/matmul_ref.c</code> ·
+    Rebuild the WASM module with <code>kernels/reference/build_wasm.sh</code>
+  </footer>
+
+  <script src="wasm/matmul_ref.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
