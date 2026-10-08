@@ -10,6 +10,7 @@ packaging with GPU power/utilization monitoring.
 ```
 kernels/cuda/matmul.cu        tiled matmul CUDA kernel
 kernels/opencl/matmul.cl      the same algorithm in OpenCL, + C host program
+kernels/hip/matmul.hip.cpp    HIP/ROCm port of the CUDA kernel (hipify-perl output, tidied), for AMD GPUs
 kernels/reference/matmul_ref.c  the one CPU reference every kernel above is checked against
 kernels/stencil/jacobi.c      GCC vs Clang compiler-comparison benchmark
 harness/benchmark.py          cross-framework inference benchmarking harness
@@ -150,6 +151,28 @@ output from that run, not an estimate.
   `--privileged`, not something fixable from inside the pod. `gpu-suite.def`
   (Singularity) has the same blocker: no daemon, and building one needs
   privileges this environment doesn't grant either.
+
+**HIP / ROCm port (AMD) — compiled, not yet run on an AMD GPU:**
+
+- **`kernels/hip/matmul.hip.cpp`** — `hipify-perl` (ROCm) translated
+  `kernels/cuda/matmul.cu`; the kernel body needed no changes (HIP uses the
+  same `__shared__` / `__syncthreads()` / `<<<>>>` syntax). Hand edits: HIP
+  labels, `HIP_CHECK` on every runtime call, and `extern "C"` around the shared
+  C reference header (`hipcc` otherwise looks for a mangled C++ symbol).
+  Verified inside the `rocm/dev-ubuntu-24.04` container (HIP 7.x, AMD clang):
+  ```
+  $ make -C kernels/hip compile-check      # gfx90a, gfx942, gfx1030, gfx1100
+  $ hipcc -O3 --offload-arch=gfx90a -o matmul_hip matmul.hip.cpp ../reference/matmul_ref.c
+  ```
+  All four architectures compile with no warnings and the binary links against
+  the same CPU reference as the CUDA and OpenCL builds. **It has not been
+  executed on AMD hardware:** the development machine is an Apple M4 and the
+  RunPod session above was NVIDIA, so the only run was on a container with no
+  `/dev/kfd`, where it exits with `HIP error ... no ROCm-capable device is
+  detected` rather than printing a result. No AMD timings or correctness
+  results exist yet; on a ROCm machine run `make -C kernels/hip run
+  GPU_ARCH=$(rocminfo | grep -o -m1 'gfx[0-9a-f]*')`. The OpenCL kernel was
+  likewise only run on NVIDIA's ICD, not on an AMD device.
 
 **Bugs found and fixed while getting all of the above running:**
 

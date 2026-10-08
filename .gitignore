@@ -8,3 +8,4 @@ __pycache__/
 engines/
 *.onnx
 *.onnx.data
+kernels/hip/matmul_hip
