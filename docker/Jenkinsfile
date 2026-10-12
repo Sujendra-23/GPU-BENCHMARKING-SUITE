@@ -8,7 +8,7 @@ pipeline {
 
         stage('Lint / Syntax') {
             steps {
-                sh 'python3 -m py_compile harness/*.py training/*.py'
+                sh 'python3 -m py_compile harness/*.py training/*.py compilers/*.py serving/*.py kernels/*.py kernels/cuda/*.py kernels/triton/*.py tests/*.py'
             }
         }
 
@@ -25,6 +25,13 @@ pipeline {
             steps {
                 sh 'python3 harness/perf_per_watt.py --self-test'
                 sh 'python3 harness/perf_per_watt.py --check-readme'
+            }
+        }
+
+        stage('Serving and Compiler Unit Checks') {
+            steps {
+                sh 'python3 -m pip install pytest -r serving/requirements-client.txt'
+                sh 'python3 -m pytest -q tests/test_serving.py tests/test_compilers.py'
             }
         }
 
@@ -48,6 +55,10 @@ pipeline {
                 sh 'nvcc -O3 -o kernels/cuda/matmul_cuda kernels/cuda/matmul.cu'
                 sh 'kernels/cuda/matmul_cuda 1024 1024 1024'
                 sh 'python3 harness/benchmark.py --model resnet50 --batch-sizes 1,8,32,64 --precisions fp32,fp16'
+                sh 'python3 -m pip install -r requirements-kernels.txt'
+                sh 'python3 -m pytest -q tests/test_kernels.py'
+                sh 'python3 -m harness.kernel_benchmark'
+                sh 'python3 -m compilers.torch_compile'
             }
         }
     }
@@ -55,6 +66,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: '**/*.csv', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'results/**/*.json,results/**/*.hlo,results/**/*.mlir', allowEmptyArchive: true
         }
     }
 }

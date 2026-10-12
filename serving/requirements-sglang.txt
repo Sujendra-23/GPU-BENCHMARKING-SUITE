@@ -1,0 +1,5 @@
+sglang[srt,openai]==0.4.10.post2
+httpx>=0.27,<1
+openai>=1.99.1,<2
+transformers==4.54.1
+cuda-python>=12,<13

@@ -1,0 +1,50 @@
+{
+  "command": [
+    "/workspace/gpu-benchmarking-suite-codex/.venv-vllm/bin/python",
+    "-m",
+    "vllm.entrypoints.openai.api_server",
+    "--model",
+    "Qwen/Qwen2.5-0.5B-Instruct",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8000",
+    "--dtype",
+    "half",
+    "--kv-cache-dtype",
+    "auto",
+    "--max-model-len",
+    "2048",
+    "--max-num-seqs",
+    "16",
+    "--no-enable-prefix-caching",
+    "--kv-cache-memory-bytes",
+    "805306368",
+    "--enforce-eager"
+  ],
+  "config": {
+    "backend": "vllm",
+    "port": 8000,
+    "concurrency": [
+      1,
+      4,
+      8,
+      16
+    ],
+    "requests": 32,
+    "input_tokens": 256,
+    "output_tokens": 128,
+    "kv_capacity_tokens": 65536,
+    "startup_timeout": 600,
+    "out_dir": "results/serving",
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_url": "http://127.0.0.1:8000",
+    "metrics_url": null,
+    "metrics_interval": 0.1,
+    "timeout": 120,
+    "kv_capacity_bytes": 805306368,
+    "seed": 7,
+    "warmup": 2,
+    "out": "results/serving/vllm.json"
+  }
+}

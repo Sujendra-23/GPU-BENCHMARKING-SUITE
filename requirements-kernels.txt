@@ -1,0 +1,5 @@
+# Install the CUDA PyTorch wheel appropriate for the host first.
+torch>=2.4
+triton>=3.0; platform_system == "Linux"
+ninja>=1.11
+pytest>=8

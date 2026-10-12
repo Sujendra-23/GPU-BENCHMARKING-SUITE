@@ -5,15 +5,33 @@ matching CUDA and OpenCL implementations of the same kernel, an NCCL multi-GPU
 training script, a deploy-gating validation harness, and Docker/Singularity
 packaging with GPU power/utilization monitoring.
 
+## Attention kernels, LLM serving and ML compilers
+
+New experiments extend the suite with fp16 fused softmax and tiled online-softmax
+attention in **Triton and CUDA C++**, correctness checks against PyTorch SDPA,
+a vendor BLAS matmul baseline, focused Nsight profiling, streaming
+**vLLM/SGLang** benchmarks for Qwen2.5-0.5B-Instruct, and **torch.compile / JAX
+jit** experiments that preserve generated Triton, StableHLO and XLA HLO.
+
+See [setup, methodology and commands](docs/gpu-experiments.md) and
+[RunPod verification results](results/experiments.md). The original measured
+results below describe the earlier Blackwell run, separately from these additions.
+
 ## Layout
 
 ```
 kernels/cuda/matmul.cu        tiled matmul CUDA kernel
+kernels/cuda/fused_ops.cu     fp16 fused softmax + tiled online-softmax attention
+kernels/triton/               tensor-core attention + fused softmax in Triton
 kernels/opencl/matmul.cl      the same algorithm in OpenCL, + C host program
 kernels/hip/matmul.hip.cpp    HIP/ROCm port of the CUDA kernel (hipify-perl output, tidied), for AMD GPUs
 kernels/reference/matmul_ref.c  the one CPU reference every kernel above is checked against
 kernels/stencil/jacobi.c      GCC vs Clang compiler-comparison benchmark
 harness/benchmark.py          cross-framework inference benchmarking harness
+harness/kernel_benchmark.py   correctness-gated fp16 kernel and SDPA/BLAS sweep
+harness/profile_kernels.py    warmed single-launch Nsight Compute target
+serving/                      streaming vLLM/SGLang load test + local server runner
+compilers/                    torch.compile source inspection + JAX jit/HLO dumps
 harness/validate.py           accuracy/latency deploy gate
 harness/power_monitor.py      nvidia-smi power/util/clock logger
 harness/perf_per_watt.py      images/s per watt from the recorded benchmark rows (results/)

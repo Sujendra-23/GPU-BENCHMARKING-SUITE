@@ -1,0 +1,4 @@
+torch>=2.4
+jax>=0.4.35
+numpy>=1.26
+# NVIDIA JAX: install 'jax[cuda12]' in its own environment instead of CPU jax.

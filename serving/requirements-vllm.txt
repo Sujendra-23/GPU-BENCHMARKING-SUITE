@@ -1,0 +1,5 @@
+# Isolated Python 3.11 environment; tested versions recorded in results.
+vllm==0.10.2
+httpx>=0.27,<1
+openai>=1.99.1,<2
+transformers>=4.55.2,<4.56
