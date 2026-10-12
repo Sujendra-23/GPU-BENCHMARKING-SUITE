@@ -1,0 +1,9 @@
+framework,batch_size,precision,mean_latency_ms,p95_latency_ms,throughput_samples_per_sec,gpu_util_percent,gpu_power_watts
+torch,1,fp32,2.0897,2.109,478.54,,233.65
+torch,1,fp16,2.6747,5.1062,373.87,,236.55
+torch,8,fp32,7.0495,7.064,1134.84,,258.88
+torch,8,fp16,4.02,4.1378,1990.06,,261.69
+torch,32,fp32,34.417,34.463,929.77,,303.15
+torch,32,fp16,16.4107,16.4761,1949.95,,290.58
+torch,64,fp32,72.1238,72.1814,887.36,,298.96
+torch,64,fp16,36.3724,36.3985,1759.58,,306.48
