@@ -16,6 +16,8 @@ kernels/stencil/jacobi.c      GCC vs Clang compiler-comparison benchmark
 harness/benchmark.py          cross-framework inference benchmarking harness
 harness/validate.py           accuracy/latency deploy gate
 harness/power_monitor.py      nvidia-smi power/util/clock logger
+harness/perf_per_watt.py      images/s per watt from the recorded benchmark rows (results/)
+results/                      recorded ResNet-50 rows + the computed performance-per-watt table
 training/train_distributed.py multi-GPU DDP training with NCCL backend
 training/export_tensorrt.py   ONNX export + TensorRT engine build
 docker/Dockerfile             CUDA-base image packaging
@@ -205,6 +207,37 @@ output from that run, not an estimate.
   in favor of `execute_async_v3`, which addresses tensors by name via
   `set_tensor_address()` instead of a positional bindings list. Updated
   accordingly.
+
+## Performance per watt
+
+`harness/perf_per_watt.py` turns the recorded ResNet-50 sweep above into
+images/s/W and J/image per batch size and precision, plus fp16-vs-fp32 ratios.
+Inputs and outputs are committed under `results/`:
+`resnet50_gpu_benchmark.csv` (the eight rows from the table above, verified
+identical to this README by `--check-readme`), `perf_per_watt.md`, and
+`perf_per_watt.csv`. Regenerate with:
+
+```
+python3 harness/perf_per_watt.py results/resnet50_gpu_benchmark.csv \
+    --markdown results/perf_per_watt.md --csv-out results/perf_per_watt.csv
+python3 harness/perf_per_watt.py --self-test     # arithmetic and row-skipping checks
+python3 harness/perf_per_watt.py --check-readme  # CSV == README table
+```
+
+From the recorded numbers (single run per configuration): at batch 8, fp16
+gives 7.60 images/s/W (1990.06 images/s at 261.69 W) versus 4.38 for fp32
+(1134.84 images/s at 258.88 W), a 1.73x improvement; at batch 32 it is 2.19x and
+at batch 64 1.93x. At batch 1, fp16 is *worse* than fp32 (0.77x), as recorded.
+The arithmetic is plain division of recorded values; the script performs no
+new GPU measurement. Caveat: the power figure comes from `nvidia-smi` on a MIG
+slice and may describe the whole board, so use the fp16/fp32 ratios, not the
+absolute images/s/W, as the comparison. The repo has no committed power log,
+so power is the per-row `gpu_power_watts` from the benchmark CSV, not a
+time-integrated energy measurement.
+
+**Not done:** a CUDA Sobel + non-maximum-suppression stage compared with
+OpenCV. It needs `nvcc` and an NVIDIA GPU to compile and check; neither exists on
+this Mac, so it was skipped rather than added unverified.
 
 ## Results dashboard
 

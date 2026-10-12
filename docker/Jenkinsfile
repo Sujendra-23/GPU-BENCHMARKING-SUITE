@@ -21,6 +21,13 @@ pipeline {
             }
         }
 
+        stage('Performance-per-watt Check') {
+            steps {
+                sh 'python3 harness/perf_per_watt.py --self-test'
+                sh 'python3 harness/perf_per_watt.py --check-readme'
+            }
+        }
+
         stage('OpenCL Kernel Correctness') {
             steps {
                 sh 'cd kernels/opencl && make run'
