@@ -1,0 +1,8 @@
+uid=0(root) gid=0(root) groups=0(root)
+RmProfilingAdminOnly: 1
+Version 2024.1.1.0 (build 33998838) (public-release)
+==PROF== Connected to process 3962 (/usr/bin/python3.11)
+==ERROR== ERR_NVGPUCTRPERM - The user does not have permission to access NVIDIA GPU Performance Counters on the target device 0. For instructions on enabling permissions and to get more information see https://developer.nvidia.com/ERR_NVGPUCTRPERM
+==PROF== Disconnected from process 3962
+==WARNING== No kernels were profiled.
+sudo: not installed

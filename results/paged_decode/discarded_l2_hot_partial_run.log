@@ -1,0 +1,13 @@
+# DISCARDED partial run of harness/paged_decode_bench.py (first version), RTX 4090.
+# The KV cache was NOT rotated, so the CUDA Graph replays re-read the same data from the 72 MB L2 cache,
+# which is why several rows report more than the 1008 GB/s DRAM peak. The run was killed and the benchmark
+# fixed (see the "L2 handling" note in the script). The original file was not saved; the lines below are
+# transcribed from the console output of that run and are kept only as evidence of the artifact.
+b=1   max_len=512   triton             pass   5.2 us   399.6 GB/s
+b=4   max_len=512   triton             pass   7.3 us  1099.2 GB/s
+b=16  max_len=512   triton             pass  15.0 us  1590.2 GB/s
+b=16  max_len=512   flashinfer         pass  15.0 us  1590.2 GB/s
+b=4   max_len=2048  triton             pass  14.7 us  1832.1 GB/s
+b=4   max_len=2048  flashinfer         pass  14.7 us  1832.1 GB/s
+b=1   max_len=4096  triton             pass   9.3 us  1795.5 GB/s
+b=4   max_len=4096  triton             pass  19.7 us  2469.6 GB/s

@@ -17,10 +17,130 @@ See [setup, methodology and commands](docs/gpu-experiments.md) and
 [RunPod verification results](results/experiments.md). The original measured
 results below describe the earlier Blackwell run, separately from these additions.
 
+## DL-kernel experiments (second RTX 4090 session)
+
+A second RunPod session on one **NVIDIA GeForce RTX 4090** (24 GB, sm_89, driver
+570.211.01, CUDA toolkit 12.4 / nvcc 12.4.131, Python 3.11.10, PyTorch 2.4.1+cu124,
+Triton 3.0.0, FlashInfer 0.2.5+cu124torch2.4, CUTLASS C++ v3.5.1, CUTLASS Python
+DSL 4.8.0, Nsight Compute 2024.1.1.0) added the pieces below. Every number is
+from a raw JSON/text report committed under `results/`; the full tables are in
+[`results/dl-kernels.md`](results/dl-kernels.md) (regenerate with
+`python -m harness.dl_kernel_report`) and the commands are in
+[`docs/dl-kernel-experiments.md`](docs/dl-kernel-experiments.md). Timing is CUDA
+events over CUDA Graph replays (median) unless a section says otherwise; the
+pod's container restarted once mid-session, so some runs were relaunched.
+Datasheet peaks used for context (not measured here): 165.2 TFLOPs dense fp16
+tensor with fp32 accumulate, 82.6 TFLOPs fp32, 1008 GB/s.
+
+**Attention forward** (`harness/attention_sweep.py`; fp16, batch 4, 16 heads,
+N = 512 to 8192, head_dim 64 and 128, causal and not; 92 rows, all within 2e-3
+of an fp32 reference, worst 1.2e-3). Percent is of PyTorch SDPA's flash backend:
+
+| kernel | non-causal | causal |
+|---|---|---|
+| `kernels/triton/attention.py` (original) | 64 to 75% (88 to 119 TFLOPs) | 71 to 92% |
+| `kernels/triton/attention_tuned.py` (new: block pointers, exp2 softmax, split causal loop, autotuned BLOCK_M/N, warps, stages) | 91 to 105% (128 to 158 TFLOPs); 96 to 98% for N >= 2048 | 79 to 123%; 95 to 104% for N >= 4096; below SDPA for head_dim 128 up to N = 2048 (79 to 92%) |
+| `kernels/cuda/attention_wmma.cu` (new: tensor-core WMMA, shared-memory K/V tiles) | 22 to 27% (29 to 43 TFLOPs) | 28 to 38% |
+| `kernels/cuda/fused_ops.cu` scalar attention (old) | 2 to 3% (3 to 4 TFLOPs, run only to N = 2048) | 3 to 5% |
+
+The WMMA kernel is about 11x faster than the scalar one (N = 1024, head_dim 64)
+but still well below SDPA, so it is a working tensor-core kernel, not a
+competitive one. What is known about the gap: it uses 56 to 64 registers per
+thread with no spills (`cuobjdump`), and its dynamic shared memory is 71.7 KB
+(head_dim 64) or 82.9 KB (head_dim 128) per block, which by arithmetic allows
+one 4-warp block per SM on a 100 KB SM; it keeps O in shared memory and has no
+`cp.async` pipelining. Those are design facts and static numbers; **no
+counter-based profile confirms them as the cause** (see Nsight below).
+
+**GEMM** (`harness/gemm_bench.py`, `kernels/cuda/gemm_fp32.cu`,
+`kernels/cutlass/gemm_fp16.cu`; N = 2048, 4096, 8192; checked against float64;
+TF32 off so the fp32 baseline is plain SGEMM):
+
+| kernel | N = 2048 | N = 4096 | N = 8192 |
+|---|---|---|---|
+| fp32 tiled 16x16 (the old `matmul.cu` algorithm), % of cuBLAS | 12% | 12% | 9% |
+| fp32 register-blocked 128x128x8, 8x8 per thread (new) | 68% (37 TFLOPs) | 86% (48 TFLOPs) | 76% (41 TFLOPs) |
+| fp16 CUTLASS `device::Gemm` 128x128x32, 4 stages (new), % of cuBLAS | 100% | 99% | 101% |
+| fp16 CUTLASS Python CuTe DSL example (CUTLASS's own code), % of cuBLAS | 94% | 93% | 103% |
+
+cuBLAS itself ran at 54 to 56 TFLOPs fp32 and 161 to 169 TFLOPs fp16, slightly
+above the datasheet fp16 figure, so treat "% of peak" as rough. The register-blocked
+kernel is sensitive to measurement method: `harness/roofline.py` (torch.profiler,
+no CUDA Graph) saw 42.0 TFLOPs at N = 4096 versus 48.4 here.
+
+**Paged-KV GQA decode** (`kernels/triton/paged_decode.py`,
+`harness/paged_decode_bench.py`; 32 query heads, 8 KV heads, head_dim 128,
+page 16, variable lengths, shuffled page table). Triton, FlashInfer
+(`BatchDecodeWithPagedKVCacheWrapper`) and SDPA on dense padded KV (gather not
+timed) all match an fp32 reference (worst 3.2e-4). KV copies are rotated so each
+timed launch misses the 72 MB L2; an earlier un-rotated run reported more than
+1 TB/s on small shapes (L2 hits) and was discarded; its console lines are transcribed in
+`results/paged_decode/discarded_l2_hot_partial_run.log`.
+At 64 sequences with lengths up to 8192: Triton 1704 us (930 GB/s), FlashInfer
+1692 us (937 GB/s), SDPA-dense 2269 us (699 GB/s). At 64 sequences up to 2048:
+444, 441 and 581 us. Small batches are launch/latency-bound for all three
+(batch 1, length up to 512: Triton 6.5 us, FlashInfer 8.4 us, SDPA 31.8 us).
+
+**Compilers** (`compilers/llama_block.py`; LLaMA-style block with RMSNorm, RoPE,
+causal SDPA and SwiGLU; hidden 4096, 32 heads, MLP 11008, batch 1, seq 2048, fp16;
+error against the same block in fp32 is at most 0.1% of the largest output):
+
+| mode | median ms | speedup | cold compile |
+|---|---:|---:|---:|
+| eager | 6.225 | 1.00x | - |
+| `torch.compile` default | 5.794 | 1.07x | 3.7 s |
+| `torch.compile` `max-autotune-no-cudagraphs` | 5.464 | 1.14x | 35.8 s |
+
+The Inductor wrapper code with its Triton kernels is saved in
+`results/compilers/llama_block/*/output_code_*.py`. The matmuls stay on
+cuBLAS/Triton templates and attention stays SDPA, so the gain is modest.
+`harness/triton_ir_dump.py` saved Triton's TTIR, TTGIR, LLIR and PTX for the
+original and tuned attention kernels in `results/triton_ir/` (e.g. the tuned
+kernel is 308 / 534 / 3860 / 2931 lines at the four stages and its PTX contains
+128 `mma.sync` and 86 `cp.async` instructions); see
+[`docs/dl-kernel-experiments.md`](docs/dl-kernel-experiments.md) for what each stage shows.
+
+**Roofline without Nsight** (`harness/roofline.py`, torch.profiler kernel time
+plus algorithmic FLOPs and minimum bytes): at N = 4096 the tuned Triton
+attention reaches 158 TFLOPs (96% of the datasheet peak) at head_dim 64 and 155
+(94%) at 128 versus 154 and 160 for SDPA; the WMMA kernel reaches 24 to 26%; paged decode
+(64 sequences) sits on the memory side of the ridge at 930 GB/s (92% of peak).
+
+**Tests:** `tests/test_kernels_extra.py` adds GPU checks (irregular lengths,
+head dims 32/64/128, causal, shuffled page tables, GEMMs); the full suite
+(`pytest tests`) passed on the pod: 173 passed.
+
+**Not done, and why:**
+
+- **Nsight Compute counters.** `ncu` 2024.1.1.0 fails with `ERR_NVGPUCTRPERM`
+  (the driver has `RmProfilingAdminOnly: 1`; the container is root without the
+  capability to change it, no `sudo`): `results/nsight/ncu-attempt-2026-10-12-pod2.txt`.
+  Nsight Systems is not installed on the pod. No occupancy or memory-throughput
+  counters exist.
+- **Apache TVM.** Not run. The only CUDA wheel (`apache-tvm` 0.27.0) is built
+  against CUDA 13 (`libcudart.so.13`); with that runtime installed
+  `cudaGetDeviceCount` returns error 35 (insufficient driver: the pod's driver
+  supports CUDA 12.8 only). The mlc-ai nightly wheel failed to load
+  (`undefined symbol` in `libtvm_runtime.so`). A source build was not attempted.
+- **cuTile.** Not run. Package metadata (`cuda-tile` 1.6.0) says it needs
+  driver r580 or later and lists Ada among supported GPUs; this pod has r570
+  (`results/notes/cutile-check.txt`).
+- The CuTe DSL row is CUTLASS's own example run through `harness/cute_dsl_gemm.py`,
+  not a kernel written for this repo. It needed `cuda-bindings` 12.x because 13.x
+  also fails with insufficient driver.
+- Only one GPU model (RTX 4090) and one process at a time; no multi-GPU or other
+  architectures. The JAX/XLA and serving results above are from the earlier session
+  and were not re-run.
+
 ## Layout
 
 ```
 kernels/cuda/matmul.cu        tiled matmul CUDA kernel
+kernels/cuda/attention_wmma.cu  tensor-core (WMMA) flash-style attention forward
+kernels/cuda/gemm_fp32.cu     fp32 tiled and register-blocked GEMMs (PyTorch extension)
+kernels/cutlass/gemm_fp16.cu  CUTLASS device-level fp16 tensor-core GEMM (needs CUTLASS_DIR)
+kernels/triton/attention_tuned.py  autotuned FlashAttention-2-style Triton kernel
+kernels/triton/paged_decode.py     paged-KV GQA decode attention (split-KV) in Triton
 kernels/cuda/fused_ops.cu     fp16 fused softmax + tiled online-softmax attention
 kernels/triton/               tensor-core attention + fused softmax in Triton
 kernels/opencl/matmul.cl      the same algorithm in OpenCL, + C host program
