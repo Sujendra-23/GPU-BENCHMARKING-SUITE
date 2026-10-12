@@ -1,0 +1,14 @@
+== N=2048
+mnkl: (2048, 2048, 2048, 1)
+[DSL INFO] Execution time: 113.82911682128906 microseconds per iteration
+PASS
+== N=4096
+mnkl: (4096, 4096, 4096, 1)
+[DSL INFO] Execution time: 873.0419158935547 microseconds per iteration
+PASS
+== N=8192
+mnkl: (8192, 8192, 8192, 1)
+[DSL INFO] Execution time: 6570.9259033203125 microseconds per iteration
+PASS
+cuda-bindings                     12.9.9
+nvidia-cutlass-dsl                4.8.0

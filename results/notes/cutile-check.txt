@@ -1,0 +1,17 @@
+System Requirements
+-------------------
+cuTile Python generates kernels based on [Tile IR](https://docs.nvidia.com/cuda/tile-ir/)
+which requires NVIDIA Driver r580 or later to run.
+Furthermore, the `tileiras` compiler (version 13.2) only supports Blackwell GPU and Ampere/Ada
+GPU. Hopper GPU will be supported in the coming versions.
+Checkout the [prerequisites](https://docs.nvidia.com/cuda/cutile-python/quickstart.html#prerequisites)
+for full list of requirements.
+
+
+Installing from PyPI
+--------------------
+cuTile Python is published on [PyPI](https://pypi.org/) under the
+[cuda-tile](https://pypi.org/project/cuda-tile/) package name and can be installed with `pip`:
+```
+pip install cuda-tile[t
+570.211.01
