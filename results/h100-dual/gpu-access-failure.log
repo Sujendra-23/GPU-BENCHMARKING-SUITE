@@ -1,0 +1,6 @@
+Failed to initialize NVML: Unknown Error
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+PermissionError: [Errno 1] Operation not permitted: '/dev/nvidiactl'
+/dev/nvidiactl
+RmProfilingAdminOnly: 1

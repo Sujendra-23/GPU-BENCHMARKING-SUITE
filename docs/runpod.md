@@ -110,20 +110,30 @@ for a larger shape. There is no KV cache or backward pass.
 
 ## 3. TensorRT-LLM next to vLLM/SGLang
 
-**Do not install TensorRT-LLM into the compiler/vLLM environment.** The pinned
-1.2.0 release requires PyTorch >=2.9.1 and TensorRT 10.14, which conflict with
-Torch-TensorRT 2.8. Use a separate environment on a sufficiently large disk,
-or a compatible NVIDIA TensorRT-LLM container template on another pod.
-[NVIDIA installation guidance](https://nvidia.github.io/TensorRT-LLM/installation/linux.html).
+**Do not install TensorRT-LLM into the compiler/vLLM environment.** Pick a
+release compatible with the host driver. CUDA 12.x / r570 hosts use the new
+`serving/requirements-tensorrt-llm-cu12.txt` environment: TensorRT-LLM 1.0.0,
+PyTorch 2.7.1, TensorRT 10.11 and Transformers 4.53.1. NVIDIA's 1.0.0 wheel
+index has Python 3.10/3.12 builds, but no Python 3.11 build; use Python 3.10
+on Ubuntu 22.04. CUDA 13 / r580 hosts may use the separate 1.2.0 requirements,
+which require PyTorch >=2.9.1 and TensorRT 10.14. These conflict with the
+compiler environment's pins.
+[NVIDIA CUDA 12 release installation](https://nvidia.github.io/TensorRT-LLM/1.0.0/installation/linux.html).
 
 ```bash
-apt-get update && apt-get install -y libnuma1 libopenmpi-dev
-python3.11 -m venv .venv-trtllm
-.venv-trtllm/bin/pip install --no-cache-dir -r serving/requirements-tensorrt-llm.txt
-.venv-trtllm/bin/python -m pip check
-.venv-trtllm/bin/python -m serving.run --backend tensorrt-llm --requests 64 \
-  --startup-timeout 1200 --out-dir results/runpod/serving
+apt-get update && apt-get install -y libnuma1 libopenmpi-dev python3.10-venv python3.10-dev
+python3.10 -m venv .venv-trtllm-cu12
+.venv-trtllm-cu12/bin/pip install --no-cache-dir -r serving/requirements-tensorrt-llm-cu12.txt
+.venv-trtllm-cu12/bin/python -m pip check
+CUDA_VISIBLE_DEVICES=0 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python \
+  .venv-trtllm-cu12/bin/python -m serving.run --backend tensorrt-llm --requests 32 \
+  --startup-timeout 1200 --out-dir results/h100-dual/serving
 ```
+
+The launcher uses the configuration-file alias accepted by both releases and
+pins both model and tokenizer revisions inside that file. It records the
+installed TensorRT-LLM version and CUDA_VISIBLE_DEVICES. The protobuf environment
+setting supports the legacy etcd3 imports in the CUDA 12 release.
 
 This uses **TensorRT-LLM's PyTorch executor**, explicitly recorded in the report,
 not a serialized TensorRT-LLM engine. It still benchmarks the TensorRT-LLM serving
@@ -196,10 +206,22 @@ Check `nvidia-smi -L` and `nvidia-smi topo -m`. Do not assume NVLink (4090 has n
 Use the same environment and workload for TP1 and TP2 on this new host:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 .venv-gpu/bin/python -m serving.run --backend vllm \
+python3.11 -m venv .venv-vllm
+.venv-vllm/bin/pip install --no-cache-dir -r serving/requirements-vllm.txt
+.venv-vllm/bin/python -m pip check
+CUDA_VISIBLE_DEVICES=0 .venv-vllm/bin/python -m serving.run --backend vllm \
   --tensor-parallel-size 1 --out-dir results/tp/serving
-CUDA_VISIBLE_DEVICES=0,1 .venv-gpu/bin/python -m serving.run --backend vllm \
+CUDA_VISIBLE_DEVICES=0,1 .venv-vllm/bin/python -m serving.run --backend vllm \
   --tensor-parallel-size 2 --out-dir results/tp/serving
+```
+
+With both isolated serving environments prepared, run the remaining phases
+sequentially with matching 32-request workloads:
+
+```bash
+nvidia-smi -L  # Must show two working GPUs, not an NVML error.
+python -m scripts.run_remaining --requests 32 --out-dir results/h100-dual
+# To retry a single phase: --stages trtllm (or tp1 or tp2).
 ```
 
 Qwen has two KV heads. TP2 shards them without replication; the runner halves
@@ -244,7 +266,21 @@ To retrieve files from any new pod using its supplied direct SSH details:
 scp -P PORT -i ~/.ssh/id_ed25519 root@HOST:/workspace/gpu-benchmarking-suite/runpod-results.tgz .
 ```
 
-No additional rentals were created in this session. TensorRT-LLM has been
-implemented and its launch/metrics paths reviewed against the pinned release,
-but its GPU execution is pending a larger isolated environment. TP2 is pending
-a two-GPU host, and counters are pending a host that permits them.
+The later H100 pod has two GPUs and NVLink; its probe and setup evidence is in
+`results/h100-dual/`. TensorRT-LLM 1.0.0 installed successfully with a clean pip
+dependency check. Before serving could start, the container lost GPU access:
+`nvidia-smi` reported `Failed to initialize NVML: Unknown Error`, and opening
+`/dev/nvidiactl` returned `EPERM`, including with the original environment.
+TensorRT-LLM and matched vLLM TP1/TP2 measurements remain pending GPU recovery.
+The Nsight probe ran before that failure and independently returned
+`ERR_NVGPUCTRPERM`; a restart is not evidence that counters are permitted.
+
+If this GPU-access error occurs, first back up results and source. Restart the
+pod through RunPod, then recheck `nvidia-smi -L` and PyTorch CUDA visibility.
+The observed error is consistent with NVIDIA's documented container device
+access failure, but the exact host-side trigger has not been verified. If it
+persists, ask RunPod support to restore the container's GPU device access.
+[NVIDIA Container Toolkit troubleshooting](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html#containers-losing-access-to-gpus-with-error-failed-to-initialize-nvml-unknown-error).
+
+No additional rentals were created by the benchmark runner. The recorded logs
+and environment manifests were copied locally before requesting a restart.

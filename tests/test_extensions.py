@@ -7,8 +7,8 @@ import pytest
 
 from harness import edge_profile
 from harness.whisper import word_errors
-from serving.benchmark import parse_metrics, request
-from serving.run import kv_capacity, run_name, server_command
+from serving.benchmark import benchmark_level, parse_metrics, request
+from serving.run import kv_capacity, run_name, server_command, trtllm_config_text
 
 
 def serving_args(**kwargs):
@@ -25,6 +25,20 @@ def test_fp8_and_tp2_preserve_sharded_kv_payload_budget():
     assert command[command.index('--tensor-parallel-size') + 1] == '2'
     assert int(command[command.index('--kv-cache-memory-bytes') + 1]) * 2 == kv_capacity(single)
     assert run_name(single) != run_name(dual)
+
+
+def test_trtllm_launch_uses_config_alias_available_in_cuda12_release():
+    args = serving_args(backend='tensorrt-llm', trtllm_config='/tmp/pinned.yaml')
+    command = server_command(args)
+    assert command[command.index('--extra_llm_api_options') + 1] == '/tmp/pinned.yaml'
+    assert command[command.index('--backend') + 1] == 'pytorch'
+    # Revision lives in the YAML for compatibility with TRT-LLM 1.0's CLI.
+    assert '--revision' not in command
+    from serving.benchmark import MODEL_REVISION
+    config = trtllm_config_text(args)
+    assert f'revision: {MODEL_REVISION}\n' in config
+    assert f'tokenizer_revision: {MODEL_REVISION}\n' in config
+    assert 'enable_block_reuse: false' in config
 
 
 def test_trtllm_json_metrics_retain_real_block_counts():
@@ -124,3 +138,28 @@ def test_whisper_fixed_mask_export_keeps_causal_semantics_and_dynamic_position(t
             torch.testing.assert_close(actual, reference[:, index], atol=1e-6, rtol=1e-5)
             exported = session.run(None, dict(input_ids=ids.numpy(), hidden=hidden.numpy(), position=position.numpy()))[0]
             torch.testing.assert_close(torch.from_numpy(exported), actual, atol=1e-6, rtol=1e-5)
+
+
+def test_trtllm_excludes_warmup_stats_drained_before_load():
+    calls = 0
+    def handler(req):
+        nonlocal calls
+        if req.url.path == '/metrics':
+            calls += 1
+            fraction = .9 if calls == 1 else .25
+            return httpx.Response(200, json=[{'iter': calls, 'numActiveRequests': 1,
+                'kvCacheStats': {'usedNumBlocks': fraction * 100, 'maxNumBlocks': 100}}])
+        body = ('data: {"choices":[{"text":"x"}]}\n\n'
+                'data: {"choices":[],"usage":{"prompt_tokens":16,"completion_tokens":2}}\n\n'
+                'data: [DONE]\n\n')
+        return httpx.Response(200, text=body)
+    args = SimpleNamespace(requests=2, base_url='http://test', metrics_url=None,
+        backend='tensorrt-llm', metrics_interval=.001, model='model', input_tokens=16,
+        output_tokens=2, seed=7, kv_capacity_bytes=1024)
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            return await benchmark_level(client, args, 1)
+    row = asyncio.run(run())
+    assert row['successful'] == 2
+    assert row['kv_cache']['peak_sampled_usage_fraction'] == .25
+    assert row['kv_cache']['samples'][0]['elapsed_seconds'] < 0

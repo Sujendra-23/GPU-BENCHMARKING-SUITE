@@ -189,8 +189,8 @@ async def benchmark_level(client, args, concurrency):
     successful = [r for r in results if r.error is None]
     total = sum(r.completion_tokens for r in successful)
     fractions = [g["fraction"] for s in samples for g in s["gauges"]
-                 if (g.get("source_active", False) if args.backend == "tensorrt-llm"
-                     else start <= s["time"] <= end)]
+                 if (g.get("source_active", False) and s["time"] >= start
+                     if args.backend == "tensorrt-llm" else start <= s["time"] <= end)]
     peak = max(fractions) if fractions else None
     for sample_row in samples:
         sample_row["elapsed_seconds"] = sample_row.pop("time") - start

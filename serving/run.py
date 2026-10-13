@@ -27,6 +27,7 @@ def server_command(args):
     if args.backend == "vllm":
         command = [sys.executable, "-m", "vllm.entrypoints.openai.api_server",
                 "--model", MODEL, "--revision", MODEL_REVISION,
+                "--tokenizer-revision", MODEL_REVISION,
                 "--host", "127.0.0.1", "--port", str(args.port),
                 "--dtype", "half", "--kv-cache-dtype", "auto", "--max-model-len", "2048",
                 "--max-num-seqs", str(max(args.concurrency)), "--no-enable-prefix-caching",
@@ -37,11 +38,11 @@ def server_command(args):
         return command
     if args.backend == "tensorrt-llm":
         executable = Path(sys.executable).parent / "trtllm-serve"
-        return [str(executable), MODEL, "--revision", MODEL_REVISION,
+        return [str(executable), MODEL,
                 "--backend", "pytorch", "--host", "127.0.0.1", "--port", str(args.port),
                 "--tp_size", "1", "--max_seq_len", "2048",
                 "--max_batch_size", str(max(args.concurrency)),
-                "--max_num_tokens", "2048", "--config", str(args.trtllm_config)]
+                "--max_num_tokens", "2048", "--extra_llm_api_options", str(args.trtllm_config)]
     return [sys.executable, "-m", "sglang.launch_server", "--model-path", MODEL,
             "--revision", MODEL_REVISION,
             "--host", "127.0.0.1", "--port", str(args.port), "--dtype", "float16",
@@ -50,6 +51,19 @@ def server_command(args):
             "--max-total-tokens", str(args.kv_capacity_tokens), "--mem-fraction-static", "0.5",
             "--disable-radix-cache", "--enable-metrics", "--disable-cuda-graph",
             "--attention-backend", "triton"]
+
+
+def trtllm_config_text(args):
+    # The YAML revision fields work with both the CUDA 12 and CUDA 13 CLIs.
+    return (
+        "dtype: float16\n"
+        f"revision: {MODEL_REVISION}\n"
+        f"tokenizer_revision: {MODEL_REVISION}\n"
+        "enable_iter_perf_stats: true\n"
+        "cuda_graph_config: null\n"
+        "kv_cache_config:\n"
+        f"  max_tokens: {args.kv_capacity_tokens}\n"
+        "  enable_block_reuse: false\n")
 
 
 def main():
@@ -82,16 +96,14 @@ def main():
     name = run_name(args)
     if args.backend == "tensorrt-llm":
         args.trtllm_config = str((root / f"{name}-config.yaml").resolve())
-        Path(args.trtllm_config).write_text(
-            "dtype: float16\n"
-            "enable_iter_perf_stats: true\n"
-            "cuda_graph_config: null\n"
-            "kv_cache_config:\n"
-            f"  max_tokens: {args.kv_capacity_tokens}\n"
-            "  enable_block_reuse: false\n")
+        Path(args.trtllm_config).write_text(trtllm_config_text(args))
     command = server_command(args)
     args.model, args.base_url = MODEL, f"http://127.0.0.1:{args.port}"
     args.model_revision = MODEL_REVISION
+    args.cuda_visible_devices = os.environ.get("CUDA_VISIBLE_DEVICES")
+    if args.backend == "tensorrt-llm":
+        from importlib.metadata import version
+        args.trtllm_version = version("tensorrt-llm")
     args.metrics_url, args.metrics_interval, args.timeout = None, .1, 120
     args.kv_capacity_bytes = kv_capacity(args)
     args.kv_capacity_scope = "per-rank; KV heads sharded, no replication for Qwen TP=2"

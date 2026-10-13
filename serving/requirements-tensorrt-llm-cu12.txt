@@ -1,0 +1,10 @@
+# Python 3.10 or 3.12 (NVIDIA publishes no CPython 3.11 wheel for 1.0.0).
+# CUDA 12.x / r570 hosts: TensorRT-LLM 1.0, isolated from compiler/vLLM pins.
+--extra-index-url https://pypi.nvidia.com
+tensorrt-llm==1.0.0
+torch==2.7.1
+torchvision==0.22.1
+torchaudio==2.7.1
+httpx>=0.27,<1
+# Avoid incompatible new PEFT APIs with the pinned Transformers 4.53.1.
+peft==0.16.0
