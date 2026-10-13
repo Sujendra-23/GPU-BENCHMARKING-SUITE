@@ -1,0 +1,8 @@
+dtype: float16
+revision: 7ae557604adf67be50417f59c2c2f167def9a775
+tokenizer_revision: 7ae557604adf67be50417f59c2c2f167def9a775
+enable_iter_perf_stats: true
+cuda_graph_config: null
+kv_cache_config:
+  max_tokens: 65536
+  enable_block_reuse: false

@@ -9,6 +9,7 @@ from harness import edge_profile
 from harness.whisper import word_errors
 from serving.benchmark import benchmark_level, parse_metrics, request
 from serving.run import kv_capacity, run_name, server_command, trtllm_config_text
+from serving.trtllm_server import collect_iteration_stats
 
 
 def serving_args(**kwargs):
@@ -30,6 +31,7 @@ def test_fp8_and_tp2_preserve_sharded_kv_payload_budget():
 def test_trtllm_launch_uses_config_alias_available_in_cuda12_release():
     args = serving_args(backend='tensorrt-llm', trtllm_config='/tmp/pinned.yaml')
     command = server_command(args)
+    assert 'serving.trtllm_server' in command
     assert command[command.index('--extra_llm_api_options') + 1] == '/tmp/pinned.yaml'
     assert command[command.index('--backend') + 1] == 'pytorch'
     # Revision lives in the YAML for compatibility with TRT-LLM 1.0's CLI.
@@ -163,3 +165,20 @@ def test_trtllm_excludes_warmup_stats_drained_before_load():
     assert row['successful'] == 2
     assert row['kv_cache']['peak_sampled_usage_fraction'] == .25
     assert row['kv_cache']['samples'][0]['elapsed_seconds'] < 0
+
+
+def test_trtllm_metrics_preserve_stats_before_empty_deque_error():
+    class LLM:
+        async def get_stats_async(self, timeout):
+            yield {'iter': 1, 'kvCacheStats': {'usedNumBlocks': 3, 'maxNumBlocks': 16}}
+            raise IndexError('pop from an empty deque')
+    assert asyncio.run(collect_iteration_stats(LLM())) == [
+        {'iter': 1, 'kvCacheStats': {'usedNumBlocks': 3, 'maxNumBlocks': 16}}]
+
+
+def test_trtllm_metrics_return_collected_stats_when_producer_stays_active():
+    class LLM:
+        async def get_stats_async(self, timeout):
+            yield {'iter': 2}
+            await asyncio.sleep(1)
+    assert asyncio.run(collect_iteration_stats(LLM(), timeout=.001)) == [{'iter': 2}]

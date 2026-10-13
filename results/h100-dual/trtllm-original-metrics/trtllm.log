@@ -1,0 +1,6 @@
+Wrote results/h100-dual/serving/tensorrt-llm-none-tp1-launch.json
+tensorrt-llm c=1: TTFT p50=30.34522943198681 ms, 78.50 output tok/s, failed=0
+tensorrt-llm c=4: TTFT p50=42.27308928966522 ms, 292.22 output tok/s, failed=0
+tensorrt-llm c=8: TTFT p50=43.54762099683285 ms, 503.32 output tok/s, failed=0
+tensorrt-llm c=16: TTFT p50=62.16542795300484 ms, 983.36 output tok/s, failed=0
+Wrote results/h100-dual/serving/tensorrt-llm-none-tp1.json

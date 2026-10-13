@@ -113,7 +113,11 @@ for a larger shape. There is no KV cache or backward pass.
 **Do not install TensorRT-LLM into the compiler/vLLM environment.** Pick a
 release compatible with the host driver. CUDA 12.x / r570 hosts use the new
 `serving/requirements-tensorrt-llm-cu12.txt` environment: TensorRT-LLM 1.0.0,
-PyTorch 2.7.1, TensorRT 10.11 and Transformers 4.53.1. NVIDIA's 1.0.0 wheel
+PyTorch 2.7.1+cu128, TensorRT 10.11 and Transformers 4.53.1. The default
+PyPI PyTorch wheel uses CUDA 12.6, which failed at DeepGEMM import with
+`undefined symbol: cudaLibraryGetKernel` on the H100 pod; the requirements
+explicitly select the CUDA 12.8 builds from the PyTorch wheel index.
+NVIDIA's 1.0.0 wheel
 index has Python 3.10/3.12 builds, but no Python 3.11 build; use Python 3.10
 on Ubuntu 22.04. CUDA 13 / r580 hosts may use the separate 1.2.0 requirements,
 which require PyTorch >=2.9.1 and TensorRT 10.14. These conflict with the
@@ -142,6 +146,13 @@ the same token capacity, and enables iteration stats. TensorRT-LLM's `/metrics`
 is JSON; cache fractions are derived from real used/max block counts, retaining
 raw counts. Missing counters fail rather than producing invented memory results.
 [TensorRT-LLM server and metrics](https://nvidia.github.io/TensorRT-LLM/commands/trtllm-serve/trtllm-serve.html).
+
+For release 1.0.0, `serving.trtllm_server` adapts only the HTTP metrics reader:
+it returns real iteration stats within a 20 ms drain window and retains already
+collected stats if the upstream empty-deque bug raises `IndexError`. The original
+endpoint could wait for a two-second gap between stats and time out during load.
+Model execution and the stats producer are unchanged. The launch report records
+this adapter; newer releases use their original metrics endpoint.
 
 SGLang remains available in its own environment using
 `serving/requirements-sglang.txt`; run `python -m serving.run --backend sglang`.
@@ -247,6 +258,12 @@ performance counters for your container** before renting. Root inside the pod
 is not enough by itself. A dedicated/bare-metal host under your control can
 configure this; do not attempt to change shared-provider driver policy.
 [NVIDIA counter permissions](https://developer.nvidia.com/ERR_NVGPUCTRPERM).
+For an r570 host, ask the provider to enable profiling in its host driver or
+grant the container a supported profiling capability (`CAP_PERFMON` or
+`CAP_SYS_ADMIN`). An exact support request is: “Nsight Compute returns
+ERR_NVGPUCTRPERM inside my GPU pod. Can this host/container be configured to
+allow NVIDIA GPU performance counters?” Verify with the probe before starting
+another rental for profiling.
 Collect SpeedOfLight, Occupancy, MemoryWorkloadAnalysis and InstructionStats for
 CUDA/Triton softmax/attention; interpret actual counters before making SM,
 DRAM, occupancy or tensor-instruction claims.
@@ -267,13 +284,15 @@ scp -P PORT -i ~/.ssh/id_ed25519 root@HOST:/workspace/gpu-benchmarking-suite/run
 ```
 
 The later H100 pod has two GPUs and NVLink; its probe and setup evidence is in
-`results/h100-dual/`. TensorRT-LLM 1.0.0 installed successfully with a clean pip
-dependency check. Before serving could start, the container lost GPU access:
+`results/h100-dual/`. TensorRT-LLM 1.0.0 and matched vLLM TP1/TP2 completed with
+zero failed requests, exact token counts and valid KV metrics. See
+[the measured H100 report](../results/h100-dual/report.md). Before serving could
+start, the container lost GPU access:
 `nvidia-smi` reported `Failed to initialize NVML: Unknown Error`, and opening
 `/dev/nvidiactl` returned `EPERM`, including with the original environment.
-TensorRT-LLM and matched vLLM TP1/TP2 measurements remain pending GPU recovery.
-The Nsight probe ran before that failure and independently returned
-`ERR_NVGPUCTRPERM`; a restart is not evidence that counters are permitted.
+Restarting through RunPod restored access and preserved the environments.
+Nsight probes before and after restart independently returned
+`ERR_NVGPUCTRPERM`; hardware counters still require provider-enabled access.
 
 If this GPU-access error occurs, first back up results and source. Restart the
 pod through RunPod, then recheck `nvidia-smi -L` and PyTorch CUDA visibility.
@@ -282,5 +301,6 @@ access failure, but the exact host-side trigger has not been verified. If it
 persists, ask RunPod support to restore the container's GPU device access.
 [NVIDIA Container Toolkit troubleshooting](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/troubleshooting.html#containers-losing-access-to-gpus-with-error-failed-to-initialize-nvml-unknown-error).
 
-No additional rentals were created by the benchmark runner. The recorded logs
-and environment manifests were copied locally before requesting a restart.
+No additional rentals were created by the benchmark runner. The final reports,
+logs and environment manifests were copied locally; the serving processes have
+exited. The pod remains rented until you stop or terminate it in RunPod.

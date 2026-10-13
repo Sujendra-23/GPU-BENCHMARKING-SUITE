@@ -140,8 +140,12 @@ LLaMA-style block/ResNet compiler comparisons with graph-break artifacts,
 TensorRT-LLM serving, a batch-1 “edge-style, not Jetson” power profile,
 Whisper-tiny ASR through ONNX/TensorRT/torch.compile, TP2 vLLM, and counter-access
 probing. GPU workloads fail explicitly; `harness.benchmark --self-test` is the
-labeled NumPy CPU check. The [new GPU report](results/runpod/report.md) distinguishes executed runs from
-TensorRT-LLM, TP2 and counter collection still pending other host resources.
+labeled NumPy CPU check. The [RTX 4090 report](results/runpod/report.md) contains
+the single-GPU experiments. [The two-H100 continuation](results/h100-dual/report.md)
+adds successful TensorRT-LLM and matched vLLM TP1/TP2 runs. At concurrency 16,
+vLLM TP2 delivered 1,731 tokens/s versus 2,136 for TP1; this tiny model did not
+benefit from the second GPU. Nsight hardware counters remain blocked by host
+permissions, including after restarting the H100 pod.
 
 ## Layout
 
@@ -161,7 +165,7 @@ kernels/stencil/jacobi.c      GCC vs Clang compiler-comparison benchmark
 harness/benchmark.py          cross-framework inference benchmarking harness
 harness/kernel_benchmark.py   correctness-gated fp16 kernel and SDPA/BLAS sweep
 harness/profile_kernels.py    warmed single-launch Nsight Compute target
-serving/                      streaming vLLM/SGLang load test + local server runner
+serving/                      streaming vLLM/SGLang/TensorRT-LLM load test + local server runner
 compilers/                    torch.compile source inspection + JAX jit/HLO dumps
 harness/validate.py           accuracy/latency deploy gate
 harness/power_monitor.py      nvidia-smi power/util/clock logger

@@ -1,0 +1,57 @@
+<frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cuda module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.driver module instead.
+<frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+[2026-10-13 16:36:23] INFO config.py:54: PyTorch version 2.7.1 available.
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/modelopt/torch/utils/import_utils.py:32: UserWarning: Failed to import diffusers plugin due to: ImportError('peft>=0.17.0 is required for a normal functioning of this module, but found peft==0.16.0.'). You may ignore this warning if you do not need this plugin.
+  warnings.warn(
+2026-10-13 16:36:25,748 - INFO - flashinfer.jit: Prebuilt kernels not found, using JIT backend
+[TensorRT-LLM] TensorRT LLM version: 1.0.0
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/serve/openai_protocol.py:84: UserWarning: Field name "schema" in "ResponseFormat" shadows an attribute in parent "OpenAIBaseModel"
+  class ResponseFormat(OpenAIBaseModel):
+[10/13/2026-16:36:26] [TRT-LLM] [I] Using LLM with PyTorch backend
+[10/13/2026-16:36:26] [TRT-LLM] [I] Set nccl_plugin to None.
+[10/13/2026-16:36:26] [TRT-LLM] [I] neither checkpoint_format nor checkpoint_loader were provided, checkpoint_format will be set to HF.
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py:2356: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+  warnings.warn(
+Traceback (most recent call last):
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/bin/trtllm-serve", line 8, in <module>
+    sys.exit(main())
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 1631, in __call__
+    return self.main(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 1552, in main
+    rv = self.invoke(ctx)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 1415, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 910, in invoke
+    return callback(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/commands/serve.py", line 332, in serve
+    launch_server(host, port, llm_args, metadata_server_cfg, server_role)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/commands/serve.py", line 164, in launch_server
+    llm = PyTorchLLM(**llm_args)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/llmapi/llm.py", line 1125, in __init__
+    super().__init__(model, tokenizer, tokenizer_mode, skip_tokenizer_init,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/llmapi/llm.py", line 942, in __init__
+    super().__init__(model,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/llmapi/llm.py", line 214, in __init__
+    self._build_model()
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/llmapi/llm.py", line 965, in _build_model
+    self.input_processor = create_input_processor(self._hf_model_dir,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/inputs/registry.py", line 124, in create_input_processor
+    from tensorrt_llm._torch.models import get_model_architecture
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/__init__.py", line 3, in <module>
+    from .modeling_auto import AutoModelForCausalLM
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/modeling_auto.py", line 5, in <module>
+    from .modeling_utils import (MODEL_CLASS_MAPPING, DecoderModelForCausalLM,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/modeling_utils.py", line 24, in <module>
+    from ..modules.fused_moe import MoE, VanillaMoE
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/modules/fused_moe/__init__.py", line 1, in <module>
+    from .create_moe import create_moe, get_moe_cls
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/modules/fused_moe/create_moe.py", line 11, in <module>
+    from .fused_moe_deepgemm import DeepGemmFusedMoE
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/modules/fused_moe/fused_moe_deepgemm.py", line 9, in <module>
+    from tensorrt_llm import deep_gemm
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/deep_gemm/__init__.py", line 17, in <module>
+    import tensorrt_llm.deep_gemm_cpp_tllm
+ImportError: /workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/deep_gemm_cpp_tllm.cpython-310-x86_64-linux-gnu.so: undefined symbol: cudaLibraryGetKernel, version libcudart.so.12

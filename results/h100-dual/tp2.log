@@ -1,0 +1,6 @@
+Wrote results/h100-dual/serving/vllm-none-tp2-launch.json
+vllm c=1: TTFT p50=12.373970821499825 ms, 113.96 output tok/s, failed=0
+vllm c=4: TTFT p50=18.125971779227257 ms, 458.20 output tok/s, failed=0
+vllm c=8: TTFT p50=27.152469381690025 ms, 903.05 output tok/s, failed=0
+vllm c=16: TTFT p50=34.25001911818981 ms, 1731.26 output tok/s, failed=0
+Wrote results/h100-dual/serving/vllm-none-tp2.json

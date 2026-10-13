@@ -1,0 +1,4248 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-10-13T16:45:13.945746+00:00",
+    "platform": "Linux-6.8.0-56-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+    "packages": {
+      "httpx": "0.28.1",
+      "vllm": null,
+      "sglang": null,
+      "tensorrt_llm": "1.0.0",
+      "torch": "2.7.1+cu128",
+      "triton": "3.3.1",
+      "transformers": "4.53.1"
+    },
+    "nvidia_smi": "NVIDIA H100 80GB HBM3, 570.124.06, 81559 MiB\nNVIDIA H100 80GB HBM3, 570.124.06, 81559 MiB",
+    "git_commit": "5d9266cca1c5602c654b2cfebbfa7c69ea8de2ef",
+    "git_dirty": true,
+    "source_sha256": {
+      "harness/__init__.py": "22ee8771700cd19a7cc8513db21f3f3b172ec436e71a5a7c421d2902e5dde911",
+      "harness/attention_sweep.py": "d3c51e33e18e649724080b155362116a3128062c79186aee1eeb120df9705f31",
+      "harness/benchmark.py": "342e76034b1ea97c94b44b742c6349e8cee074b0b11c83309905f079f7880f33",
+      "harness/cute_dsl_gemm.py": "b1f0f047eacc041e1516a720602ac3432dcd7bbcea51ef931310ffa99459dc60",
+      "harness/dl_kernel_report.py": "1d5d40cd8a96c173fb0e5ee2c04b2a4fb5712236cb886a602b40260360b3d394",
+      "harness/edge_profile.py": "072b1ebadb1e693cae784b140e03c14e00fbcaaca5ceddbf95a6d735e23c746d",
+      "harness/experiment_report.py": "441b2e6e1efc91a69a23073ae4f61caed070dd12b43b038ce141ab9288e39812",
+      "harness/extension_report.py": "47d0fa92773b3abd759246309132175cc5eb8ce9f4c7354d59528db4d940f73d",
+      "harness/gemm_bench.py": "236d4ab0fcb162aae770d4644aa10cb44cc5676343dc682aa760fe5ccfb18e07",
+      "harness/kernel_benchmark.py": "8aca8c37245683836015b7b73fe23cda63257523c9b41ff0c05bcb5d43b3a79e",
+      "harness/measurement.py": "1b1efbaadd3f6bc545fb15c48c60e141244d5f90318afb6df9ae2ca59856931b",
+      "harness/nsight_counters.py": "38afdb23371822b6cab75af3fc44141a64a03d0ca3e417b0af82dd0c8ee97afe",
+      "harness/onnx_utils.py": "cbbd40fc90f1b4e5eb495944a6eaa25fe0807160cfbea99d6b9815038bf762d9",
+      "harness/paged_decode_bench.py": "be4edcbc06d63368937ef9d2d87c11d0d91626a2c3536e50e8d2a8491e2d55ae",
+      "harness/perf_per_watt.py": "3c51bfb165c956b9157e6bd0976b40b63ffc44f8fc6c0aa428a0b77b50a2d766",
+      "harness/power_monitor.py": "bb2b3e8b24944ba2d010b45b02e5661a5d0a1b7ad83e1c6b7575528f1e839437",
+      "harness/prepare_whisper_data.py": "611cb3c86fc34da65db7f14c22c5f6800c81dfcd8a1b3cde273553108aae6839",
+      "harness/profile_kernels.py": "a128e4629ff17a40d109d13582ee90681caa25f3e64139c1ac3541e7ccd3410b",
+      "harness/roofline.py": "44ce510435de7e958801117c3d7cfc635f2df67024dbf6cabf46826d0da6b8b0",
+      "harness/tensorrt_utils.py": "700421d42b5da8471f316c4a5cc11450a04ef108dc747bdc615de06ea19369ff",
+      "harness/triton_ir_dump.py": "24a3b6603d3b792678597b0ef30e1ee004660b23ca6203aa7361ba2504f2e936",
+      "harness/validate.py": "042f95fb1de615e4c8f87da19c2e85457e2d308b53c948017b362d5c9d3ec303",
+      "harness/whisper.py": "90644d45409e762abfa666752c5e4e1612072cffae8ef44f5b798ef714856bf6",
+      "kernels/__init__.py": "064f56c54a610d59f6ef74c4473f6ca8ab4591cef987acb52a66dfab00e5e6c3",
+      "kernels/contracts.py": "0486cd273008fe23f6871b17168445936d2c7c0de01299fc42adbd6168b50086",
+      "kernels/cuda/__init__.py": "b136e0401a7cbd22a834a462123e3da9a0617411e4a13aacb7e90234367542ec",
+      "kernels/cuda/attention_wmma.cu": "b166beb1991ddad4c9a0846d5b700f64b3c1aa478676c5d4b28256b8f812a49f",
+      "kernels/cuda/fused.py": "fa3897eca1a85b40d71d7ceb42270f9dd200c5a0224dc8eab8f95b131582da56",
+      "kernels/cuda/fused_ops.cpp": "059cbec727acaed2ef796410cb09607f2426f7730e671eb43c4b7031c0601179",
+      "kernels/cuda/fused_ops.cu": "4ca3d9b75fd40cc4b560fdfdc46c730cb67c64d39a81b3c9e3eddbf2059b138e",
+      "kernels/cuda/gemm.py": "64194852419a95f384a58d535ed20891013960c16eb92ec27ed80bf262e978ee",
+      "kernels/cuda/gemm_fp32.cu": "61ec3967144b43a3405af653c935b64b7634712e7645004b34c9c808a3c03286",
+      "kernels/cuda/matmul.cu": "296e94a393948a331e17f98996ac7ecad74c455971fc461b9cad6ec3ded7cc98",
+      "kernels/cuda/wmma.py": "44f5f1efd5c994ddda3259560f2216da5a0e7dfa9644edbee6081b6df7a83e92",
+      "kernels/cutlass/gemm_fp16.cu": "b14f17feaf337d8369fca90d6d9786113b2526dbe37c9189adbb4c99bcef35ae",
+      "kernels/hip/matmul.hip.cpp": "c8344093d500a33381fef93ba13d949d053f67151d078cebcc9aa6602e01fb27",
+      "kernels/triton/__init__.py": "b9ae38031f1640264e447f60c3e8bc172e9895bd03f3392bbbf8e31ef3189dac",
+      "kernels/triton/attention.py": "37ca5c5a9c0af75dd539e2aa8bdded7a038bf11122b8ac67599c85f79934abd7",
+      "kernels/triton/attention_tuned.py": "5d90a8d451c3515a829457c19b67d3807b88c83e85fb5f43eb3c293985980704",
+      "kernels/triton/paged_decode.py": "8f25013e6f8197f1073fc6802dfafd8a18655f7fd251ac1917cbd481b3e081c9",
+      "kernels/triton/softmax.py": "ad0f04e3590e1b852dbcbe372b74ec60fdb34eb86ad1a95cc5c9585c9c924aad",
+      "compilers/__init__.py": "5ad2593265c904ecda27c9dedf42cc6e0c32d3eeb313e0fdbba291f3f619df5a",
+      "compilers/jax_jit.py": "e9276c211fcee1faa2d0208a35477113c2785345f1c3a9321d7fe2fdc544dbea",
+      "compilers/llama_block.py": "394110ee8be99a3179905fc4f94953c5d28fdb8529520e06ea465822e6682a3d",
+      "compilers/torch_compile.py": "44010d66a3f7d0f465a724bd472c72ad0f1da7d53ff59094c13ba99ead040b97",
+      "compilers/torch_tensorrt_block.py": "1db2e3fe27860ebb6c148a9f8cc1c2206ecb4df25c9df4f1afe96eafa3df3579",
+      "serving/__init__.py": "c24eef08bf558a6a4411a35af1eda651fcaddd87327d1bde7c631db20063cbf8",
+      "serving/benchmark.py": "431e37d5fd2fe674ba5d84d6b69c38b3103249dee028470728f8d8ed57d032dd",
+      "serving/run.py": "f4a939e44dea323c47d5b63315bf8cd5e2f61b7f3a17f364eb1044b92e08bcbb",
+      "training/export_tensorrt.py": "ee71c08a8b63f151d182cff56627aeb7cac2b8df25649bdb0d690fa414e1282a",
+      "training/train_distributed.py": "3675acec2342cb4046f185ee8abee3c9b251480668f9b838d1c77f3ff4975eba"
+    }
+  },
+  "config": {
+    "backend": "tensorrt-llm",
+    "quantization": "none",
+    "tensor_parallel_size": 1,
+    "port": 8000,
+    "concurrency": [
+      1,
+      4,
+      8,
+      16
+    ],
+    "requests": 32,
+    "input_tokens": 256,
+    "output_tokens": 128,
+    "kv_capacity_tokens": 65536,
+    "startup_timeout": 1200,
+    "out_dir": "results/h100-dual/serving",
+    "trtllm_config": "/workspace/gpu-benchmarking-suite/results/h100-dual/serving/tensorrt-llm-none-tp1-config.yaml",
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "base_url": "http://127.0.0.1:8000",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "cuda_visible_devices": "0",
+    "trtllm_version": "1.0.0",
+    "metrics_url": null,
+    "metrics_interval": 0.1,
+    "timeout": 120,
+    "kv_capacity_bytes": 805306368,
+    "kv_capacity_scope": "per-rank; KV heads sharded, no replication for Qwen TP=2",
+    "trtllm_runtime": "pytorch (TensorRT-LLM executor, not a serialized TensorRT engine)",
+    "seed": 7,
+    "warmup": 2,
+    "out": "results/h100-dual/serving/tensorrt-llm-none-tp1.json"
+  },
+  "server_models": {
+    "object": "list",
+    "data": [
+      {
+        "id": "Qwen/Qwen2.5-0.5B-Instruct",
+        "object": "model",
+        "created": 1791909820,
+        "owned_by": "tensorrt_llm"
+      }
+    ]
+  },
+  "method": "closed-loop; client TTFT to first nonempty text; server usage token counts",
+  "kv_method": "sampled cache fraction times explicitly configured capacity; estimate",
+  "results": [
+    {
+      "concurrency": 1,
+      "peak_client_inflight": 1,
+      "requests": 32,
+      "successful": 32,
+      "failed": 0,
+      "duration_seconds": 52.17801047861576,
+      "output_tokens": 4096,
+      "output_tokens_per_second": 78.5005016946492,
+      "requests_per_second": 0.6132851694894469,
+      "ttft_p50_ms": 30.34522943198681,
+      "ttft_p95_ms": 42.95523092150688,
+      "latency_p95_ms": 1694.6114283055067,
+      "decode_tps_p50": 79.55657887319575,
+      "kv_cache": {
+        "configured_capacity_bytes": 805306368,
+        "capacity_scope": "per-rank; KV heads sharded, no replication for Qwen TP=2",
+        "estimated_peak_used_bytes_scope": "maximum observed fraction times per-rank capacity; not aggregate GPU memory",
+        "tensor_parallel_size": 1,
+        "peak_sampled_usage_fraction": 0.005859375,
+        "estimated_peak_used_bytes": 4718592,
+        "metric_errors": [
+          "KV gauge absent",
+          "",
+          "Server error '500 Internal Server Error' for url 'http://127.0.0.1:8000/metrics'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500"
+        ],
+        "samples": [
+          {
+            "gauges": [
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 6,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 7,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 8,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 9,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 10,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 11,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 12,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 13,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 14,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 15,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 16,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 17,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 18,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 19,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 20,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 21,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 22,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 23,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 24,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 25,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 26,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 27,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 28,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 29,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 30,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 31,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 32,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 33,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 34,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 35,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 36,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 37,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 38,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 39,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 40,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 41,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 42,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 43,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 44,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 45,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 46,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 47,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 48,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 49,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 50,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 51,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 52,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 53,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 54,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 55,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 56,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 57,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 58,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 59,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 60,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 61,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 62,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 63,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 64,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 65,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 66,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 67,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 68,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 69,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 70,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 71,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 72,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 73,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 74,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 75,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 76,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 77,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 78,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 79,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 80,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 81,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 82,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 83,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 84,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 85,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 86,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 87,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 88,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 89,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 90,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 91,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 92,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 93,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 94,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 95,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 96,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 97,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 98,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 99,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 100,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 101,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 102,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 103,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 104,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 105,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 106,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 107,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 108,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 109,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 110,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 111,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 112,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 113,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 114,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 115,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 116,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 117,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 118,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 119,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 120,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 121,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 122,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 123,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 124,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 125,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 126,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 127,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 128,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 129,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 130,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 131,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 132,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0,
+                "source_active": true,
+                "iteration": 133,
+                "used_blocks": 0,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00390625,
+                "source_active": true,
+                "iteration": 134,
+                "used_blocks": 8,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 135,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 136,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 137,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 138,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 139,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 140,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 141,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 142,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 143,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 144,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 145,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 146,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 147,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 148,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 149,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 150,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 151,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 152,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 153,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 154,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 155,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 156,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 157,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 158,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 159,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 160,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 161,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 162,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 163,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 164,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 165,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00439453125,
+                "source_active": true,
+                "iteration": 166,
+                "used_blocks": 9,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 167,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 168,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 169,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 170,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 171,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 172,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 173,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 174,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 175,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 176,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 177,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 178,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 179,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 180,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 181,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 182,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 183,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 184,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 185,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 186,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 187,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 188,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 189,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 190,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 191,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 192,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 193,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 194,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 195,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 196,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 197,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0048828125,
+                "source_active": true,
+                "iteration": 198,
+                "used_blocks": 10,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 199,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 200,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 201,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 202,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 203,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 204,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 205,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 206,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 207,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 208,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 209,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 210,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 211,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 212,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 213,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 214,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 215,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 216,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 217,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 218,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 219,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 220,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 221,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 222,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 223,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 224,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 225,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 226,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 227,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 228,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 229,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.00537109375,
+                "source_active": true,
+                "iteration": 230,
+                "used_blocks": 11,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 231,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 232,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 233,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 234,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 235,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 236,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 237,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 238,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 239,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 240,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 241,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 242,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 243,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 244,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 245,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 246,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 247,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 248,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 249,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 250,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 251,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 252,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 253,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 254,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 255,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 256,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 257,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 258,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 259,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 260,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 261,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0,
+                "source_active": true,
+                "iteration": 262,
+                "used_blocks": 0,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              }
+            ],
+            "elapsed_seconds": -2.3853033781051636e-05
+          },
+          {
+            "gauges": [],
+            "elapsed_seconds": 0.00230482779443264
+          },
+          {
+            "gauges": [
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 4380,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 4382,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 4384,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 4386,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.005859375,
+                "source_active": true,
+                "iteration": 4388,
+                "used_blocks": 12,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0,
+                "source_active": true,
+                "iteration": 4390,
+                "used_blocks": 0,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              }
+            ],
+            "elapsed_seconds": 54.27030574530363
+          },
+          {
+            "gauges": [],
+            "elapsed_seconds": 54.27193507924676
+          }
+        ]
+      },
+      "request_results": [
+        {
+          "request_id": 0,
+          "ttft_ms": 32.90673717856407,
+          "latency_ms": 1667.219428345561,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 77.7085074884381,
+          "error": null
+        },
+        {
+          "request_id": 1,
+          "ttft_ms": 29.1062593460083,
+          "latency_ms": 1620.513403788209,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.80358794010215,
+          "error": null
+        },
+        {
+          "request_id": 2,
+          "ttft_ms": 29.27120216190815,
+          "latency_ms": 1619.5778977125883,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.8588098480107,
+          "error": null
+        },
+        {
+          "request_id": 3,
+          "ttft_ms": 44.195231050252914,
+          "latency_ms": 1648.523684591055,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.1608474684265,
+          "error": null
+        },
+        {
+          "request_id": 4,
+          "ttft_ms": 33.34837034344673,
+          "latency_ms": 1654.0362257510424,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 78.36178914789244,
+          "error": null
+        },
+        {
+          "request_id": 5,
+          "ttft_ms": 35.5701707303524,
+          "latency_ms": 1644.2245319485664,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 78.94797233124987,
+          "error": null
+        },
+        {
+          "request_id": 6,
+          "ttft_ms": 31.00290521979332,
+          "latency_ms": 1612.2001521289349,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 80.31888510320537,
+          "error": null
+        },
+        {
+          "request_id": 7,
+          "ttft_ms": 30.467908829450607,
+          "latency_ms": 1585.8056526631117,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 81.65429052532676,
+          "error": null
+        },
+        {
+          "request_id": 8,
+          "ttft_ms": 42.95523092150688,
+          "latency_ms": 1643.8986361026764,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.32822583795718,
+          "error": null
+        },
+        {
+          "request_id": 9,
+          "ttft_ms": 29.421720653772354,
+          "latency_ms": 1630.0884634256363,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.34193708558907,
+          "error": null
+        },
+        {
+          "request_id": 10,
+          "ttft_ms": 29.62840348482132,
+          "latency_ms": 1615.5465822666883,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 80.07979333306326,
+          "error": null
+        },
+        {
+          "request_id": 11,
+          "ttft_ms": 28.86604331433773,
+          "latency_ms": 1606.492331251502,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 80.50068699480134,
+          "error": null
+        },
+        {
+          "request_id": 12,
+          "ttft_ms": 29.386386275291443,
+          "latency_ms": 1648.3061090111732,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 78.44737340365293,
+          "error": null
+        },
+        {
+          "request_id": 13,
+          "ttft_ms": 30.43774701654911,
+          "latency_ms": 1668.8762102276087,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 77.51282874005636,
+          "error": null
+        },
+        {
+          "request_id": 14,
+          "ttft_ms": 29.18153628706932,
+          "latency_ms": 1658.9600052684546,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 77.92470106650461,
+          "error": null
+        },
+        {
+          "request_id": 15,
+          "ttft_ms": 31.045962125062943,
+          "latency_ms": 1694.6114283055067,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 76.34205120378746,
+          "error": null
+        },
+        {
+          "request_id": 16,
+          "ttft_ms": 33.215463161468506,
+          "latency_ms": 1622.626356780529,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.90381877327093,
+          "error": null
+        },
+        {
+          "request_id": 17,
+          "ttft_ms": 29.262660071253777,
+          "latency_ms": 1584.8720725625753,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 81.64003057593257,
+          "error": null
+        },
+        {
+          "request_id": 18,
+          "ttft_ms": 33.58272649347782,
+          "latency_ms": 1715.6684529036283,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 75.50150269156556,
+          "error": null
+        },
+        {
+          "request_id": 19,
+          "ttft_ms": 31.66027180850506,
+          "latency_ms": 1613.3138872683048,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 80.29570998266902,
+          "error": null
+        },
+        {
+          "request_id": 20,
+          "ttft_ms": 30.325831845402718,
+          "latency_ms": 1626.6740132123232,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.55657887319575,
+          "error": null
+        },
+        {
+          "request_id": 21,
+          "ttft_ms": 28.970934450626373,
+          "latency_ms": 1631.5520331263542,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.24715953841263,
+          "error": null
+        },
+        {
+          "request_id": 22,
+          "ttft_ms": 28.831079602241516,
+          "latency_ms": 1614.3447384238243,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 80.10022448774833,
+          "error": null
+        },
+        {
+          "request_id": 23,
+          "ttft_ms": 33.83863344788551,
+          "latency_ms": 1633.0369841307402,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.41478925723706,
+          "error": null
+        },
+        {
+          "request_id": 24,
+          "ttft_ms": 28.593480587005615,
+          "latency_ms": 1660.8972754329443,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 77.80414430267658,
+          "error": null
+        },
+        {
+          "request_id": 25,
+          "ttft_ms": 29.812125489115715,
+          "latency_ms": 1641.4943560957909,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 78.79965267855204,
+          "error": null
+        },
+        {
+          "request_id": 26,
+          "ttft_ms": 31.126173213124275,
+          "latency_ms": 1618.712643161416,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.99564269663777,
+          "error": null
+        },
+        {
+          "request_id": 27,
+          "ttft_ms": 31.538566574454308,
+          "latency_ms": 1603.2783519476652,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 80.80217933138579,
+          "error": null
+        },
+        {
+          "request_id": 28,
+          "ttft_ms": 30.464449897408485,
+          "latency_ms": 1608.1324964761734,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 80.49855625548383,
+          "error": null
+        },
+        {
+          "request_id": 29,
+          "ttft_ms": 29.808668419718742,
+          "latency_ms": 1611.529728397727,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 80.29228617703666,
+          "error": null
+        },
+        {
+          "request_id": 30,
+          "ttft_ms": 29.5342355966568,
+          "latency_ms": 1577.7144115418196,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 82.03179576464129,
+          "error": null
+        },
+        {
+          "request_id": 31,
+          "ttft_ms": 30.34522943198681,
+          "latency_ms": 1589.965332299471,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 81.4300865746091,
+          "error": null
+        }
+      ]
+    },
+    {
+      "concurrency": 4,
+      "peak_client_inflight": 4,
+      "requests": 32,
+      "successful": 32,
+      "failed": 0,
+      "duration_seconds": 14.016635434702039,
+      "output_tokens": 4096,
+      "output_tokens_per_second": 292.2241945352466,
+      "requests_per_second": 2.2830015198066143,
+      "ttft_p50_ms": 42.27308928966522,
+      "ttft_p95_ms": 60.93662045896053,
+      "latency_p95_ms": 1875.0161528587341,
+      "decode_tps_p50": 72.41853195880113,
+      "kv_cache": {
+        "configured_capacity_bytes": 805306368,
+        "capacity_scope": "per-rank; KV heads sharded, no replication for Qwen TP=2",
+        "estimated_peak_used_bytes_scope": "maximum observed fraction times per-rank capacity; not aggregate GPU memory",
+        "tensor_parallel_size": 1,
+        "peak_sampled_usage_fraction": 0.0234375,
+        "estimated_peak_used_bytes": 18874368,
+        "metric_errors": [
+          "KV gauge absent",
+          "",
+          "Server error '500 Internal Server Error' for url 'http://127.0.0.1:8000/metrics'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500"
+        ],
+        "samples": [
+          {
+            "gauges": [],
+            "elapsed_seconds": -9.920448064804077e-06
+          },
+          {
+            "gauges": [],
+            "elapsed_seconds": 0.003288261592388153
+          },
+          {
+            "gauges": [
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5400,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5402,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5404,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5406,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5408,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5410,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5412,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5414,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5416,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5418,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5420,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5422,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5424,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5426,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0234375,
+                "source_active": true,
+                "iteration": 5428,
+                "used_blocks": 48,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              },
+              {
+                "name": "trtllm:kv_blocks_used_fraction",
+                "labels": "",
+                "fraction": 0.0,
+                "source_active": true,
+                "iteration": 5430,
+                "used_blocks": 0,
+                "max_blocks": 2048,
+                "tokens_per_block": 32
+              }
+            ],
+            "elapsed_seconds": 16.03887795098126
+          },
+          {
+            "gauges": [],
+            "elapsed_seconds": 16.040602155029774
+          }
+        ]
+      },
+      "request_results": [
+        {
+          "request_id": 0,
+          "ttft_ms": 47.49448783695698,
+          "latency_ms": 1645.9915060549974,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.44963209351246,
+          "error": null
+        },
+        {
+          "request_id": 1,
+          "ttft_ms": 60.93662045896053,
+          "latency_ms": 1660.2262407541275,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.41025714689546,
+          "error": null
+        },
+        {
+          "request_id": 2,
+          "ttft_ms": 60.74840389192104,
+          "latency_ms": 1661.047862842679,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.36014680856545,
+          "error": null
+        },
+        {
+          "request_id": 3,
+          "ttft_ms": 72.9366410523653,
+          "latency_ms": 1661.6507172584534,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.93886496132835,
+          "error": null
+        },
+        {
+          "request_id": 4,
+          "ttft_ms": 41.06958955526352,
+          "latency_ms": 1794.7643492370844,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.41853195880113,
+          "error": null
+        },
+        {
+          "request_id": 5,
+          "ttft_ms": 39.11927714943886,
+          "latency_ms": 1798.4285596758127,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.18742108700046,
+          "error": null
+        },
+        {
+          "request_id": 6,
+          "ttft_ms": 37.90218383073807,
+          "latency_ms": 1796.3924668729305,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.22104166551873,
+          "error": null
+        },
+        {
+          "request_id": 7,
+          "ttft_ms": 36.884525790810585,
+          "latency_ms": 1794.3880800157785,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.26158928367292,
+          "error": null
+        },
+        {
+          "request_id": 8,
+          "ttft_ms": 60.141421854496,
+          "latency_ms": 1875.4759766161442,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.95955630706042,
+          "error": null
+        },
+        {
+          "request_id": 9,
+          "ttft_ms": 43.7962431460619,
+          "latency_ms": 1874.1248715668917,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.38644679866752,
+          "error": null
+        },
+        {
+          "request_id": 10,
+          "ttft_ms": 42.96846501529217,
+          "latency_ms": 1875.0161528587341,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.32133963690404,
+          "error": null
+        },
+        {
+          "request_id": 11,
+          "ttft_ms": 41.842564940452576,
+          "latency_ms": 1873.1240760535002,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.35034249475372,
+          "error": null
+        },
+        {
+          "request_id": 12,
+          "ttft_ms": 47.88915067911148,
+          "latency_ms": 1856.1375681310892,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 70.2337127876252,
+          "error": null
+        },
+        {
+          "request_id": 13,
+          "ttft_ms": 47.154128551483154,
+          "latency_ms": 1858.8677998632193,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 70.0993771869305,
+          "error": null
+        },
+        {
+          "request_id": 14,
+          "ttft_ms": 46.3378019630909,
+          "latency_ms": 1858.74480381608,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 70.07256089286584,
+          "error": null
+        },
+        {
+          "request_id": 15,
+          "ttft_ms": 45.22080533206463,
+          "latency_ms": 1855.552352964878,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 70.15289556549185,
+          "error": null
+        },
+        {
+          "request_id": 16,
+          "ttft_ms": 49.83345605432987,
+          "latency_ms": 1806.4513560384512,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.29802223986674,
+          "error": null
+        },
+        {
+          "request_id": 17,
+          "ttft_ms": 48.739830031991005,
+          "latency_ms": 1803.4229967743158,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.37773884602949,
+          "error": null
+        },
+        {
+          "request_id": 18,
+          "ttft_ms": 47.67228662967682,
+          "latency_ms": 1803.8856759667397,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.31467472636687,
+          "error": null
+        },
+        {
+          "request_id": 19,
+          "ttft_ms": 46.63744196295738,
+          "latency_ms": 1802.3421689867973,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.33562571496996,
+          "error": null
+        },
+        {
+          "request_id": 20,
+          "ttft_ms": 41.66216403245926,
+          "latency_ms": 1648.2067313045263,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.05165072117956,
+          "error": null
+        },
+        {
+          "request_id": 21,
+          "ttft_ms": 41.13440774381161,
+          "latency_ms": 1649.8355902731419,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 78.94567454741366,
+          "error": null
+        },
+        {
+          "request_id": 22,
+          "ttft_ms": 39.93125259876251,
+          "latency_ms": 1647.681312635541,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 78.99237770645443,
+          "error": null
+        },
+        {
+          "request_id": 23,
+          "ttft_ms": 39.51961174607277,
+          "latency_ms": 1649.1154823452234,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 78.90179287843597,
+          "error": null
+        },
+        {
+          "request_id": 24,
+          "ttft_ms": 43.06530021131039,
+          "latency_ms": 1737.4617140740156,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 74.95294428207556,
+          "error": null
+        },
+        {
+          "request_id": 25,
+          "ttft_ms": 41.13651625812054,
+          "latency_ms": 1739.0497606247663,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 74.79769677359072,
+          "error": null
+        },
+        {
+          "request_id": 26,
+          "ttft_ms": 40.19823856651783,
+          "latency_ms": 1736.9620762765408,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 74.84836556359018,
+          "error": null
+        },
+        {
+          "request_id": 27,
+          "ttft_ms": 39.39478099346161,
+          "latency_ms": 1737.6248333603144,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 74.78374312302263,
+          "error": null
+        },
+        {
+          "request_id": 28,
+          "ttft_ms": 42.27308928966522,
+          "latency_ms": 1638.1235681474209,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.58139041378199,
+          "error": null
+        },
+        {
+          "request_id": 29,
+          "ttft_ms": 42.04440489411354,
+          "latency_ms": 1636.201724410057,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.66591405079318,
+          "error": null
+        },
+        {
+          "request_id": 30,
+          "ttft_ms": 40.79400561749935,
+          "latency_ms": 1634.9185295403004,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.6675530011169,
+          "error": null
+        },
+        {
+          "request_id": 31,
+          "ttft_ms": 40.503885596990585,
+          "latency_ms": 1634.8234172910452,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 79.65780853544165,
+          "error": null
+        }
+      ]
+    },
+    {
+      "concurrency": 8,
+      "peak_client_inflight": 8,
+      "requests": 32,
+      "successful": 32,
+      "failed": 0,
+      "duration_seconds": 8.137926567345858,
+      "output_tokens": 4096,
+      "output_tokens_per_second": 503.3223101859334,
+      "requests_per_second": 3.932205548327605,
+      "ttft_p50_ms": 43.54762099683285,
+      "ttft_p95_ms": 64.59183990955353,
+      "latency_p95_ms": 2685.820637270808,
+      "decode_tps_p50": 69.62513061131398,
+      "kv_cache": {
+        "configured_capacity_bytes": 805306368,
+        "capacity_scope": "per-rank; KV heads sharded, no replication for Qwen TP=2",
+        "estimated_peak_used_bytes_scope": "maximum observed fraction times per-rank capacity; not aggregate GPU memory",
+        "tensor_parallel_size": 1,
+        "peak_sampled_usage_fraction": null,
+        "estimated_peak_used_bytes": null,
+        "metric_errors": [
+          "KV gauge absent",
+          "",
+          "Server error '500 Internal Server Error' for url 'http://127.0.0.1:8000/metrics'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500"
+        ],
+        "samples": [
+          {
+            "gauges": [],
+            "elapsed_seconds": -9.357929229736328e-06
+          },
+          {
+            "gauges": [],
+            "elapsed_seconds": 0.00543578714132309
+          },
+          {
+            "gauges": [],
+            "elapsed_seconds": 10.232055630534887
+          }
+        ]
+      },
+      "request_results": [
+        {
+          "request_id": 0,
+          "ttft_ms": 64.59183990955353,
+          "latency_ms": 1903.972851112485,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.04496633731347,
+          "error": null
+        },
+        {
+          "request_id": 1,
+          "ttft_ms": 63.65198642015457,
+          "latency_ms": 1898.6566066741943,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.20963500485247,
+          "error": null
+        },
+        {
+          "request_id": 2,
+          "ttft_ms": 63.68476524949074,
+          "latency_ms": 1900.7438998669386,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.13223292969646,
+          "error": null
+        },
+        {
+          "request_id": 3,
+          "ttft_ms": 75.08936710655689,
+          "latency_ms": 1899.1433959454298,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.62513061131398,
+          "error": null
+        },
+        {
+          "request_id": 4,
+          "ttft_ms": 63.39273601770401,
+          "latency_ms": 1901.997797191143,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.07410551722606,
+          "error": null
+        },
+        {
+          "request_id": 5,
+          "ttft_ms": 63.043780624866486,
+          "latency_ms": 1900.6744921207428,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.11073003161712,
+          "error": null
+        },
+        {
+          "request_id": 6,
+          "ttft_ms": 49.622274935245514,
+          "latency_ms": 1882.936155423522,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.27346230868847,
+          "error": null
+        },
+        {
+          "request_id": 7,
+          "ttft_ms": 61.70453503727913,
+          "latency_ms": 1899.0827854722738,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 69.12022604487294,
+          "error": null
+        },
+        {
+          "request_id": 8,
+          "ttft_ms": 58.36510844528675,
+          "latency_ms": 1789.020825177431,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.38259064015558,
+          "error": null
+        },
+        {
+          "request_id": 9,
+          "ttft_ms": 44.16143521666527,
+          "latency_ms": 1793.6750762164593,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.5916031883143,
+          "error": null
+        },
+        {
+          "request_id": 10,
+          "ttft_ms": 42.589083313941956,
+          "latency_ms": 1789.4237115979195,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.70293246061871,
+          "error": null
+        },
+        {
+          "request_id": 11,
+          "ttft_ms": 41.39920696616173,
+          "latency_ms": 1789.5878981798887,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.64662026375817,
+          "error": null
+        },
+        {
+          "request_id": 12,
+          "ttft_ms": 41.57880134880543,
+          "latency_ms": 1792.1146005392075,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.54921610785435,
+          "error": null
+        },
+        {
+          "request_id": 13,
+          "ttft_ms": 40.78002832829952,
+          "latency_ms": 1789.3311996012926,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.63156039496432,
+          "error": null
+        },
+        {
+          "request_id": 14,
+          "ttft_ms": 39.95887748897076,
+          "latency_ms": 1788.6377144604921,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.62625778667686,
+          "error": null
+        },
+        {
+          "request_id": 15,
+          "ttft_ms": 38.48034515976906,
+          "latency_ms": 1784.4262886792421,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.73993818158753,
+          "error": null
+        },
+        {
+          "request_id": 16,
+          "ttft_ms": 46.63544334471226,
+          "latency_ms": 1761.4449970424175,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 74.06070238304035,
+          "error": null
+        },
+        {
+          "request_id": 17,
+          "ttft_ms": 45.77570594847202,
+          "latency_ms": 1765.9021895378828,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.83177993689593,
+          "error": null
+        },
+        {
+          "request_id": 18,
+          "ttft_ms": 44.29907537996769,
+          "latency_ms": 1762.095246464014,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.93193798997372,
+          "error": null
+        },
+        {
+          "request_id": 19,
+          "ttft_ms": 42.61435009539127,
+          "latency_ms": 1758.8598113507032,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.99873903066785,
+          "error": null
+        },
+        {
+          "request_id": 20,
+          "ttft_ms": 42.696116492152214,
+          "latency_ms": 1761.9606480002403,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.86879544859764,
+          "error": null
+        },
+        {
+          "request_id": 21,
+          "ttft_ms": 42.248355224728584,
+          "latency_ms": 1760.6477960944176,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.90598307907082,
+          "error": null
+        },
+        {
+          "request_id": 22,
+          "ttft_ms": 40.73558375239372,
+          "latency_ms": 1756.1464849859476,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 74.03473996153001,
+          "error": null
+        },
+        {
+          "request_id": 23,
+          "ttft_ms": 40.05841724574566,
+          "latency_ms": 1758.194725960493,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.91730176228126,
+          "error": null
+        },
+        {
+          "request_id": 24,
+          "ttft_ms": 44.26172748208046,
+          "latency_ms": 2681.995714083314,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 48.147387357904776,
+          "error": null
+        },
+        {
+          "request_id": 25,
+          "ttft_ms": 46.54141701757908,
+          "latency_ms": 2688.245801255107,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 48.07502336664966,
+          "error": null
+        },
+        {
+          "request_id": 26,
+          "ttft_ms": 44.92458514869213,
+          "latency_ms": 2685.820637270808,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 48.08973829089108,
+          "error": null
+        },
+        {
+          "request_id": 27,
+          "ttft_ms": 43.54762099683285,
+          "latency_ms": 2684.7668569535017,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 48.08385395315345,
+          "error": null
+        },
+        {
+          "request_id": 28,
+          "ttft_ms": 43.17939653992653,
+          "latency_ms": 2684.5265813171864,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 48.081524735533655,
+          "error": null
+        },
+        {
+          "request_id": 29,
+          "ttft_ms": 43.08768920600414,
+          "latency_ms": 2684.742793440819,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 48.075920204877384,
+          "error": null
+        },
+        {
+          "request_id": 30,
+          "ttft_ms": 41.63967818021774,
+          "latency_ms": 2682.5858633965254,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 48.08882540315679,
+          "error": null
+        },
+        {
+          "request_id": 31,
+          "ttft_ms": 40.98799638450146,
+          "latency_ms": 2682.359304279089,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 48.08108561655821,
+          "error": null
+        }
+      ]
+    },
+    {
+      "concurrency": 16,
+      "peak_client_inflight": 16,
+      "requests": 32,
+      "successful": 32,
+      "failed": 0,
+      "duration_seconds": 4.165291473269463,
+      "output_tokens": 4096,
+      "output_tokens_per_second": 983.3645559466518,
+      "requests_per_second": 7.682535593333217,
+      "ttft_p50_ms": 62.16542795300484,
+      "ttft_p95_ms": 121.41315266489983,
+      "latency_p95_ms": 2360.6761153787374,
+      "decode_tps_p50": 56.83486580827415,
+      "kv_cache": {
+        "configured_capacity_bytes": 805306368,
+        "capacity_scope": "per-rank; KV heads sharded, no replication for Qwen TP=2",
+        "estimated_peak_used_bytes_scope": "maximum observed fraction times per-rank capacity; not aggregate GPU memory",
+        "tensor_parallel_size": 1,
+        "peak_sampled_usage_fraction": null,
+        "estimated_peak_used_bytes": null,
+        "metric_errors": [
+          "KV gauge absent",
+          ""
+        ],
+        "samples": [
+          {
+            "gauges": [],
+            "elapsed_seconds": -1.241639256477356e-05
+          },
+          {
+            "gauges": [],
+            "elapsed_seconds": 0.010407716035842896
+          },
+          {
+            "gauges": [],
+            "elapsed_seconds": 7.119483744725585
+          }
+        ]
+      },
+      "request_results": [
+        {
+          "request_id": 0,
+          "ttft_ms": 73.39536026120186,
+          "latency_ms": 2336.237832903862,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.12410122905421,
+          "error": null
+        },
+        {
+          "request_id": 1,
+          "ttft_ms": 73.18291813135147,
+          "latency_ms": 2339.3354434520006,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.042123635093866,
+          "error": null
+        },
+        {
+          "request_id": 2,
+          "ttft_ms": 72.79890775680542,
+          "latency_ms": 2339.9776872247458,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.01675578041722,
+          "error": null
+        },
+        {
+          "request_id": 3,
+          "ttft_ms": 104.4440045952797,
+          "latency_ms": 2340.999163687229,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.78375491153213,
+          "error": null
+        },
+        {
+          "request_id": 4,
+          "ttft_ms": 72.05467112362385,
+          "latency_ms": 2338.74480240047,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.02883175234006,
+          "error": null
+        },
+        {
+          "request_id": 5,
+          "ttft_ms": 71.29815593361855,
+          "latency_ms": 2335.629465058446,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.08719867459943,
+          "error": null
+        },
+        {
+          "request_id": 6,
+          "ttft_ms": 49.67023991048336,
+          "latency_ms": 2316.299667581916,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.03033228526924,
+          "error": null
+        },
+        {
+          "request_id": 7,
+          "ttft_ms": 70.6506222486496,
+          "latency_ms": 2335.326712578535,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.07865978816444,
+          "error": null
+        },
+        {
+          "request_id": 8,
+          "ttft_ms": 124.46549534797668,
+          "latency_ms": 2359.0093478560448,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.83486580827415,
+          "error": null
+        },
+        {
+          "request_id": 9,
+          "ttft_ms": 101.29337199032307,
+          "latency_ms": 2359.9294908344746,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.2286235221421,
+          "error": null
+        },
+        {
+          "request_id": 10,
+          "ttft_ms": 100.37354938685894,
+          "latency_ms": 2360.6761153787374,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.18716799724959,
+          "error": null
+        },
+        {
+          "request_id": 11,
+          "ttft_ms": 100.0455841422081,
+          "latency_ms": 2358.6223404854536,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.230101387220365,
+          "error": null
+        },
+        {
+          "request_id": 12,
+          "ttft_ms": 99.16367940604687,
+          "latency_ms": 2355.619739741087,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.28294839525612,
+          "error": null
+        },
+        {
+          "request_id": 13,
+          "ttft_ms": 100.03522038459778,
+          "latency_ms": 2359.844285994768,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.19943823249898,
+          "error": null
+        },
+        {
+          "request_id": 14,
+          "ttft_ms": 99.37923215329647,
+          "latency_ms": 2358.7247021496296,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.210969808086105,
+          "error": null
+        },
+        {
+          "request_id": 15,
+          "ttft_ms": 121.41315266489983,
+          "latency_ms": 2377.7029644697905,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 56.2870954500335,
+          "error": null
+        },
+        {
+          "request_id": 16,
+          "ttft_ms": 65.02091698348522,
+          "latency_ms": 1807.5321055948734,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.88331967682035,
+          "error": null
+        },
+        {
+          "request_id": 17,
+          "ttft_ms": 62.16542795300484,
+          "latency_ms": 1800.7238432765007,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.04902664220744,
+          "error": null
+        },
+        {
+          "request_id": 18,
+          "ttft_ms": 60.77618896961212,
+          "latency_ms": 1799.7290641069412,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.032456379803,
+          "error": null
+        },
+        {
+          "request_id": 19,
+          "ttft_ms": 60.59514731168747,
+          "latency_ms": 1800.7911648601294,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.98028424344713,
+          "error": null
+        },
+        {
+          "request_id": 20,
+          "ttft_ms": 58.6762260645628,
+          "latency_ms": 1797.444548457861,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.04020803944312,
+          "error": null
+        },
+        {
+          "request_id": 21,
+          "ttft_ms": 58.393869549036026,
+          "latency_ms": 1798.6942511051893,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.97590769154363,
+          "error": null
+        },
+        {
+          "request_id": 22,
+          "ttft_ms": 57.73468315601349,
+          "latency_ms": 1797.0652263611555,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.01659853909736,
+          "error": null
+        },
+        {
+          "request_id": 23,
+          "ttft_ms": 56.39917962253094,
+          "latency_ms": 1796.4483592659235,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 72.98644284641857,
+          "error": null
+        },
+        {
+          "request_id": 24,
+          "ttft_ms": 53.89607697725296,
+          "latency_ms": 1791.1287788301706,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.10477166619238,
+          "error": null
+        },
+        {
+          "request_id": 25,
+          "ttft_ms": 51.931483671069145,
+          "latency_ms": 1788.5005734860897,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.13270790367923,
+          "error": null
+        },
+        {
+          "request_id": 26,
+          "ttft_ms": 50.57591013610363,
+          "latency_ms": 1787.1711030602455,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.13160863134304,
+          "error": null
+        },
+        {
+          "request_id": 27,
+          "ttft_ms": 50.953999161720276,
+          "latency_ms": 1788.4143386036158,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.09519366686365,
+          "error": null
+        },
+        {
+          "request_id": 28,
+          "ttft_ms": 49.83699508011341,
+          "latency_ms": 1786.5520883351564,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.1265597294775,
+          "error": null
+        },
+        {
+          "request_id": 29,
+          "ttft_ms": 50.14561861753464,
+          "latency_ms": 1787.519734352827,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.0988212899966,
+          "error": null
+        },
+        {
+          "request_id": 30,
+          "ttft_ms": 49.20249618589878,
+          "latency_ms": 1786.252073943615,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.11247855339796,
+          "error": null
+        },
+        {
+          "request_id": 31,
+          "ttft_ms": 43.89822669327259,
+          "latency_ms": 1780.1903262734413,
+          "completion_tokens": 128,
+          "prompt_tokens": 256,
+          "decode_tokens_per_second": 73.14437474587847,
+          "error": null
+        }
+      ]
+    }
+  ]
+}

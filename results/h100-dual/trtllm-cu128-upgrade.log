@@ -1,0 +1,122 @@
+Looking in indexes: https://download.pytorch.org/whl/cu128
+Collecting torch==2.7.1+cu128
+  Downloading https://download-r2.pytorch.org/whl/cu128/torch-2.7.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl (1039.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 GB 84.6 MB/s eta 0:00:00
+Collecting torchvision==0.22.1+cu128
+  Downloading https://download-r2.pytorch.org/whl/cu128/torchvision-0.22.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl (8.7 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.7/8.7 MB 344.4 MB/s eta 0:00:00
+Collecting torchaudio==2.7.1+cu128
+  Downloading https://download-r2.pytorch.org/whl/cu128/torchaudio-2.7.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl (3.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.9/3.9 MB 417.9 MB/s eta 0:00:00
+Requirement already satisfied: filelock in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (4.1.0)
+Requirement already satisfied: triton==3.3.1 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (3.3.1)
+Collecting nvidia-curand-cu12==10.3.9.55
+  Downloading https://pypi.nvidia.com/nvidia-curand-cu12/nvidia_curand_cu12-10.3.9.55-py3-none-manylinux_2_27_x86_64.whl (63.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.6/63.6 MB 124.9 MB/s eta 0:00:00
+Collecting nvidia-cusparse-cu12==12.5.7.53
+  Downloading https://pypi.nvidia.com/nvidia-cusparse-cu12/nvidia_cusparse_cu12-12.5.7.53-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (292.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 292.1/292.1 MB 137.9 MB/s eta 0:00:00
+Requirement already satisfied: fsspec in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (2024.9.0)
+Collecting nvidia-cuda-cupti-cu12==12.8.57
+  Downloading https://pypi.nvidia.com/nvidia-cuda-cupti-cu12/nvidia_cuda_cupti_cu12-12.8.57-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.2/10.2 MB 75.2 MB/s eta 0:00:00
+Collecting nvidia-cudnn-cu12==9.7.1.26
+  Downloading https://pypi.nvidia.com/nvidia-cudnn-cu12/nvidia_cudnn_cu12-9.7.1.26-py3-none-manylinux_2_27_x86_64.whl (726.9 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 726.9/726.9 MB 145.0 MB/s eta 0:00:00
+Requirement already satisfied: nvidia-cusparselt-cu12==0.6.3 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (0.6.3)
+Requirement already satisfied: jinja2 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (3.1.6)
+Collecting nvidia-cuda-runtime-cu12==12.8.57
+  Downloading https://pypi.nvidia.com/nvidia-cuda-runtime-cu12/nvidia_cuda_runtime_cu12-12.8.57-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (954 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 954.8/954.8 KB 479.5 MB/s eta 0:00:00
+Collecting nvidia-cufile-cu12==1.13.0.11
+  Downloading https://pypi.nvidia.com/nvidia-cufile-cu12/nvidia_cufile_cu12-1.13.0.11-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 414.5 MB/s eta 0:00:00
+Collecting nvidia-cusolver-cu12==11.7.2.55
+  Downloading https://pypi.nvidia.com/nvidia-cusolver-cu12/nvidia_cusolver_cu12-11.7.2.55-py3-none-manylinux_2_27_x86_64.whl (260.4 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 260.4/260.4 MB 91.8 MB/s eta 0:00:00
+Collecting nvidia-cublas-cu12==12.8.3.14
+  Downloading https://pypi.nvidia.com/nvidia-cublas-cu12/nvidia_cublas_cu12-12.8.3.14-py3-none-manylinux_2_27_x86_64.whl (609.6 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 609.6/609.6 MB 107.4 MB/s eta 0:00:00
+Requirement already satisfied: sympy>=1.13.3 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (1.14.0)
+Collecting nvidia-cuda-nvrtc-cu12==12.8.61
+  Downloading https://pypi.nvidia.com/nvidia-cuda-nvrtc-cu12/nvidia_cuda_nvrtc_cu12-12.8.61-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (88.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.0/88.0 MB 29.6 MB/s eta 0:00:00
+Collecting nvidia-cufft-cu12==11.3.3.41
+  Downloading https://pypi.nvidia.com/nvidia-cufft-cu12/nvidia_cufft_cu12-11.3.3.41-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (193.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 193.1/193.1 MB 83.5 MB/s eta 0:00:00
+Requirement already satisfied: typing-extensions>=4.10.0 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (4.16.0)
+Collecting nvidia-nvtx-cu12==12.8.55
+  Downloading https://pypi.nvidia.com/nvidia-nvtx-cu12/nvidia_nvtx_cu12-12.8.55-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (89 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 89.9/89.9 KB 399.3 MB/s eta 0:00:00
+Requirement already satisfied: nvidia-nccl-cu12==2.26.2 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (2.26.2)
+Collecting nvidia-nvjitlink-cu12==12.8.61
+  Downloading https://pypi.nvidia.com/nvidia-nvjitlink-cu12/nvidia_nvjitlink_cu12-12.8.61-py3-none-manylinux2010_x86_64.manylinux_2_12_x86_64.whl (39.2 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 39.2/39.2 MB 72.3 MB/s eta 0:00:00
+Requirement already satisfied: networkx in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torch==2.7.1+cu128) (3.4.2)
+Requirement already satisfied: numpy in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torchvision==0.22.1+cu128) (1.26.4)
+Requirement already satisfied: pillow!=8.3.*,>=5.3.0 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from torchvision==0.22.1+cu128) (10.3.0)
+Requirement already satisfied: setuptools>=40.8.0 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from triton==3.3.1->torch==2.7.1+cu128) (59.6.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from sympy>=1.13.3->torch==2.7.1+cu128) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in ./.venv-trtllm-cu12/lib/python3.10/site-packages (from jinja2->torch==2.7.1+cu128) (3.0.4)
+Installing collected packages: nvidia-nvtx-cu12, nvidia-nvjitlink-cu12, nvidia-curand-cu12, nvidia-cufile-cu12, nvidia-cuda-runtime-cu12, nvidia-cuda-nvrtc-cu12, nvidia-cuda-cupti-cu12, nvidia-cublas-cu12, nvidia-cusparse-cu12, nvidia-cufft-cu12, nvidia-cudnn-cu12, nvidia-cusolver-cu12, torch, torchvision, torchaudio
+  Attempting uninstall: nvidia-nvtx-cu12
+    Found existing installation: nvidia-nvtx-cu12 12.6.77
+    Uninstalling nvidia-nvtx-cu12-12.6.77:
+      Successfully uninstalled nvidia-nvtx-cu12-12.6.77
+  Attempting uninstall: nvidia-nvjitlink-cu12
+    Found existing installation: nvidia-nvjitlink-cu12 12.6.85
+    Uninstalling nvidia-nvjitlink-cu12-12.6.85:
+      Successfully uninstalled nvidia-nvjitlink-cu12-12.6.85
+  Attempting uninstall: nvidia-curand-cu12
+    Found existing installation: nvidia-curand-cu12 10.3.7.77
+    Uninstalling nvidia-curand-cu12-10.3.7.77:
+      Successfully uninstalled nvidia-curand-cu12-10.3.7.77
+  Attempting uninstall: nvidia-cufile-cu12
+    Found existing installation: nvidia-cufile-cu12 1.11.1.6
+    Uninstalling nvidia-cufile-cu12-1.11.1.6:
+      Successfully uninstalled nvidia-cufile-cu12-1.11.1.6
+  Attempting uninstall: nvidia-cuda-runtime-cu12
+    Found existing installation: nvidia-cuda-runtime-cu12 12.6.77
+    Uninstalling nvidia-cuda-runtime-cu12-12.6.77:
+      Successfully uninstalled nvidia-cuda-runtime-cu12-12.6.77
+  Attempting uninstall: nvidia-cuda-nvrtc-cu12
+    Found existing installation: nvidia-cuda-nvrtc-cu12 12.6.77
+    Uninstalling nvidia-cuda-nvrtc-cu12-12.6.77:
+      Successfully uninstalled nvidia-cuda-nvrtc-cu12-12.6.77
+  Attempting uninstall: nvidia-cuda-cupti-cu12
+    Found existing installation: nvidia-cuda-cupti-cu12 12.6.80
+    Uninstalling nvidia-cuda-cupti-cu12-12.6.80:
+      Successfully uninstalled nvidia-cuda-cupti-cu12-12.6.80
+  Attempting uninstall: nvidia-cublas-cu12
+    Found existing installation: nvidia-cublas-cu12 12.6.4.1
+    Uninstalling nvidia-cublas-cu12-12.6.4.1:
+      Successfully uninstalled nvidia-cublas-cu12-12.6.4.1
+  Attempting uninstall: nvidia-cusparse-cu12
+    Found existing installation: nvidia-cusparse-cu12 12.5.4.2
+    Uninstalling nvidia-cusparse-cu12-12.5.4.2:
+      Successfully uninstalled nvidia-cusparse-cu12-12.5.4.2
+  Attempting uninstall: nvidia-cufft-cu12
+    Found existing installation: nvidia-cufft-cu12 11.3.0.4
+    Uninstalling nvidia-cufft-cu12-11.3.0.4:
+      Successfully uninstalled nvidia-cufft-cu12-11.3.0.4
+  Attempting uninstall: nvidia-cudnn-cu12
+    Found existing installation: nvidia-cudnn-cu12 9.5.1.17
+    Uninstalling nvidia-cudnn-cu12-9.5.1.17:
+      Successfully uninstalled nvidia-cudnn-cu12-9.5.1.17
+  Attempting uninstall: nvidia-cusolver-cu12
+    Found existing installation: nvidia-cusolver-cu12 11.7.1.2
+    Uninstalling nvidia-cusolver-cu12-11.7.1.2:
+      Successfully uninstalled nvidia-cusolver-cu12-11.7.1.2
+  Attempting uninstall: torch
+    Found existing installation: torch 2.7.1
+    Uninstalling torch-2.7.1:
+      Successfully uninstalled torch-2.7.1
+  Attempting uninstall: torchvision
+    Found existing installation: torchvision 0.22.1
+    Uninstalling torchvision-0.22.1:
+      Successfully uninstalled torchvision-0.22.1
+  Attempting uninstall: torchaudio
+    Found existing installation: torchaudio 2.7.1
+    Uninstalling torchaudio-2.7.1:
+      Successfully uninstalled torchaudio-2.7.1
+Successfully installed nvidia-cublas-cu12-12.8.3.14 nvidia-cuda-cupti-cu12-12.8.57 nvidia-cuda-nvrtc-cu12-12.8.61 nvidia-cuda-runtime-cu12-12.8.57 nvidia-cudnn-cu12-9.7.1.26 nvidia-cufft-cu12-11.3.3.41 nvidia-cufile-cu12-1.13.0.11 nvidia-curand-cu12-10.3.9.55 nvidia-cusolver-cu12-11.7.2.55 nvidia-cusparse-cu12-12.5.7.53 nvidia-nvjitlink-cu12-12.8.61 nvidia-nvtx-cu12-12.8.55 torch-2.7.1+cu128 torchaudio-2.7.1+cu128 torchvision-0.22.1+cu128

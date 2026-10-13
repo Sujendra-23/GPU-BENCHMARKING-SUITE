@@ -34,6 +34,7 @@ def main():
         env = os.environ.copy()
         env['CUDA_VISIBLE_DEVICES'] = '0,1' if tp == 2 else '0'
         env['OMP_NUM_THREADS'] = '4'
+        env['MAX_JOBS'] = '4'
         env['CUDA_HOME'] = '/usr/local/cuda'
         env['PATH'] = '/usr/local/cuda/bin:' + env.get('PATH', '')
         if backend == 'tensorrt-llm':

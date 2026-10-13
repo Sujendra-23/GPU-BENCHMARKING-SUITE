@@ -73,9 +73,9 @@ def render(root):
               'TP2 needs two visible GPUs in one pod; compare TP1 and TP2 on that same host.', '']
     pending = read(root / 'external-pending.json')
     if pending:
-        lines += ['', '## Prepared but not executed', '']
+        lines += ['', '## Follow-up status', '']
         for name, row in pending.items():
-            lines.append(f"- {name}: {row['reason']}")
+            lines.append(f"- {name}: `{row['status']}`. {row['reason']}")
     status = read(root / 'status.json')
     if status:
         lines += ['', '## Stage exit codes', '']

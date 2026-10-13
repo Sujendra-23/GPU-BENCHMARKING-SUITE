@@ -1,9 +1,6 @@
-/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/cuda/__init__.py:789: UserWarning: Can't initialize NVML
-  warnings.warn("Can't initialize NVML")
-usage: run.py [-h] --backend {vllm,sglang,tensorrt-llm}
-              [--quantization {none,fp8}] [--tensor-parallel-size {1,2}]
-              [--port PORT] [--concurrency CONCURRENCY] [--requests REQUESTS]
-              [--input-tokens INPUT_TOKENS] [--output-tokens OUTPUT_TOKENS]
-              [--kv-capacity-tokens KV_CAPACITY_TOKENS]
-              [--startup-timeout STARTUP_TIMEOUT] [--out-dir OUT_DIR]
-run.py: error: Need 1 visible CUDA GPUs; use a separate two-GPU pod for TP=2
+Wrote results/h100-dual/serving/tensorrt-llm-none-tp1-launch.json
+tensorrt-llm c=1: TTFT p50=31.18593990802765 ms, 73.28 output tok/s, failed=0
+tensorrt-llm c=4: TTFT p50=46.14663124084473 ms, 270.88 output tok/s, failed=0
+tensorrt-llm c=8: TTFT p50=51.09587870538235 ms, 539.53 output tok/s, failed=0
+tensorrt-llm c=16: TTFT p50=86.95243671536446 ms, 885.96 output tok/s, failed=0
+Wrote results/h100-dual/serving/tensorrt-llm-none-tp1.json

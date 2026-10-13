@@ -1,0 +1,2 @@
+Wrote results/h100-dual/nsight-after-restart/status.json
+Host denies GPU counters. Use a different counter-enabled host or bare metal.

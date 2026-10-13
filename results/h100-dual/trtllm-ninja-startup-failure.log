@@ -1,0 +1,258 @@
+<frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cuda module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.driver module instead.
+<frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+[2026-10-13 16:40:30] INFO config.py:54: PyTorch version 2.7.1+cu128 available.
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/modelopt/torch/utils/import_utils.py:32: UserWarning: Failed to import diffusers plugin due to: ImportError('peft>=0.17.0 is required for a normal functioning of this module, but found peft==0.16.0.'). You may ignore this warning if you do not need this plugin.
+  warnings.warn(
+2026-10-13 16:40:32,543 - INFO - flashinfer.jit: Prebuilt kernels not found, using JIT backend
+[TensorRT-LLM] TensorRT LLM version: 1.0.0
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/serve/openai_protocol.py:84: UserWarning: Field name "schema" in "ResponseFormat" shadows an attribute in parent "OpenAIBaseModel"
+  class ResponseFormat(OpenAIBaseModel):
+[10/13/2026-16:40:33] [TRT-LLM] [I] Using LLM with PyTorch backend
+[10/13/2026-16:40:33] [TRT-LLM] [I] Set nccl_plugin to None.
+[10/13/2026-16:40:33] [TRT-LLM] [I] neither checkpoint_format nor checkpoint_loader were provided, checkpoint_format will be set to HF.
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py:2356: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+  warnings.warn(
+[10/13/2026-16:40:34] [TRT-LLM] [I] PyTorchConfig(extra_resource_managers={}, use_cuda_graph=False, cuda_graph_batch_sizes=None, cuda_graph_max_batch_size=0, cuda_graph_padding_enabled=False, disable_overlap_scheduler=False, moe_max_num_tokens=None, moe_load_balancer=None, attention_dp_enable_balance=False, attention_dp_time_out_iters=50, attention_dp_batching_wait_iters=10, attn_backend='TRTLLM', moe_backend='CUTLASS', enable_mixed_sampler=False, enable_trtllm_sampler=False, kv_cache_dtype='auto', enable_iter_perf_stats=True, enable_iter_req_stats=False, print_iter_log=False, torch_compile_enabled=False, torch_compile_fullgraph=True, torch_compile_inductor_enabled=False, torch_compile_piecewise_cuda_graph=False, torch_compile_enable_userbuffers=True, torch_compile_max_num_streams=1, enable_autotuner=True, enable_layerwise_nvtx_marker=False, load_format=<LoadFormat.AUTO: 0>, enable_min_latency=False, allreduce_strategy='AUTO', stream_interval=1, force_dynamic_quantization=False, _limit_torch_cuda_mem_fraction=True)
+[33;20mrank 0 using MpiPoolSession to spawn MPI processes
+[0m[10/13/2026-16:40:34] [TRT-LLM] [I] Generating a new HMAC key for server proxy_request_queue
+[10/13/2026-16:40:34] [TRT-LLM] [I] Generating a new HMAC key for server worker_init_status_queue
+[10/13/2026-16:40:34] [TRT-LLM] [I] Generating a new HMAC key for server proxy_result_queue
+[10/13/2026-16:40:34] [TRT-LLM] [I] Generating a new HMAC key for server proxy_stats_queue
+[10/13/2026-16:40:34] [TRT-LLM] [I] Generating a new HMAC key for server proxy_kv_cache_events_queue
+<frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cuda module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.driver module instead.
+<frozen importlib._bootstrap_external>:1184: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+[2026-10-13 16:40:39] INFO config.py:54: PyTorch version 2.7.1+cu128 available.
+Multiple distributions found for package optimum. Picked distribution: optimum
+Multiple distributions found for package modelopt. Picked distribution: nvidia-modelopt
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/modelopt/torch/utils/import_utils.py:32: UserWarning: Failed to import diffusers plugin due to: ImportError('peft>=0.17.0 is required for a normal functioning of this module, but found peft==0.16.0.'). You may ignore this warning if you do not need this plugin.
+  warnings.warn(
+2026-10-13 16:40:41,926 - INFO - flashinfer.jit: Prebuilt kernels not found, using JIT backend
+[TensorRT-LLM] TensorRT LLM version: 1.0.0
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/serve/openai_protocol.py:84: UserWarning: Field name "schema" in "ResponseFormat" shadows an attribute in parent "OpenAIBaseModel"
+  class ResponseFormat(OpenAIBaseModel):
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py:2356: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+  warnings.warn(
+[TensorRT-LLM][INFO] Refreshed the MPI local session
+[10/13/2026-16:40:42] [TRT-LLM] [I] ATTENTION RUNTIME FEATURES:  AttentionRuntimeFeatures(chunked_prefill=False, cache_reuse=False, has_speculative_draft_tokens=False, chunk_size=2048)
+[10/13/2026-16:40:43] [TRT-LLM] [I] Validating KV Cache config against kv_cache_dtype="auto"
+[10/13/2026-16:40:43] [TRT-LLM] [I] KV cache quantization set to "auto". Using checkpoint KV quantization.
+[10/13/2026-16:40:43] [TRT-LLM] [I] Use 1.17 GB for model weights.
+[10/13/2026-16:40:43] [TRT-LLM] [I] Prefetching 0.92GB checkpoint files.
+[10/13/2026-16:40:43] [TRT-LLM] [I] Prefetching /root/.cache/huggingface/hub/models--Qwen--Qwen2.5-0.5B-Instruct/snapshots/7ae557604adf67be50417f59c2c2f167def9a775/model.safetensors to memory...
+[10/13/2026-16:40:43] [TRT-LLM] [I] Finished prefetching /root/.cache/huggingface/hub/models--Qwen--Qwen2.5-0.5B-Instruct/snapshots/7ae557604adf67be50417f59c2c2f167def9a775/model.safetensors.
+Loading safetensors weights in parallel:   0%|          | 0/1 [00:00<?, ?it/s]Loading safetensors weights in parallel: 100%|██████████| 1/1 [00:00<00:00, 183.09it/s]
+Loading weights concurrently:   0%|          | 0/465 [00:00<?, ?it/s]Loading weights concurrently:  38%|███▊      | 176/465 [00:00<00:00, 1750.92it/s]Loading weights concurrently: 100%|██████████| 465/465 [00:00<00:00, 2421.43it/s]
+Model init total -- 0.87s
+[10/13/2026-16:40:43] [TRT-LLM] [I] max_tokens is set by kv_cache_config.max_tokens: 2112
+[TensorRT-LLM][INFO] Number of tokens per block: 32.
+[TensorRT-LLM][INFO] [MemUsageChange] Allocated 0.02 GiB for max tokens in paged KV cache (2112).
+[10/13/2026-16:40:43] [TRT-LLM] [I] max_seq_len=2049, max_num_requests=16, max_num_tokens=2048, max_batch_size=16
+[10/13/2026-16:40:43] [TRT-LLM] [I] cache_transceiver is disabled
+[10/13/2026-16:40:43] [TRT-LLM] [I] Detected use_mrope: False
+[10/13/2026-16:40:43] [TRT-LLM] [I] [Autotuner] Autotuning process starts ...
+2026-10-13 16:40:44,946 - INFO - flashinfer.jit: Loading JIT ops: norm
+/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py:2356: UserWarning: TORCH_CUDA_ARCH_LIST is not set, all archs for visible cards are included for compilation. 
+If this is not desired, please set os.environ['TORCH_CUDA_ARCH_LIST'].
+  warnings.warn(
+[10/13/2026-16:40:44] [TRT-LLM] [I] [Autotuner] Autotuning process ends
+[10/13/2026-16:40:44] [TRT-LLM] [E] Failed to initialize executor on rank 0: Ninja is required to load C++ extensions
+[10/13/2026-16:40:44] [TRT-LLM] [E] Traceback (most recent call last):
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/worker.py", line 771, in worker_main
+    worker: GenerationExecutorWorker = worker_cls(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/worker.py", line 139, in __init__
+    self.engine = _create_engine()
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/worker.py", line 137, in _create_engine
+    return create_executor(**args)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/py_executor_creator.py", line 377, in create_py_executor
+    py_executor = create_py_executor_instance(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/_util.py", line 562, in create_py_executor_instance
+    return PyExecutor(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/py_executor.py", line 217, in __init__
+    self.model_engine.warmup(self.resource_manager)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 481, in wrapper
+    return method(self, *args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 711, in warmup
+    self.forward(batch,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/utils.py", line 67, in wrapper
+    return func(self, *args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 2144, in forward
+    outputs = self._forward_step(inputs, gather_ids,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 2206, in _forward_step
+    logits = self.model_forward(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 2190, in model_forward
+    return self.model.forward(**kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/modeling_qwen.py", line 194, in forward
+    output = self.model(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/modeling_qwen.py", line 161, in forward
+    hidden_states, residual = decoder_layer(position_ids=position_ids,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/modeling_qwen.py", line 95, in forward
+    hidden_states = self.input_layernorm(hidden_states)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/modules/rms_norm.py", line 43, in forward
+    hidden_states = flashinfer_rmsnorm(hidden_states, self.weight,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 671, in __call__
+    return self._opoverload(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_ops.py", line 756, in __call__
+    return self._op(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 335, in backend_impl
+    result = self._backend_fns[device_type](*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_compile.py", line 51, in inner
+    return disable_fn(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 838, in _fn
+    return fn(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 367, in wrapped_fn
+    return fn(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/custom_ops/flashinfer_custom_ops.py", line 47, in flashinfer_rmsnorm
+    return rmsnorm(input, weight, eps, enable_pdl=ENABLE_PDL)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/norm.py", line 86, in rmsnorm
+    _rmsnorm(out, input, weight, eps, enable_pdl)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/norm.py", line 98, in _rmsnorm
+    get_module_attr("rmsnorm")(out, input, weight, eps, enable_pdl)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/norm.py", line 50, in get_module_attr
+    get_norm_module()
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/norm.py", line 36, in get_norm_module
+    _norm_module = load_cuda_ops(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/jit/core.py", line 135, in load_cuda_ops
+    torch_cpp_ext.load(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1623, in load
+    return _jit_compile(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2076, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2180, in _write_ninja_file_and_build_library
+    verify_ninja_availability()
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2241, in verify_ninja_availability
+    raise RuntimeError("Ninja is required to load C++ extensions")
+RuntimeError: Ninja is required to load C++ extensions
+
+[10/13/2026-16:40:44] [TRT-LLM] [E] Executor worker initialization error: Traceback (most recent call last):
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/worker.py", line 771, in worker_main
+    worker: GenerationExecutorWorker = worker_cls(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/worker.py", line 139, in __init__
+    self.engine = _create_engine()
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/worker.py", line 137, in _create_engine
+    return create_executor(**args)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/py_executor_creator.py", line 377, in create_py_executor
+    py_executor = create_py_executor_instance(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/_util.py", line 562, in create_py_executor_instance
+    return PyExecutor(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/py_executor.py", line 217, in __init__
+    self.model_engine.warmup(self.resource_manager)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 481, in wrapper
+    return method(self, *args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 711, in warmup
+    self.forward(batch,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/utils.py", line 67, in wrapper
+    return func(self, *args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 2144, in forward
+    outputs = self._forward_step(inputs, gather_ids,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 2206, in _forward_step
+    logits = self.model_forward(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/pyexecutor/model_engine.py", line 2190, in model_forward
+    return self.model.forward(**kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/modeling_qwen.py", line 194, in forward
+    output = self.model(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/modeling_qwen.py", line 161, in forward
+    hidden_states, residual = decoder_layer(position_ids=position_ids,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/models/modeling_qwen.py", line 95, in forward
+    hidden_states = self.input_layernorm(hidden_states)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/modules/rms_norm.py", line 43, in forward
+    hidden_states = flashinfer_rmsnorm(hidden_states, self.weight,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 671, in __call__
+    return self._opoverload(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_ops.py", line 756, in __call__
+    return self._op(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 335, in backend_impl
+    result = self._backend_fns[device_type](*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_compile.py", line 51, in inner
+    return disable_fn(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 838, in _fn
+    return fn(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 367, in wrapped_fn
+    return fn(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/_torch/custom_ops/flashinfer_custom_ops.py", line 47, in flashinfer_rmsnorm
+    return rmsnorm(input, weight, eps, enable_pdl=ENABLE_PDL)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/norm.py", line 86, in rmsnorm
+    _rmsnorm(out, input, weight, eps, enable_pdl)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/norm.py", line 98, in _rmsnorm
+    get_module_attr("rmsnorm")(out, input, weight, eps, enable_pdl)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/norm.py", line 50, in get_module_attr
+    get_norm_module()
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/norm.py", line 36, in get_norm_module
+    _norm_module = load_cuda_ops(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/flashinfer/jit/core.py", line 135, in load_cuda_ops
+    torch_cpp_ext.load(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 1623, in load
+    return _jit_compile(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2076, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2180, in _write_ninja_file_and_build_library
+    verify_ninja_availability()
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/torch/utils/cpp_extension.py", line 2241, in verify_ninja_availability
+    raise RuntimeError("Ninja is required to load C++ extensions")
+RuntimeError: Ninja is required to load C++ extensions
+
+RuntimeError: Ninja is required to load C++ extensions
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/bin/trtllm-serve", line 8, in <module>
+    sys.exit(main())
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 1631, in __call__
+    return self.main(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 1552, in main
+    rv = self.invoke(ctx)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 1415, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/click/core.py", line 910, in invoke
+    return callback(*args, **kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/commands/serve.py", line 332, in serve
+    launch_server(host, port, llm_args, metadata_server_cfg, server_role)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/commands/serve.py", line 164, in launch_server
+    llm = PyTorchLLM(**llm_args)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/llmapi/llm.py", line 1125, in __init__
+    super().__init__(model, tokenizer, tokenizer_mode, skip_tokenizer_init,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/llmapi/llm.py", line 942, in __init__
+    super().__init__(model,
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/llmapi/llm.py", line 214, in __init__
+    self._build_model()
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/llmapi/llm.py", line 1072, in _build_model
+    self._executor = self._executor_cls.create(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/executor.py", line 423, in create
+    return GenerationExecutorProxy(
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/proxy.py", line 105, in __init__
+    self._start_executor_workers(worker_kwargs)
+  File "/workspace/gpu-benchmarking-suite/.venv-trtllm-cu12/lib/python3.10/site-packages/tensorrt_llm/executor/proxy.py", line 330, in _start_executor_workers
+    raise RuntimeError(
+RuntimeError: Executor worker returned error

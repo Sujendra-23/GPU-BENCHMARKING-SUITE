@@ -145,7 +145,9 @@ async def benchmark_level(client, args, concurrency):
             response.raise_for_status()
             values = parse_metrics(response.text, args.backend)
             samples.append({"time": time.perf_counter(), "gauges": values})
-            if not values and "KV gauge absent" not in metric_errors:
+            # A drained TRT-LLM idle queue legitimately returns an empty list.
+            absent = not values and (args.backend != "tensorrt-llm" or response.json())
+            if absent and "KV gauge absent" not in metric_errors:
                 metric_errors.append("KV gauge absent")
         except (httpx.HTTPError, ValueError) as error:
             if str(error) not in metric_errors:

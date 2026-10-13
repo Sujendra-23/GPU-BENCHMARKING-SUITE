@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "timestamp_utc": "2026-10-13T16:25:41.246708+00:00",
+    "timestamp_utc": "2026-10-13T16:50:31.509382+00:00",
     "platform": "Linux-6.8.0-56-generic-x86_64-with-glibc2.35",
     "python": "3.11.10 (main, Sep  7 2024, 18:35:41) [GCC 11.4.0]",
     "packages": {},
-    "nvidia_smi": null,
+    "nvidia_smi": "NVIDIA H100 80GB HBM3, 570.124.06, 81559 MiB\nNVIDIA H100 80GB HBM3, 570.124.06, 81559 MiB",
     "git_commit": "5d9266cca1c5602c654b2cfebbfa7c69ea8de2ef",
     "git_dirty": true,
     "source_sha256": {
@@ -55,8 +55,9 @@
       "compilers/torch_compile.py": "44010d66a3f7d0f465a724bd472c72ad0f1da7d53ff59094c13ba99ead040b97",
       "compilers/torch_tensorrt_block.py": "1db2e3fe27860ebb6c148a9f8cc1c2206ecb4df25c9df4f1afe96eafa3df3579",
       "serving/__init__.py": "c24eef08bf558a6a4411a35af1eda651fcaddd87327d1bde7c631db20063cbf8",
-      "serving/benchmark.py": "431e37d5fd2fe674ba5d84d6b69c38b3103249dee028470728f8d8ed57d032dd",
-      "serving/run.py": "71032768298f3b72b44c590e2000218c49d90be16078ac231d4404071655ef22",
+      "serving/benchmark.py": "ac87787abfd4a10ec8701d3af8c2db8877643ee5175ca99bc89fba7bfadc83f7",
+      "serving/run.py": "913d4f63168834f052e9a814eb19edd6d89f7e3c4f31c58f538521022d680b64",
+      "serving/trtllm_server.py": "4a3555e4495d48c20942a69da77eb2b4ee186a08fe5d048a75ecf3f6f770b90a",
       "training/export_tensorrt.py": "ee71c08a8b63f151d182cff56627aeb7cac2b8df25649bdb0d690fa414e1282a",
       "training/train_distributed.py": "3675acec2342cb4046f185ee8abee3c9b251480668f9b838d1c77f3ff4975eba"
     }
@@ -64,7 +65,7 @@
   "config": {
     "trtllm_python": ".venv-trtllm-cu12/bin/python",
     "vllm_python": ".venv-vllm/bin/python",
-    "stages": "trtllm",
+    "stages": "trtllm,tp1,tp2",
     "requests": 32,
     "out_dir": "results/h100-dual"
   },
@@ -87,9 +88,55 @@
           "--out-dir",
           "results/h100-dual/serving"
         ],
-        "returncode": 2,
+        "returncode": 0,
         "cuda_visible_devices": "0",
         "log": "results/h100-dual/trtllm.log"
+      }
+    ],
+    "tp1": [
+      {
+        "command": [
+          ".venv-vllm/bin/python",
+          "-u",
+          "-m",
+          "serving.run",
+          "--backend",
+          "vllm",
+          "--tensor-parallel-size",
+          "1",
+          "--requests",
+          "32",
+          "--startup-timeout",
+          "1200",
+          "--out-dir",
+          "results/h100-dual/serving"
+        ],
+        "returncode": 0,
+        "cuda_visible_devices": "0",
+        "log": "results/h100-dual/tp1.log"
+      }
+    ],
+    "tp2": [
+      {
+        "command": [
+          ".venv-vllm/bin/python",
+          "-u",
+          "-m",
+          "serving.run",
+          "--backend",
+          "vllm",
+          "--tensor-parallel-size",
+          "2",
+          "--requests",
+          "32",
+          "--startup-timeout",
+          "1200",
+          "--out-dir",
+          "results/h100-dual/serving"
+        ],
+        "returncode": 0,
+        "cuda_visible_devices": "0,1",
+        "log": "results/h100-dual/tp2.log"
       }
     ]
   }

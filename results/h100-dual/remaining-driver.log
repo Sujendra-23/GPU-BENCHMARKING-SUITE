@@ -1,0 +1,6 @@
+Running trtllm: ['.venv-trtllm-cu12/bin/python', '-u', '-m', 'serving.run', '--backend', 'tensorrt-llm', '--tensor-parallel-size', '1', '--requests', '32', '--startup-timeout', '1200', '--out-dir', 'results/h100-dual/serving']
+Wrote results/h100-dual/status.json
+Running tp1: ['.venv-vllm/bin/python', '-u', '-m', 'serving.run', '--backend', 'vllm', '--tensor-parallel-size', '1', '--requests', '32', '--startup-timeout', '1200', '--out-dir', 'results/h100-dual/serving']
+Wrote results/h100-dual/status.json
+Running tp2: ['.venv-vllm/bin/python', '-u', '-m', 'serving.run', '--backend', 'vllm', '--tensor-parallel-size', '2', '--requests', '32', '--startup-timeout', '1200', '--out-dir', 'results/h100-dual/serving']
+Wrote results/h100-dual/status.json

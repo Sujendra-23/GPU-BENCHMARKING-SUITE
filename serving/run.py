@@ -30,15 +30,15 @@ def server_command(args):
                 "--tokenizer-revision", MODEL_REVISION,
                 "--host", "127.0.0.1", "--port", str(args.port),
                 "--dtype", "half", "--kv-cache-dtype", "auto", "--max-model-len", "2048",
-                "--max-num-seqs", str(max(args.concurrency)), "--no-enable-prefix-caching",
+                "--max-num-seqs", str(max(args.concurrency)), "--max-num-batched-tokens", "2048",
+                "--no-enable-prefix-caching",
                 "--kv-cache-memory-bytes", str(kv_capacity(args)),
                 "--tensor-parallel-size", str(args.tensor_parallel_size), "--enforce-eager"]
         if args.quantization == "fp8":
             command.extend(["--quantization", "fp8"])
         return command
     if args.backend == "tensorrt-llm":
-        executable = Path(sys.executable).parent / "trtllm-serve"
-        return [str(executable), MODEL,
+        return [sys.executable, "-m", "serving.trtllm_server", MODEL,
                 "--backend", "pytorch", "--host", "127.0.0.1", "--port", str(args.port),
                 "--tp_size", "1", "--max_seq_len", "2048",
                 "--max_batch_size", str(max(args.concurrency)),
@@ -104,6 +104,7 @@ def main():
     if args.backend == "tensorrt-llm":
         from importlib.metadata import version
         args.trtllm_version = version("tensorrt-llm")
+        args.trtllm_metrics_adapter = "bounded real iteration-stats drain (20 ms); empty-deque fix" if args.trtllm_version == "1.0.0" else None
     args.metrics_url, args.metrics_interval, args.timeout = None, .1, 120
     args.kv_capacity_bytes = kv_capacity(args)
     args.kv_capacity_scope = "per-rank; KV heads sharded, no replication for Qwen TP=2"
@@ -119,6 +120,9 @@ def main():
             parser.error(f"Port {args.port} is occupied; choose a free port")
     write_json(root / f"{name}-launch.json", {"command": command, "config": vars(args)})
     env = os.environ.copy()
+    # Direct invocation of a venv Python does not activate its bin directory.
+    # FlashInfer/Torch JIT must be able to find that environment's Ninja.
+    env["PATH"] = str(Path(sys.executable).parent) + os.pathsep + env.get("PATH", "")
     env["VLLM_USE_V1"] = "1"
     env["DO_NOT_TRACK"] = "1"
     with (root / f"{name}-server.log").open("w") as log:

@@ -70,11 +70,11 @@ Nsight probe: `permission_denied`.
 TP2 needs two visible GPUs in one pod; compare TP1 and TP2 on that same host.
 
 
-## Prepared but not executed
+## Follow-up status
 
-- tensorrt-llm: Pinned launch/metrics integration is implemented. GPU execution needs a separate dependency environment; the current 20 GB pod has about 3 GB free. Use the isolated setup in docs/runpod.md on a pod with a larger disk.
-- vllm-tp2: Current pod exposes one GPU. Provide a separate pod with two matching visible GPUs; run TP1 and TP2 there using identical settings.
-- nsight-counters: Nsight Compute probe returned ERR_NVGPUCTRPERM. Full counter collection requires a provider/host permitting GPU counters; no profiling numbers are claimed.
+- tensorrt-llm: `executed_on_separate_host`. TensorRT-LLM TP1 completed on two H100s, with zero failed requests and valid KV metrics. See [the H100 report](../h100-dual/report.md).
+- vllm-tp2: `executed_on_separate_host`. Matched vLLM TP1 and TP2 completed on two H100s, with zero failed requests and valid KV metrics. See [the H100 report](../h100-dual/report.md).
+- nsight-counters: `permission_denied`. Nsight Compute returned ERR_NVGPUCTRPERM on the RTX 4090 and on the H100 host before and after restart. Counter collection still needs provider-enabled access; no hardware counter values are claimed.
 
 ## Stage exit codes
 
