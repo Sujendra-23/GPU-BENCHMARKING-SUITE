@@ -1,0 +1,10 @@
+Running serving: ['/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python', '-u', '-m', 'serving.run', '--backend', 'vllm', '--quantization', 'none', '--requests', '16', '--concurrency', '1,4,8,16', '--out-dir', 'results/runpod/serving']
+Wrote results/runpod/status.json
+Running serving: ['/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python', '-u', '-m', 'serving.run', '--backend', 'vllm', '--quantization', 'fp8', '--requests', '16', '--concurrency', '1,4,8,16', '--out-dir', 'results/runpod/serving']
+Wrote results/runpod/status.json
+Running compiler: ['/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python', '-u', '-m', 'compilers.torch_tensorrt_block', '--models', 'llama-block,resnet18', '--batch-size', '1', '--iterations', '20', '--out-dir', 'results/runpod/compiler']
+Wrote results/runpod/status.json
+Running edge: ['/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python', '-u', '-m', 'harness.edge_profile', '--power-limit', '200', '--model', 'resnet18', '--engine-dir', 'results/runpod/engines', '--out-dir', 'results/runpod/edge']
+Wrote results/runpod/status.json
+Running whisper: ['/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python', '-u', '-m', 'harness.benchmark', '--model', 'whisper-tiny', '--batch-sizes', '1', '--frameworks', 'torch,onnx,tensorrt,torch.compile', '--precisions', 'fp32', '--audio-manifest', 'data/whisper/manifest.jsonl', '--audio-samples', '4', '--warmup', '1', '--iterations', '3', '--out', 'results/runpod/whisper.csv', '--asr-out-dir', 'results/runpod/whisper']
+Wrote results/runpod/status.json

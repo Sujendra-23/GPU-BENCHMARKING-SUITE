@@ -5,7 +5,12 @@ From: nvcr.io/nvidia/pytorch:24.05-py3
     harness /workspace/harness
     training /workspace/training
     kernels /workspace/kernels
+    compilers /workspace/compilers
+    serving /workspace/serving
+    scripts /workspace/scripts
+    docs /workspace/docs
     requirements.txt /workspace/requirements.txt
+    requirements-gpu-extensions.txt /workspace/requirements-gpu-extensions.txt
 
 %post
     cd /workspace

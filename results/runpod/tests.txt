@@ -1,0 +1,12 @@
+.................                                                        [100%]
+=============================== warnings summary ===============================
+tests/test_extensions.py::test_whisper_fixed_mask_export_keeps_causal_semantics_and_dynamic_position
+  /workspace/gpu-benchmarking-suite/training/export_tensorrt.py:48: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter will be the default. To switch now, set dynamo=True in torch.onnx.export. This new exporter supports features like exporting LLMs with DynamicCache. We encourage you to try it and share feedback to help improve the experience. Learn more about the new export logic: https://pytorch.org/docs/stable/onnx_dynamo.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html.
+    torch.onnx.export(model, inputs, str(onnx_path), input_names=list(input_names),
+
+tests/test_extensions.py::test_whisper_fixed_mask_export_keeps_causal_semantics_and_dynamic_position
+  /workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/onnx/utils.py:179: DeprecationWarning: The feature will be removed. Please remove usage of this function
+    setup_onnx_logging(verbose) as log_ctx,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+17 passed, 2 warnings in 5.37s

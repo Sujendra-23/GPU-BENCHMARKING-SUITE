@@ -46,9 +46,9 @@ def metadata(packages=()):
         commit, dirty = None, None
     root = Path(__file__).resolve().parents[1]
     sources = {}
-    for directory in ("harness", "kernels", "compilers", "serving"):
+    for directory in ("harness", "kernels", "compilers", "serving", "training"):
         for path in sorted((root / directory).rglob("*")):
-            if path.suffix in (".py", ".cu", ".cpp") and "__pycache__" not in path.parts:
+            if path.suffix in (".py", ".cu", ".cpp") and "__pycache__" not in path.parts and not path.name.startswith("._"):
                 sources[str(path.relative_to(root))] = hashlib.sha256(path.read_bytes()).hexdigest()
     return {"timestamp_utc": datetime.now(timezone.utc).isoformat(),
             "platform": platform.platform(), "python": sys.version,
@@ -100,3 +100,22 @@ def write_json(path, result):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
     print(f"Wrote {path}")
+
+
+def synchronized_time(fn, warmup=10, iterations=50):
+    """Application latency, including dispatch and synchronization, without CUDA graphs."""
+    import time
+    import torch
+    if warmup < 0 or iterations < 1:
+        raise ValueError("Invalid warmup/iteration counts")
+    with torch.inference_mode():
+        for _ in range(warmup):
+            fn()
+        torch.cuda.synchronize()
+        samples = []
+        for _ in range(iterations):
+            start = time.perf_counter()
+            fn()
+            torch.cuda.synchronize()
+            samples.append((time.perf_counter() - start) * 1000)
+    return {**summarize(samples), "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"}

@@ -1,0 +1,7 @@
+[10/13/2026-07:21:55] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/13/2026-07:21:55] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/13/2026-07:21:56] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+BenchResult(framework='tensorrt', batch_size=1, precision='fp32', mean_latency_ms=0.5079, p95_latency_ms=0.5117, throughput_samples_per_sec=1968.88, gpu_util_percent=0.0, gpu_power_watts=45.15, model='resnet18')
+BenchResult(framework='tensorrt', batch_size=1, precision='fp16', mean_latency_ms=0.1901, p95_latency_ms=0.195, throughput_samples_per_sec=5259.56, gpu_util_percent=0.0, gpu_power_watts=45.15, model='resnet18')
+BenchResult(framework='tensorrt', batch_size=1, precision='int8', mean_latency_ms=0.1898, p95_latency_ms=0.1969, throughput_samples_per_sec=5267.45, gpu_util_percent=0.0, gpu_power_watts=45.15, model='resnet18')
+wrote 3 rows to results/runpod/edge/baseline.csv

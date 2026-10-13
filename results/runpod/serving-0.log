@@ -1,0 +1,6 @@
+Wrote results/runpod/serving/vllm-none-tp1-launch.json
+vllm c=1: TTFT p50=13.408372178673744 ms, 96.22 output tok/s, failed=0
+vllm c=4: TTFT p50=22.315947338938713 ms, 350.19 output tok/s, failed=0
+vllm c=8: TTFT p50=32.25334919989109 ms, 679.57 output tok/s, failed=0
+vllm c=16: TTFT p50=69.52270492911339 ms, 1260.27 output tok/s, failed=0
+Wrote results/runpod/serving/vllm-none-tp1.json

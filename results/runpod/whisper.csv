@@ -1,0 +1,5 @@
+framework,batch_size,precision,mean_latency_ms,p95_latency_ms,throughput_samples_per_sec,gpu_util_percent,gpu_power_watts,model
+torch,1,fp32,115.038,150.6649,8.69,37.0,98.06,whisper-tiny
+onnx,1,fp32,51.452,65.1662,19.44,0.0,65.29,whisper-tiny
+tensorrt,1,fp32,26.5949,34.4087,37.6,1.0,73.56,whisper-tiny
+torch.compile,1,fp32,67.3917,88.3465,14.84,0.0,63.74,whisper-tiny

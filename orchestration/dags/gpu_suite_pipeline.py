@@ -13,9 +13,8 @@ demand against whatever hardware is attached, not a recurring production job.
 Honest limitations of the underlying scripts, not of this DAG (see
 ../../README.md "Orchestration (Airflow)" for the full picture):
 
-- harness/benchmark.py has no real GPU/TensorRT in this container, so it
-  always falls through to its numpy CPU self-test path - that's the script's
-  own documented fallback, genuinely executed, not faked by this DAG.
+- This CPU-only container invokes harness/benchmark.py --self-test explicitly.
+  Real GPU benchmarks now fail instead of substituting synthetic CPU rows.
   Running this for real under Airflow's non-root container UID surfaced an
   actual bug on the way to that fallback: query_gpu_metrics() only caught
   FileNotFoundError, but a non-root user that can't even stat /root/bin
@@ -52,9 +51,8 @@ with DAG(
         task_id="run_benchmark",
         bash_command=(
             f"cd {REPO_ROOT} && "
-            f"python harness/benchmark.py "
-            f"--model resnet50 --batch-sizes 1,8,32,64 --precisions fp32,fp16 "
-            f"--frameworks torch,tensorrt --out {OUTPUT_DIR}/benchmark_report.csv"
+            f"python -m harness.benchmark --self-test "
+            f"--out {OUTPUT_DIR}/benchmark_report.csv"
         ),
     )
 
@@ -67,7 +65,7 @@ with DAG(
         task_id="run_tensorrt_export",
         bash_command=(
             f"cd {REPO_ROOT} && "
-            f"python training/export_tensorrt.py "
+            f"python -m training.export_tensorrt "
             f"--checkpoint model.pt --precision fp16 --batch-size 32 "
             f"--out {OUTPUT_DIR}/engines/resnet50_fp16_bs32.trt"
         ),

@@ -1,0 +1,4 @@
+framework,batch_size,precision,mean_latency_ms,p95_latency_ms,throughput_samples_per_sec,gpu_util_percent,gpu_power_watts,model
+tensorrt,1,fp32,0.5068,0.5101,1973.29,0.0,57.63,resnet18
+tensorrt,1,fp16,0.1897,0.1955,5271.11,0.0,57.63,resnet18
+tensorrt,1,int8,0.1877,0.1953,5326.62,0.0,57.63,resnet18

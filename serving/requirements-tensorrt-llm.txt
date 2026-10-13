@@ -1,0 +1,4 @@
+# Separate environment/container. See docs/runpod.md for CUDA/driver requirements.
+--extra-index-url https://pypi.nvidia.com
+tensorrt-llm==1.2.0
+httpx>=0.27,<1

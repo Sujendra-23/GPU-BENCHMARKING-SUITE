@@ -1,0 +1,966 @@
+{
+  "calibration": [
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n01440764/n01440764_457.JPEG",
+      "label": 0,
+      "sha256": "5d6b78631958036d6fb876ac1f14e834fc568d274e697e388e9c6f8a64ce864e"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03425413/n03425413_719.JPEG",
+      "label": 7,
+      "sha256": "5ab90a0da818d536dbbae6dfdcd3142a0d20084c0dd78f29884db4221ace6af6"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03445777/n03445777_11089.JPEG",
+      "label": 8,
+      "sha256": "c0607d330dd18e4f0c716463321b5f543ad657522cef694f2beba594a6202777"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03445777/n03445777_8953.JPEG",
+      "label": 8,
+      "sha256": "abc900afbf6a53de24594b1b88f644b064dac518625612359c55f417d57fd46b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03394916/n03394916_34333.JPEG",
+      "label": 5,
+      "sha256": "bf481a7b45be5bf5d803ead1822ce581a85b7c972e29a120ec547241763ad500"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_25947.JPEG",
+      "label": 6,
+      "sha256": "dd51e17b4826cb7aa56c8152622aefaa32fab508754e5c3737f60b62ff46bf0c"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03425413/n03425413_9326.JPEG",
+      "label": 7,
+      "sha256": "f6d950bfffce1bf518e66a90574ed08ee3ce470d4ba248bb7254ae2289237a0b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03888257/n03888257_33789.JPEG",
+      "label": 9,
+      "sha256": "4bfa225cb6d4e497cef52647b2a795039861c45b66caad4cc6ae2d1df30d58aa"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03028079/n03028079_50248.JPEG",
+      "label": 4,
+      "sha256": "c870e190b9f3b9f0e3b6e81a16ccabb6b94a1ecd794be4383181307b35a045f6"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03888257/n03888257_23233.JPEG",
+      "label": 9,
+      "sha256": "17691e2e7847310813773d99d96a787dc90a739ec7cb365c6773a810b51defa5"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02979186/n02979186_11953.JPEG",
+      "label": 2,
+      "sha256": "9e2d8a54051a2aee448b58dbb954f0480512e0a8d800b736a31903fa28ea853f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02979186/n02979186_18283.JPEG",
+      "label": 2,
+      "sha256": "ae0048153219418824ceafa26676aad4518c34ffc1b2cbf8df7222f492b33151"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_10965.JPEG",
+      "label": 6,
+      "sha256": "c002746858ef0bee292a63e649c6cfc74897f32627233e3642ef3695c5ab4bc6"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03000684/n03000684_18783.JPEG",
+      "label": 3,
+      "sha256": "713b0fcd422c5c0d12513e728c101b1625bf3937372787b51985eae7b15239ba"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03028079/n03028079_748.JPEG",
+      "label": 4,
+      "sha256": "2645d7dc359b7266041fc0f2ac59392938e3a5163d3650634e8a32392f02e129"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03028079/n03028079_44153.JPEG",
+      "label": 4,
+      "sha256": "c6dc75d44e2998e83f8ae9fc829e98dbc5d6347d5bb0c23f9a389a9ba42287ff"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02102040/n02102040_5037.JPEG",
+      "label": 1,
+      "sha256": "7d399a147c83a7956442f1a5b8893607c3374b9c3497de19339c3a9dc0098bdc"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_18603.JPEG",
+      "label": 6,
+      "sha256": "256631e48e669fc99682e5d34aa0e99a1025ee0d6d2c76e967b9ce771adea218"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03394916/n03394916_14349.JPEG",
+      "label": 5,
+      "sha256": "3cc995850338514ee262cd2e6a4c58976cc3a00f0a8b5ada70a94469e03c401f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03445777/n03445777_6848.JPEG",
+      "label": 8,
+      "sha256": "63c000b79349acb25d075aab6a8caef4093b183c62433dbad19b933e9f4f0d24"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03394916/n03394916_38103.JPEG",
+      "label": 5,
+      "sha256": "07ff764cf64841e6f5065332b88fc79f16c7b1673bc9b73d76e9168b43650f25"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03394916/n03394916_35604.JPEG",
+      "label": 5,
+      "sha256": "abf3a72a68f5aaea7890a388b65234480afa8d39b2a801b924ae95a30ccd36bb"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03028079/n03028079_9063.JPEG",
+      "label": 4,
+      "sha256": "e5ab92f9edb4410113370d2a43784f7e2563176a22636fe85d994c5c2d01cc4b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n01440764/n01440764_8878.JPEG",
+      "label": 0,
+      "sha256": "bedbfd1221c403bb87831dd935c08aaeed929a480891b935657e70fd0756921d"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n01440764/n01440764_6659.JPEG",
+      "label": 0,
+      "sha256": "67898d6a75eeb38fac9b84fd339db875e90d0500ac9ed92e0037bbeff7483bd2"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03000684/n03000684_17824.JPEG",
+      "label": 3,
+      "sha256": "6cccff3d70fba899a122ece1924b1e8a76f1193a63967a05c0c8a099f55ac9b1"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03445777/n03445777_7666.JPEG",
+      "label": 8,
+      "sha256": "1a074e977885d7dcfafc3cd57741fee636bbe942b4c5d0582687c823e635245e"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03425413/n03425413_15395.JPEG",
+      "label": 7,
+      "sha256": "b27c195a1b06c77676cf308e2c96e2fe2b7bbe38123a2d55eb3f6fb63f90a889"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02979186/n02979186_23188.JPEG",
+      "label": 2,
+      "sha256": "3ac0d601541db5fbc48f1ed0dedd635f8dba062f5350cda2d3aa24dc4604747b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03425413/n03425413_5864.JPEG",
+      "label": 7,
+      "sha256": "48ec7fa700f87be9f75260c7222b3998967112cd6f5dc72bc9f9a511d87483b2"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03028079/n03028079_63677.JPEG",
+      "label": 4,
+      "sha256": "8b4b6deb1572d485f28681f90b8784a1d8062dc3e927731cf88e013dc4ee7eae"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02102040/n02102040_637.JPEG",
+      "label": 1,
+      "sha256": "7d9011c59aa23d867fbc31f39cf1a0dd4726e19e066605398fa07d5efe9bf57e"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03888257/n03888257_22668.JPEG",
+      "label": 9,
+      "sha256": "b1aef8a334c21562b3a034f9daf1af8f780887ba428b408b827d933f17803d92"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03445777/n03445777_833.JPEG",
+      "label": 8,
+      "sha256": "092095659048b9b54429b2a0fa885226f357440eb4acedbbf479a0dc01b7d446"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02979186/n02979186_26736.JPEG",
+      "label": 2,
+      "sha256": "4d4caf75a85b33e63f9e6289ebef532db1e30d74406b632288c588b053dc4115"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03000684/n03000684_6968.JPEG",
+      "label": 3,
+      "sha256": "f962a8c17298f41069a1b145c2ca7a793c39531c46de888469197afec1a07950"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02102040/n02102040_7554.JPEG",
+      "label": 1,
+      "sha256": "dce439cf7ddd36ff477132aa0fa03547dc75093017a5dbcf4db9afd23473829c"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03028079/n03028079_6248.JPEG",
+      "label": 4,
+      "sha256": "3bf6640a2798dbca2e0ca01ab37f5a220a523d5d26f2c5fc9b5902a5863e0d5b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03000684/n03000684_19119.JPEG",
+      "label": 3,
+      "sha256": "39b0a424530fab80b346e1ef5b6eb511422bb82b471ee75116e7da4766e02bec"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03425413/n03425413_20918.JPEG",
+      "label": 7,
+      "sha256": "56f4e4efb55df2651578872f4bac2aac6cb5ce27e0f4bd7643d90bbd202ba3fb"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03425413/n03425413_13309.JPEG",
+      "label": 7,
+      "sha256": "072f1991d6cfddd2d2f25d7f1e6b516b9642b80e9a587df6bc497ca191a622fb"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02102040/n02102040_2213.JPEG",
+      "label": 1,
+      "sha256": "9c1a40720da57fca5d59bf96d1aa8de318e9232b528f42593e8b2262a77e0247"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_17916.JPEG",
+      "label": 6,
+      "sha256": "ccdb11d7f33daa161ca2e1fa139cb3b89994ada5a18fb46a6b55d0c4215779ac"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03000684/n03000684_11756.JPEG",
+      "label": 3,
+      "sha256": "134624d536015583fbcb00c2611b29f23e898b4b06402602fa89513cce0a2d25"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03445777/n03445777_9844.JPEG",
+      "label": 8,
+      "sha256": "6551dafcca9e2ef5f64012d1d9c911793cd46f01326369a8c97e99fa680381c5"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02102040/n02102040_5497.JPEG",
+      "label": 1,
+      "sha256": "71baa5cf1c4ab3cb6437ba4956edfd18ae0a15cb9a7a1bde0b41699896cf944a"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_10259.JPEG",
+      "label": 6,
+      "sha256": "aa11f60eb2f9d8f0b2338269a4e95a81425284996f4ee74302a6f1eb68f39689"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02979186/n02979186_14709.JPEG",
+      "label": 2,
+      "sha256": "fa084a13a8005e398958b26dfab42feee4fb89c8dcceb78fcea426cfe490e5ff"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02102040/n02102040_946.JPEG",
+      "label": 1,
+      "sha256": "754d096380208c721034cb83de09a87f10ea1ff2636b6bd310a3cb5bc77affd3"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03888257/n03888257_37239.JPEG",
+      "label": 9,
+      "sha256": "56ad5b238d6495dce62ddcb3ed7afc0ecb4d046f8f724befc26ed15abf2b5637"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03888257/ILSVRC2012_val_00015787.JPEG",
+      "label": 9,
+      "sha256": "78aa5ebecc5b65e0f9d1af75bd74875a3f043761ba9d86f983c347875dd72124"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_7485.JPEG",
+      "label": 6,
+      "sha256": "c3dbe0bf24995ad6c4b5d92db7eb2c8077b6a51482e8c7bc58d7c3499239f8fd"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03028079/n03028079_31686.JPEG",
+      "label": 4,
+      "sha256": "3293f1c380cf925aa0a8ce16151b6c12eaa7d8120e50362a79c026c2a84ed04b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02102040/n02102040_3049.JPEG",
+      "label": 1,
+      "sha256": "b49affb72073a61cd1a7803cc5bafba2fde66071d86230c2379f3bbeaf255ef3"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03394916/n03394916_44308.JPEG",
+      "label": 5,
+      "sha256": "e085e2e154748961f407f05efafc2b39f0bf3728ec12cfb962239f7b6cf2868d"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_13066.JPEG",
+      "label": 6,
+      "sha256": "912dc678ea5b9877d51ee52a7ede568a07e5062cc1d89a28c5443abc466b17d6"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_1635.JPEG",
+      "label": 6,
+      "sha256": "2b71ed007fbecffb2b8dec3f817a85279b5ba409e55835240be0cec9562f806f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03425413/n03425413_19388.JPEG",
+      "label": 7,
+      "sha256": "3b66cbb7954edaf5d0cf8acec776bd8de57430b20c3c889448f84a914f278035"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03445777/n03445777_138.JPEG",
+      "label": 8,
+      "sha256": "174bcc711fc2dfdf4140a887cb296b0eb2bd676e3135d14105fc412437abac30"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03888257/n03888257_15234.JPEG",
+      "label": 9,
+      "sha256": "7f5796a879b501f132a6117d3be5fad7f9aacb732c9fc8565ed5e02f3a4da40b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03000684/n03000684_2849.JPEG",
+      "label": 3,
+      "sha256": "86e11ddc462e801d8fa568d303e0b53d148ea1f93b15ec327119ed619103563e"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03425413/n03425413_8564.JPEG",
+      "label": 7,
+      "sha256": "bbb72de8d7556de5313ba09256a8ee08f504ca2d759314393b8af7d15ab290be"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n03417042/n03417042_6235.JPEG",
+      "label": 6,
+      "sha256": "d9131e16fd2e3253618f267f896d946d9043a0f96263733b52149b14c57a3cfe"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/train/n02979186/n02979186_21438.JPEG",
+      "label": 2,
+      "sha256": "b20d95251870ad75d68ba79382dd5c8da9a75b7bc5f45fcb3434c0cb180ae7d0"
+    }
+  ],
+  "evaluation": [
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_3960.JPEG",
+      "label": 217,
+      "sha256": "0bee420993a5dd6e8f16c183716d5b12fac6b6e43affe9bb51c91e6f949ac541"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_6630.JPEG",
+      "label": 217,
+      "sha256": "5286848ba06fc6ed8bcb34209e014d9d507751df32ac2344191d0965cfc8ef34"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_2071.JPEG",
+      "label": 574,
+      "sha256": "deb311b9bd86c0209aff274aa38a0b3146e192c5868b534db2cd8470ed627572"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_4472.JPEG",
+      "label": 491,
+      "sha256": "2b64fd3b18a415ae6dba87ac8f1cb92eaa1cbacf936ce55af6abcc765b567190"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_10032.JPEG",
+      "label": 497,
+      "sha256": "1cdcabf6147e5b62f4f70c10446886f229d98de1f9c1e20a0f20e31287be4768"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_1960.JPEG",
+      "label": 491,
+      "sha256": "ebd85d55ec7273bb2fa3d9386e4539f1fe7314c55fd038d69a1e174b824041e8"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_5432.JPEG",
+      "label": 0,
+      "sha256": "de09eed4afb1909f7e068114849dd38f4c56bc2ed1d03a557b8b8fdac69d0c6c"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_5401.JPEG",
+      "label": 497,
+      "sha256": "67464e3f7cee872ee4573d430e9b1df7ef9629836cf11053741b16eae8e58d01"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02979186/n02979186_17460.JPEG",
+      "label": 482,
+      "sha256": "8e5c1bd17eb371e7959759d0532a97a4327fb7eed908369e6a49b04d3a415bad"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_17831.JPEG",
+      "label": 497,
+      "sha256": "244cc738f2529b6372bb6bfe09b34587d5cef6c00ee02bca8bcffe27c8ea5e7d"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_1222.JPEG",
+      "label": 217,
+      "sha256": "3a5643052aeae4161aa5e00e0656665345c6a9bdac1c68155c5be94c455f2534"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_12430.JPEG",
+      "label": 491,
+      "sha256": "43a30722561dd617408ca133da2bf278f682bad58161f36c2ab7b4b98e89b019"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_11331.JPEG",
+      "label": 0,
+      "sha256": "f4f444cc0426c612d54c51148e8a9a3600e4dc0fb52164f161be32d59c55a89c"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_5911.JPEG",
+      "label": 0,
+      "sha256": "fa57012c9e4153434b615efa3ff2af8c1d33e7b1a4f20fa1eb7cad48c498ec7e"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_13180.JPEG",
+      "label": 571,
+      "sha256": "3d48c28a3904420fc5c7ae5d873751c00217342c31cf57a819927158dce72f25"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_16601.JPEG",
+      "label": 566,
+      "sha256": "7d1d31f2c6646b1393c70de46b464a42c180730972406e81f9342231575b14ef"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_55411.JPEG",
+      "label": 566,
+      "sha256": "2ecc11e777905e7d5fdcddfeab62106e6ec89c33f557fa3115a76a9a3b9f64a8"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_580.JPEG",
+      "label": 217,
+      "sha256": "c85d9d9d510f29fdeba342f022e1df6e97ccac570813243918a10615456efebc"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_5841.JPEG",
+      "label": 491,
+      "sha256": "a4214a6a9f238f28d6c2ad77fd14ff286436156da9895d16b0211017f5f0c3ad"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_621.JPEG",
+      "label": 701,
+      "sha256": "1073fcbba0bc3d97d6387f7f5fffac7280e724a4a62ee7fa067c137c4b5c3f0f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_501.JPEG",
+      "label": 491,
+      "sha256": "69165c9fc00f0025de42fc556e62b04a756a597ffe45e7190da879db9f8e76d8"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_30232.JPEG",
+      "label": 497,
+      "sha256": "b73f8da787e3e8e3a5e62e1540e466c6ae67d51d8705d57daf4127b1d94353a2"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_17851.JPEG",
+      "label": 571,
+      "sha256": "e683a5ea8bbf0f9965094937d314fb92ac0a66479141e60b7f41829e2a9ca136"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02979186/n02979186_18070.JPEG",
+      "label": 482,
+      "sha256": "2abbb0776f6834fa51be0b34364482032fee3f9d43ce7fbae37b0257cf4e01fc"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_36351.JPEG",
+      "label": 497,
+      "sha256": "9859f2be866be0136217c780aa148a4f8c90ec17e9771bc3833a92813b179d1b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_6402.JPEG",
+      "label": 701,
+      "sha256": "0b3606641f91c4675a20bcf6adf7dea822f0947c6ff2c1f791aebbb607bbb69f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_47300.JPEG",
+      "label": 566,
+      "sha256": "1241eb77e10131727b122af5cd6d016a9b80ac863da0f535735b94cac5a2418f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_3221.JPEG",
+      "label": 217,
+      "sha256": "7e1ec7b6d8c233ab5746dc0c7f2056601c324609d138e44fc7c2dfb11a15cea8"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_20012.JPEG",
+      "label": 701,
+      "sha256": "8ec09240d4625c3c6dae24313cb7a88b6549bdbdd0cff276c45cd5714c89da0e"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_20280.JPEG",
+      "label": 569,
+      "sha256": "2a4c2cfc0752e92e5154370ba4f4321c9f44c1645a7797b10ffd7169ff2902b1"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_1302.JPEG",
+      "label": 0,
+      "sha256": "51fdd8c5f1dfadf3bec007a12a3823d6b9d1c6a5b78524c94ae6448a82612c55"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02979186/n02979186_20362.JPEG",
+      "label": 482,
+      "sha256": "47b4e3018745305a9e8c904b671c3fb9c5a8bafff74ecebe43af3945ede0800e"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_4392.JPEG",
+      "label": 217,
+      "sha256": "779ed2282ce4f70926fe4adaa54f958a0826ee35750679a175d1c5e2537c3fa1"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_13242.JPEG",
+      "label": 701,
+      "sha256": "993e89447d3311ecfc332c8c7ba2e550ba97cd9b8fd3813f30da35e0cf9f8381"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_12172.JPEG",
+      "label": 574,
+      "sha256": "2aa57373dbb1e2a88553e02c681bb7b1835f2ff8985337415e1b47609c194afd"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_292.JPEG",
+      "label": 491,
+      "sha256": "0d1ecec5bfcf0eddd34b98a4f3f5888e7701789e04c8286052786f4726c29cab"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02979186/n02979186_3102.JPEG",
+      "label": 482,
+      "sha256": "b4439ed1793a78ecd883b6258106d58a173020f81f69837f55955572fbccd795"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_15202.JPEG",
+      "label": 491,
+      "sha256": "85cd912128818b07f3793643fe9b41421e8ba36ee7dd50e53bf566538d1cceef"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_16300.JPEG",
+      "label": 571,
+      "sha256": "6df410e74ff233834e0ac9210e8d2f0e4ba0ae05b204fdb6859c6d45803d6439"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_31481.JPEG",
+      "label": 497,
+      "sha256": "cdfa9ce2dd06e9bdce09e51ff48d1fb8bf05b1cae7a673eb50715c6dfd71463a"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_5862.JPEG",
+      "label": 574,
+      "sha256": "885c1a9836168864b0669b9de62942baf43d1984d392462ae0e524edbfadf7c3"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_5790.JPEG",
+      "label": 217,
+      "sha256": "ab12bad02408d30c84fd2d283d54fd6eeab1db45e1c7d7268e3979c0ee250e11"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_1290.JPEG",
+      "label": 491,
+      "sha256": "a945a6b85fcccee3602ad4ee81b4030f9e9aff40e9dd49d701c8b85e78d11258"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_30930.JPEG",
+      "label": 491,
+      "sha256": "04466be5bf6be85a741ce6849d95d26e1dd841675cc95026cdb910f17c043e1d"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_4572.JPEG",
+      "label": 497,
+      "sha256": "0762e7bb6c4e719f59f1b6b5004dffcf8a02ed2bf2bdb6f06bb402305b327e85"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02979186/n02979186_16101.JPEG",
+      "label": 482,
+      "sha256": "56089394d2445e75ad174e3857bdf0061734de0d38a7cf9f15f5101a4a8cd4e2"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_14590.JPEG",
+      "label": 571,
+      "sha256": "f40399dae19f2035bea1d232a11a587082f2d1f6d58ebe03520541fa9d2a242b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02979186/n02979186_18450.JPEG",
+      "label": 482,
+      "sha256": "ebdbbfdaa0b060386f044869eafbab5c217e5f44905d061afa89bd7a684bdb49"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_4311.JPEG",
+      "label": 701,
+      "sha256": "50cf1d030df6bc07a19287b182303f5d3950627d5b758683b5eb2e1aaa861448"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_7641.JPEG",
+      "label": 574,
+      "sha256": "f98a36aac69077bce322d8c14005f3a695a91b164550bdbda8f085c6f34bb5a5"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02979186/n02979186_13231.JPEG",
+      "label": 482,
+      "sha256": "af7a1e263e54bf29ef20a5044d03d17a789833470ea4c9318e9e88892b6186e3"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_12170.JPEG",
+      "label": 569,
+      "sha256": "a4957d3e1a68a3f9c672aafd94932960c2cf7d2dc8fdacbd69fad04fccc11938"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_2270.JPEG",
+      "label": 574,
+      "sha256": "80f725298e82e58699f5d5157bc0d92f1b34640d2f5363dd19c37630ee5845da"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_43022.JPEG",
+      "label": 566,
+      "sha256": "565a4cf7b899d6620e387eb8aec4cc9396ef00e05ec92d8681054d343512b0c9"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_7050.JPEG",
+      "label": 491,
+      "sha256": "b160d06613fcbab29aeeb4748d85d952d3f375476677b078a456811b0d326249"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_7951.JPEG",
+      "label": 566,
+      "sha256": "a91da2f53e67522594798e4cfc5aee47a5d0f46329ff7310160e2e9839db1806"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_8782.JPEG",
+      "label": 0,
+      "sha256": "1087c14412489fc55003cd69d6c7d21ad9a1e1da79fc704e383c0cd45a26597a"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_1910.JPEG",
+      "label": 217,
+      "sha256": "32f15b4d74f0de339d686008a0965ea55877db9498d3ac790f62eaf6274a747e"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_12570.JPEG",
+      "label": 491,
+      "sha256": "cc62c2e1dad793cea7831ddb16a7f63ea526c22a111e2bad1aa6bd8e8d45b281"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_5890.JPEG",
+      "label": 217,
+      "sha256": "08dd2f6a635f4d37c196b74640b980b23e96a015dc08b9660189bf7c4156cf39"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_110420.JPEG",
+      "label": 497,
+      "sha256": "d7ffaf64b279e5753bad5662c6eb45c42434924e70948db430955a23ff15fb6a"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_10342.JPEG",
+      "label": 0,
+      "sha256": "0b057d9f6a1e110906ed22636eed2ee680fcf115759de45b9e38f06f9e62d997"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_16712.JPEG",
+      "label": 571,
+      "sha256": "f3328f5927ecf8958bbc69f65e69ac0595a6d1fc0a4efe08570cc6c27a2bdfbd"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_16920.JPEG",
+      "label": 571,
+      "sha256": "b087b79c45ea2756b5d4a3b22c2d62ad1913ccd20354207940bf4fa09763c79f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_24522.JPEG",
+      "label": 571,
+      "sha256": "2e9e579d8cad6cc4f30a52688357b3994c3eb19c81631677ffad55d9c3eada5b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_6312.JPEG",
+      "label": 569,
+      "sha256": "d7062491eb0fbb3482f8a8787ab1ed2f0a0ed9e4eaec92f9e534b4e642746362"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_9082.JPEG",
+      "label": 497,
+      "sha256": "6107929cdec3306589aeab5e2b1fb674d0de9340e0044d524a7528864f93cc89"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_15601.JPEG",
+      "label": 571,
+      "sha256": "3d335302ca4ad19c78f0be9633f3d46abf7d1609f434bcfa0f4205a46a9efd61"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_14720.JPEG",
+      "label": 491,
+      "sha256": "f7887b3d44e2c3ce1b1673803b461ba76e1c9d9422b769ac25264703ac3c74f6"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_3090.JPEG",
+      "label": 574,
+      "sha256": "8834034aa406c7ce62766505dc6350c8176bf6477b371476f4300dffeddc90fd"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_7530.JPEG",
+      "label": 569,
+      "sha256": "c353caf80fdffd480a4d0e2200686025c47945057a9aa7d6aa4077441afb16b1"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_9471.JPEG",
+      "label": 0,
+      "sha256": "ac0814e32872998bde7fa28166793983c18870b206082c777bee04e5e1404def"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_1092.JPEG",
+      "label": 217,
+      "sha256": "8935776de098e9de351b58def5c52a5e53f5df9f3307c3d05241a7ccaf8c4493"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_5030.JPEG",
+      "label": 217,
+      "sha256": "be6010b0832aa378bedd9686ab3505dfdbf8e424af91f6caf9f79dbe2ddf33e2"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_1781.JPEG",
+      "label": 574,
+      "sha256": "7aa492ec60f8fcdf39635325deb84a073627a8d8797ab921ba446b383714533a"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_3091.JPEG",
+      "label": 217,
+      "sha256": "b17be2338b94c2e09b335ce77eb892cc10d04283538c7fdc4950cfb07081d021"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_3060.JPEG",
+      "label": 574,
+      "sha256": "de7897d910f760f1dc42509dedffd184f639b4f71647475246eff8abd8b50bf5"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_3492.JPEG",
+      "label": 497,
+      "sha256": "1ce6c1bfcce1dd73eb590fdf9a9bca44994d37d9e0224d959f92503b9aee3023"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_1151.JPEG",
+      "label": 217,
+      "sha256": "dd08562ac7ef825f1db404ce513b0f8b359876fec82a1c6a11d421b961636d9b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_9171.JPEG",
+      "label": 574,
+      "sha256": "8e7a505a73129b2b4e1b87bd5babeff691309be3e1117a27a2f6193a93cd6ffc"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_13230.JPEG",
+      "label": 571,
+      "sha256": "07b977cb8d957f57175ead0513d73c2e94c1362877bab8867feb49b5e61ab7ad"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_16370.JPEG",
+      "label": 569,
+      "sha256": "fbf66154a623e95741248865d4b65f5a33ac0af1bc256ead80b65bb3d49a555b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_482.JPEG",
+      "label": 574,
+      "sha256": "914fa2de6d8d520eac3b7dba2d315a014c96ba6b3585f6e85eb820dc03879aeb"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02979186/n02979186_22681.JPEG",
+      "label": 482,
+      "sha256": "5a2e8d182855ed80e5fe2347e1b309020cbf043d291cfd8a981871afc9e84161"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_18371.JPEG",
+      "label": 497,
+      "sha256": "97e0542bc3ab093ad5a1e868bcbce1246db694797ce6c0a9490d39086bf09c13"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_30032.JPEG",
+      "label": 701,
+      "sha256": "5e06e878cd5a0edced3167a736dcab165197af5933c14ca6491afe724989b81b"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_3970.JPEG",
+      "label": 574,
+      "sha256": "c8f9e179e7fb784fd17c0768f7254d349c02afa8443b9051af9fa5ceb3e54a7f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_11802.JPEG",
+      "label": 701,
+      "sha256": "9ca3367942ab5af403cdacca47ddf17341ef3ebdadb1d7e5eac8c9f3984b3888"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_6962.JPEG",
+      "label": 0,
+      "sha256": "7ae6a3aa63545619a867bbe848f25b38e493f06427d15ad25741c86fbc32e955"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_32042.JPEG",
+      "label": 701,
+      "sha256": "fa992009254072ae9e478fc5f3e7d701a5b2595fb8549cb5934af9be9ed34c87"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_15582.JPEG",
+      "label": 491,
+      "sha256": "9dea41f69eba51f012c2fe467cc69617379a9e4064c769623a6e0e03a6efa1f4"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_7882.JPEG",
+      "label": 497,
+      "sha256": "d624ba9567db286008506b1234a8dca7f64e19621caad67f8e40cbc4befaf7c9"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_15110.JPEG",
+      "label": 574,
+      "sha256": "36b877717b299fc3fb6b6953888c27de5e1a6086bedf533cc6259ec408fd4697"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_8001.JPEG",
+      "label": 701,
+      "sha256": "be51c649c1fff32b7ae9df5f6c537ad76737918465f29399dfd1fbf18c88c235"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_14030.JPEG",
+      "label": 571,
+      "sha256": "c9b021c0eea45878c1e6d8b6005fe590c741f2201a941c102ea07fa44ac626b9"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03445777/n03445777_7372.JPEG",
+      "label": 574,
+      "sha256": "36b9fa13c487e4d8a286a8412526b4ee00eba5561051832bb7a6da7e98c9e88f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_13200.JPEG",
+      "label": 571,
+      "sha256": "d5d7e0bb6a49cae4f88d3353272377cead69a9c12363bf7d94b4a930cfbdfee9"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_9650.JPEG",
+      "label": 701,
+      "sha256": "9a878c7039aec694aba3ea3f614646b53e7e335bd4f30f7e8fc7faff983d40cb"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_13382.JPEG",
+      "label": 571,
+      "sha256": "2edb84ead136939a50d64324b4709691d60012ad64df265361efb673d521f37c"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_59442.JPEG",
+      "label": 701,
+      "sha256": "ed8394a69a2e15e4fdc89030cf7ab401a50c0c1eb50102757f3847abed3a32c4"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_21051.JPEG",
+      "label": 571,
+      "sha256": "8c285737dbb6f3ade68691f4f46892e00430218c7bc3bfaa6f16492300091f2d"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_1841.JPEG",
+      "label": 217,
+      "sha256": "b5c4060b8284e489c2468182f8adae783311da9e309911f1627c4970fcc2c8dd"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_19020.JPEG",
+      "label": 569,
+      "sha256": "83239e66b5cf35183bb68cbf80bda63b16924b5c9d7b125437f4ff3639e961fb"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_7602.JPEG",
+      "label": 566,
+      "sha256": "2c4d97a08f377f756a6fa9d9e4a98c7e14fbaf54c9c129b58205f2303971f2b8"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_17922.JPEG",
+      "label": 497,
+      "sha256": "0dbf0703b2e81f448815aee75c7bb745bfeb9c60b0bbf47f053951ada05ed6c1"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_28461.JPEG",
+      "label": 566,
+      "sha256": "31881c35951ed42bdca2d69545f1e58a95ad171173bfd23a5b6a518af9c32346"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_15070.JPEG",
+      "label": 571,
+      "sha256": "14d1713aec564137b773ad9b1540ce3f1bb1b8eb1f078466b2220029decd5e86"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_4980.JPEG",
+      "label": 0,
+      "sha256": "20e678c88dd4544a61f93d67f68100974217ad6ebf5bba82eb0c06a3b7c3db72"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_5090.JPEG",
+      "label": 569,
+      "sha256": "d6804b49b55c886d74eb1c5506f26ac08367ffd2dea7afe73f95ce3d68070c82"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_20360.JPEG",
+      "label": 571,
+      "sha256": "537a5ee3a8bcc5755cbb6df0fc343d64978b319292959f0aee5bfac6f23c7e49"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_33222.JPEG",
+      "label": 566,
+      "sha256": "68c6346623f2921970d6a998599ccdf98de600e9ac084655c27c55444b9707eb"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_4410.JPEG",
+      "label": 217,
+      "sha256": "6623f13cfe35c3f484d5efcb7094b5871369ae8974dbb6f1776a7c02216145bb"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_3710.JPEG",
+      "label": 569,
+      "sha256": "4309446d2cba94e5eb5b0908c54a0fee686618cec238f6fb9359ebd14a0a2916"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_40391.JPEG",
+      "label": 566,
+      "sha256": "333413ede8b249718f950db078a6a4d8465cb76ecb6be90d81f4baa7d9d87651"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_15002.JPEG",
+      "label": 497,
+      "sha256": "36a2d5a36608e75887a77ab28520ad9b2221caba386ac06e7d39333ad537abe2"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_15571.JPEG",
+      "label": 571,
+      "sha256": "a21e244e12003a56b391b9a97bc9befe7b571851cee6d71149241af859a1eabf"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_6110.JPEG",
+      "label": 497,
+      "sha256": "06919caa48ac29b9bc289281eae1f56be97e8963614755a1ed2e6abe1ca5f1da"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_10462.JPEG",
+      "label": 0,
+      "sha256": "3b48b3103052689357d998963ce2f6e9b296849c9a496ea40bec1c65e8d396c0"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_341.JPEG",
+      "label": 217,
+      "sha256": "0aea590b28e167eb305243d30260b2e696779160d099c587cdb2fd9cb07003a9"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03000684/n03000684_6220.JPEG",
+      "label": 491,
+      "sha256": "f800954a9b1bfbd9d3ffed5e226f1303e155bf6dcd1d366e2d688f2bf8490e0f"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/n03417042_18232.JPEG",
+      "label": 569,
+      "sha256": "7e1b013dc844a81f7f5c12b1714f1e5cf8c2677d12ea2461285249731db7edc5"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03394916/n03394916_39500.JPEG",
+      "label": 566,
+      "sha256": "816d1213fe205ca43e5ecbfab15c7e2ad6b9f4efae0793b2b47cf46cd18702f2"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03425413/n03425413_20691.JPEG",
+      "label": 571,
+      "sha256": "272c82a258a7453e8546bef5a7acf94a20f179740203e4172a51687f57bc8ff3"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03028079/n03028079_5942.JPEG",
+      "label": 497,
+      "sha256": "56da4d1933e3de9c13aef8120762af9c28b297d98849c6f070bd895c53c31642"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n01440764/n01440764_8150.JPEG",
+      "label": 0,
+      "sha256": "a9e85495fb3ceeb97d0cffcffa09e05808371edd3e4ef5f4766133530d2fd082"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03888257/n03888257_12641.JPEG",
+      "label": 701,
+      "sha256": "44d5ed436476c1278b08f6149c2a30102b1224883f2f842f15a503e947123408"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n03417042/ILSVRC2012_val_00033842.JPEG",
+      "label": 569,
+      "sha256": "29ec9c3574c703c5eb39b5514f1d6c1607c43a718a6a7564f919aa4692182d98"
+    },
+    {
+      "path": "/workspace/gpu-benchmarking-suite/data/imagenette2-160/val/n02102040/n02102040_171.JPEG",
+      "label": 217,
+      "sha256": "0575f8c0de4a189a03dc87f4101cbbda9a5634ec0f16c379c8f6ac89fdfc8f65"
+    }
+  ]
+}

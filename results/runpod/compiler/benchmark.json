@@ -1,0 +1,558 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-10-13T07:17:09.717300+00:00",
+    "platform": "Linux-6.8.0-117-generic-x86_64-with-glibc2.35",
+    "python": "3.11.10 (main, Sep  7 2024, 18:35:41) [GCC 11.4.0]",
+    "packages": {
+      "torch": "2.8.0",
+      "torchvision": "0.23.0",
+      "torch_tensorrt": "2.8.0",
+      "tensorrt": "10.12.0.36",
+      "onnx": "1.18.0"
+    },
+    "nvidia_smi": "NVIDIA GeForce RTX 4090, 580.159.04, 24564 MiB",
+    "git_commit": null,
+    "git_dirty": null,
+    "source_sha256": {
+      "harness/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._benchmark.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._edge_profile.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._experiment_report.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._kernel_benchmark.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._measurement.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._nsight_counters.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._onnx_utils.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._perf_per_watt.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._power_monitor.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._prepare_whisper_data.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._profile_kernels.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._tensorrt_utils.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._validate.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._whisper.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/__init__.py": "22ee8771700cd19a7cc8513db21f3f3b172ec436e71a5a7c421d2902e5dde911",
+      "harness/benchmark.py": "59a8823f14cbb213fb0a944c6c526d4e857628a8d85856f784ab2eed08d28d89",
+      "harness/edge_profile.py": "072b1ebadb1e693cae784b140e03c14e00fbcaaca5ceddbf95a6d735e23c746d",
+      "harness/experiment_report.py": "441b2e6e1efc91a69a23073ae4f61caed070dd12b43b038ce141ab9288e39812",
+      "harness/extension_report.py": "bf4588ca89aa0fd39210a204a6a79d386629f0cb7c2b0f4b314228d44fb0903f",
+      "harness/kernel_benchmark.py": "8aca8c37245683836015b7b73fe23cda63257523c9b41ff0c05bcb5d43b3a79e",
+      "harness/measurement.py": "f037b4ba1c5385b74bcf84f791874c8b1209857a9f3c3a250ce55e0e3142e624",
+      "harness/nsight_counters.py": "38afdb23371822b6cab75af3fc44141a64a03d0ca3e417b0af82dd0c8ee97afe",
+      "harness/onnx_utils.py": "10735629e61cebdd5848c3a80427a594d495c246e26832716adc61603a5569e5",
+      "harness/perf_per_watt.py": "3c51bfb165c956b9157e6bd0976b40b63ffc44f8fc6c0aa428a0b77b50a2d766",
+      "harness/power_monitor.py": "bb2b3e8b24944ba2d010b45b02e5661a5d0a1b7ad83e1c6b7575528f1e839437",
+      "harness/prepare_whisper_data.py": "611cb3c86fc34da65db7f14c22c5f6800c81dfcd8a1b3cde273553108aae6839",
+      "harness/profile_kernels.py": "a128e4629ff17a40d109d13582ee90681caa25f3e64139c1ac3541e7ccd3410b",
+      "harness/tensorrt_utils.py": "700421d42b5da8471f316c4a5cc11450a04ef108dc747bdc615de06ea19369ff",
+      "harness/validate.py": "042f95fb1de615e4c8f87da19c2e85457e2d308b53c948017b362d5c9d3ec303",
+      "harness/whisper.py": "10f58e9a9304a26b90cf5159f0204f6c6d6fadd81611312984d12da5e366201c",
+      "kernels/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/._contracts.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/__init__.py": "064f56c54a610d59f6ef74c4473f6ca8ab4591cef987acb52a66dfab00e5e6c3",
+      "kernels/contracts.py": "0486cd273008fe23f6871b17168445936d2c7c0de01299fc42adbd6168b50086",
+      "kernels/cuda/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/._fused.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/._fused_ops.cpp": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/._fused_ops.cu": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/._matmul.cu": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/__init__.py": "b136e0401a7cbd22a834a462123e3da9a0617411e4a13aacb7e90234367542ec",
+      "kernels/cuda/fused.py": "fa3897eca1a85b40d71d7ceb42270f9dd200c5a0224dc8eab8f95b131582da56",
+      "kernels/cuda/fused_ops.cpp": "059cbec727acaed2ef796410cb09607f2426f7730e671eb43c4b7031c0601179",
+      "kernels/cuda/fused_ops.cu": "4ca3d9b75fd40cc4b560fdfdc46c730cb67c64d39a81b3c9e3eddbf2059b138e",
+      "kernels/cuda/matmul.cu": "296e94a393948a331e17f98996ac7ecad74c455971fc461b9cad6ec3ded7cc98",
+      "kernels/hip/._matmul.hip.cpp": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/hip/matmul.hip.cpp": "c8344093d500a33381fef93ba13d949d053f67151d078cebcc9aa6602e01fb27",
+      "kernels/triton/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/triton/._attention.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/triton/._softmax.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/triton/__init__.py": "b9ae38031f1640264e447f60c3e8bc172e9895bd03f3392bbbf8e31ef3189dac",
+      "kernels/triton/attention.py": "37ca5c5a9c0af75dd539e2aa8bdded7a038bf11122b8ac67599c85f79934abd7",
+      "kernels/triton/softmax.py": "ad0f04e3590e1b852dbcbe372b74ec60fdb34eb86ad1a95cc5c9585c9c924aad",
+      "compilers/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "compilers/._jax_jit.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "compilers/._torch_compile.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "compilers/._torch_tensorrt_block.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "compilers/__init__.py": "5ad2593265c904ecda27c9dedf42cc6e0c32d3eeb313e0fdbba291f3f619df5a",
+      "compilers/jax_jit.py": "e9276c211fcee1faa2d0208a35477113c2785345f1c3a9321d7fe2fdc544dbea",
+      "compilers/torch_compile.py": "44010d66a3f7d0f465a724bd472c72ad0f1da7d53ff59094c13ba99ead040b97",
+      "compilers/torch_tensorrt_block.py": "1db2e3fe27860ebb6c148a9f8cc1c2206ecb4df25c9df4f1afe96eafa3df3579",
+      "serving/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "serving/._benchmark.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "serving/._run.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "serving/__init__.py": "c24eef08bf558a6a4411a35af1eda651fcaddd87327d1bde7c631db20063cbf8",
+      "serving/benchmark.py": "e7ced0889e62d7efe69fe8cc3e3752188ed801bce110591664a9c6edba39d971",
+      "serving/run.py": "ee3b14921ad5033985c8433eea738f4bcf263634da033fe17db2d72a5889b26a",
+      "training/._export_tensorrt.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "training/._train_distributed.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "training/export_tensorrt.py": "81d23638d279abe644705235297e63f159d2dc28e13203bb35b279b7aaf34439",
+      "training/train_distributed.py": "3675acec2342cb4046f185ee8abee3c9b251480668f9b838d1c77f3ff4975eba"
+    }
+  },
+  "config": {
+    "models": "llama-block,resnet18",
+    "batch_size": 1,
+    "sequence": 128,
+    "hidden": 512,
+    "heads": 8,
+    "intermediate": 1376,
+    "precision": "fp16",
+    "iterations": 20,
+    "warmup": 10,
+    "out_dir": "results/runpod/compiler"
+  },
+  "llama_scope": "seeded random LLaMA-style block; no pretrained checkpoint or KV cache",
+  "models": {
+    "llama-block": {
+      "shape": [
+        1,
+        128,
+        512
+      ],
+      "backends": {
+        "eager": {
+          "status": "pass",
+          "correctness": {
+            "status": "pass",
+            "atol": 0.03,
+            "rtol": 0.03,
+            "max_abs_error": 0.0
+          },
+          "latency": {
+            "mean_ms": 0.7579362951219082,
+            "median_ms": 0.757221132516861,
+            "p95_ms": 0.768173485994339,
+            "min_ms": 0.7463395595550537,
+            "samples_ms": [
+              0.766851007938385,
+              0.7549319416284561,
+              0.7624514400959015,
+              0.768173485994339,
+              0.7575005292892456,
+              0.7492322474718094,
+              0.7616914808750153,
+              0.7583592087030411,
+              0.7568113505840302,
+              0.7463395595550537,
+              0.7628239691257477,
+              0.7548518478870392,
+              0.7586218416690826,
+              0.7569417357444763,
+              0.7466040551662445,
+              0.7547438144683838,
+              0.7794816046953201,
+              0.7546413689851761,
+              0.74734166264534,
+              0.7603317499160767
+            ],
+            "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"
+          },
+          "build_and_first_call_ms": 0.964827835559845,
+          "dynamo_counters": {},
+          "speedup_vs_eager": 1.0
+        },
+        "torch.compile": {
+          "status": "pass",
+          "correctness": {
+            "status": "pass",
+            "atol": 0.03,
+            "rtol": 0.03,
+            "max_abs_error": 0.001953125
+          },
+          "latency": {
+            "mean_ms": 0.39020050317049026,
+            "median_ms": 0.37375558167696,
+            "p95_ms": 0.46996399760246277,
+            "min_ms": 0.36342255771160126,
+            "samples_ms": [
+              0.3668013960123062,
+              0.37016160786151886,
+              0.3653820604085922,
+              0.38481131196022034,
+              0.37798844277858734,
+              0.36841072142124176,
+              0.3700926899909973,
+              0.37760287523269653,
+              0.3728102892637253,
+              0.3710910677909851,
+              0.36342255771160126,
+              0.3747008740901947,
+              0.37661194801330566,
+              0.3656018525362015,
+              0.3666505217552185,
+              0.3766492009162903,
+              0.4614051431417465,
+              0.48643723130226135,
+              0.46996399760246277,
+              0.4374142736196518
+            ],
+            "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"
+          },
+          "build_and_first_call_ms": 4497.268998995423,
+          "dynamo_counters": {
+            "frames": {
+              "total": 1,
+              "ok": 1
+            },
+            "stats": {
+              "calls_captured": 59,
+              "unique_graphs": 1
+            },
+            "inductor": {
+              "pattern_matcher_count": 31,
+              "pattern_matcher_nodes": 38,
+              "fxgraph_cache_miss": 1,
+              "extern_calls": 9,
+              "async_compile_cache_miss": 7,
+              "triton_bundler_save_kernel": 104,
+              "triton_bundler_save_static_autotuner": 1,
+              "benchmarking.InductorBenchmarker.benchmark_gpu": 11
+            },
+            "aot_autograd": {
+              "total": 1,
+              "autograd_cache_miss": 1,
+              "autograd_cache_saved": 1,
+              "ok": 1
+            },
+            "aten_mm_info": {
+              "aten.mm_128_512_512": 4,
+              "aten.bmm_8_128_128_64": 1,
+              "aten.bmm_8_128_64_128": 1,
+              "aten.mm_128_1376_512": 2,
+              "aten.mm_128_512_1376": 1
+            }
+          },
+          "speedup_vs_eager": 2.025979462619326
+        },
+        "torch-tensorrt": {
+          "status": "pass",
+          "correctness": {
+            "status": "pass",
+            "atol": 0.03,
+            "rtol": 0.03,
+            "max_abs_error": 0.00390625
+          },
+          "latency": {
+            "mean_ms": 0.18147481605410576,
+            "median_ms": 0.17611589282751083,
+            "p95_ms": 0.20219571888446808,
+            "min_ms": 0.173104926943779,
+            "samples_ms": [
+              0.17690472304821014,
+              0.1775939017534256,
+              0.17542392015457153,
+              0.20413659512996674,
+              0.1973658800125122,
+              0.17566606402397156,
+              0.173104926943779,
+              0.17540529370307922,
+              0.18594413995742798,
+              0.17599575221538544,
+              0.17522461712360382,
+              0.17385557293891907,
+              0.2011861652135849,
+              0.20219571888446808,
+              0.17623603343963623,
+              0.17773732542991638,
+              0.1741759479045868,
+              0.1733154058456421,
+              0.17480365931987762,
+              0.18322467803955078
+            ],
+            "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"
+          },
+          "build_and_first_call_ms": 14559.724492952228,
+          "dynamo_counters": {},
+          "partition_modules": [
+            {
+              "name": "_run_on_acc_0",
+              "type": "torch_tensorrt.dynamo.runtime._TorchTensorRTModule.TorchTensorRTModule"
+            }
+          ],
+          "trt_runtime_modules": [
+            {
+              "name": "_run_on_acc_0",
+              "type": "torch_tensorrt.dynamo.runtime._TorchTensorRTModule.TorchTensorRTModule"
+            }
+          ],
+          "partitioned_graph": "/workspace/gpu-benchmarking-suite/results/runpod/compiler/llama-block-partitioned-graph.txt",
+          "note": "PyTorch fallback partitions are separate from Dynamo graph breaks",
+          "speedup_vs_eager": 4.299561614569837
+        },
+        "native-tensorrt": {
+          "status": "pass",
+          "correctness": {
+            "status": "pass",
+            "atol": 0.03,
+            "rtol": 0.03,
+            "max_abs_error": 0.00390625
+          },
+          "latency": {
+            "mean_ms": 0.0707271508872509,
+            "median_ms": 0.06984826177358627,
+            "p95_ms": 0.07295235991477966,
+            "min_ms": 0.06854534149169922,
+            "samples_ms": [
+              0.07295235991477966,
+              0.07137283682823181,
+              0.06987154483795166,
+              0.0701509416103363,
+              0.07078051567077637,
+              0.06932206451892853,
+              0.06957165896892548,
+              0.07045269012451172,
+              0.08475221693515778,
+              0.0716131180524826,
+              0.06928481161594391,
+              0.06889365613460541,
+              0.06953999400138855,
+              0.06913207471370697,
+              0.06876327097415924,
+              0.06854534149169922,
+              0.06929226219654083,
+              0.07006153464317322,
+              0.06982497870922089,
+              0.07036514580249786
+            ],
+            "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"
+          },
+          "build_and_first_call_ms": 11510.385166853666,
+          "dynamo_counters": {},
+          "engine_size_bytes": 6631828,
+          "engine": "/workspace/gpu-benchmarking-suite/results/runpod/compiler/llama-block.trt",
+          "speedup_vs_eager": 10.840944545927279
+        }
+      },
+      "dynamo_explain": {
+        "graph_count": 1,
+        "graph_break_count": 0,
+        "op_count": 37,
+        "break_reasons": []
+      }
+    },
+    "resnet18": {
+      "shape": [
+        1,
+        3,
+        224,
+        224
+      ],
+      "backends": {
+        "eager": {
+          "status": "pass",
+          "correctness": {
+            "status": "pass",
+            "atol": 0.03,
+            "rtol": 0.03,
+            "max_abs_error": 0.0
+          },
+          "latency": {
+            "mean_ms": 2.320315781980753,
+            "median_ms": 2.3085130378603935,
+            "p95_ms": 2.3494064807891846,
+            "min_ms": 2.2900383919477463,
+            "samples_ms": [
+              2.3379474878311157,
+              2.3438483476638794,
+              2.332821488380432,
+              2.3494064807891846,
+              2.2996682673692703,
+              2.2956859320402145,
+              2.297148108482361,
+              2.3090578615665436,
+              2.2900383919477463,
+              2.2941473871469498,
+              2.3053884506225586,
+              2.301689237356186,
+              2.3079682141542435,
+              2.321828156709671,
+              2.3104362189769745,
+              2.2948887199163437,
+              2.3340005427598953,
+              2.320796251296997,
+              2.299407497048378,
+              2.460142597556114
+            ],
+            "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"
+          },
+          "build_and_first_call_ms": 2.5702472776174545,
+          "dynamo_counters": {},
+          "speedup_vs_eager": 1.0
+        },
+        "torch.compile": {
+          "status": "pass",
+          "correctness": {
+            "status": "pass",
+            "atol": 0.03,
+            "rtol": 0.03,
+            "max_abs_error": 0.00390625
+          },
+          "latency": {
+            "mean_ms": 1.3164537027478218,
+            "median_ms": 1.3005752116441727,
+            "p95_ms": 1.421002671122551,
+            "min_ms": 1.2889876961708069,
+            "samples_ms": [
+              1.3190489262342453,
+              1.2950189411640167,
+              1.3132188469171524,
+              1.293247565627098,
+              1.3071093708276749,
+              1.29740871489048,
+              1.2991596013307571,
+              1.3109389692544937,
+              1.2973565608263016,
+              1.294497400522232,
+              1.3041086494922638,
+              1.2944992631673813,
+              1.2889876961708069,
+              1.2927204370498657,
+              1.3031288981437683,
+              1.3019908219575882,
+              1.2951269745826721,
+              1.3024993240833282,
+              1.421002671122551,
+              1.4980044215917587
+            ],
+            "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"
+          },
+          "build_and_first_call_ms": 4258.200027048588,
+          "dynamo_counters": {
+            "frames": {
+              "total": 1,
+              "ok": 1
+            },
+            "stats": {
+              "calls_captured": 69,
+              "unique_graphs": 1
+            },
+            "aot_autograd": {
+              "total": 1,
+              "autograd_cache_miss": 1,
+              "autograd_cache_saved": 1,
+              "ok": 1
+            },
+            "inductor": {
+              "pattern_matcher_count": 1,
+              "pattern_matcher_nodes": 1,
+              "fxgraph_cache_miss": 1,
+              "async_compile_cache_miss": 44,
+              "extern_calls": 21,
+              "async_compile_cache_hit": 22,
+              "triton_bundler_save_kernel": 272,
+              "triton_bundler_save_static_autotuner": 1,
+              "benchmarking.InductorBenchmarker.benchmark_gpu": 24
+            },
+            "aten_mm_info": {
+              "aten.addmm_1_1000_512": 1
+            }
+          },
+          "speedup_vs_eager": 1.7749938774721048
+        },
+        "torch-tensorrt": {
+          "status": "pass",
+          "correctness": {
+            "status": "pass",
+            "atol": 0.03,
+            "rtol": 0.03,
+            "max_abs_error": 0.015625
+          },
+          "latency": {
+            "mean_ms": 0.2854269929230213,
+            "median_ms": 0.2808980643749237,
+            "p95_ms": 0.3027282655239105,
+            "min_ms": 0.27560628950595856,
+            "samples_ms": [
+              0.3027282655239105,
+              0.2947598695755005,
+              0.29201991856098175,
+              0.28928741812705994,
+              0.30503049492836,
+              0.2895686775445938,
+              0.29096752405166626,
+              0.3002472221851349,
+              0.28354860842227936,
+              0.2775900065898895,
+              0.27786940336227417,
+              0.27824752032756805,
+              0.27670711278915405,
+              0.27630850672721863,
+              0.27715787291526794,
+              0.2775397151708603,
+              0.27560628950595856,
+              0.27570687234401703,
+              0.29088929295539856,
+              0.2767592668533325
+            ],
+            "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"
+          },
+          "build_and_first_call_ms": 19406.901266425848,
+          "dynamo_counters": {},
+          "partition_modules": [
+            {
+              "name": "_run_on_acc_0",
+              "type": "torch_tensorrt.dynamo.runtime._TorchTensorRTModule.TorchTensorRTModule"
+            }
+          ],
+          "trt_runtime_modules": [
+            {
+              "name": "_run_on_acc_0",
+              "type": "torch_tensorrt.dynamo.runtime._TorchTensorRTModule.TorchTensorRTModule"
+            }
+          ],
+          "partitioned_graph": "/workspace/gpu-benchmarking-suite/results/runpod/compiler/resnet18-partitioned-graph.txt",
+          "note": "PyTorch fallback partitions are separate from Dynamo graph breaks",
+          "speedup_vs_eager": 8.218330172539554
+        },
+        "native-tensorrt": {
+          "status": "pass",
+          "correctness": {
+            "status": "pass",
+            "atol": 0.03,
+            "rtol": 0.03,
+            "max_abs_error": 0.01470947265625
+          },
+          "latency": {
+            "mean_ms": 0.18952740356326103,
+            "median_ms": 0.18897559493780136,
+            "p95_ms": 0.19114650785923004,
+            "min_ms": 0.18797628581523895,
+            "samples_ms": [
+              0.19021518528461456,
+              0.18962472677230835,
+              0.1895856112241745,
+              0.1894235610961914,
+              0.18797628581523895,
+              0.18849410116672516,
+              0.18947571516036987,
+              0.19114650785923004,
+              0.18875300884246826,
+              0.18901564180850983,
+              0.1889355480670929,
+              0.18891505897045135,
+              0.19526667892932892,
+              0.18859654664993286,
+              0.18833577632904053,
+              0.18889456987380981,
+              0.18879584968090057,
+              0.1886952668428421,
+              0.1902356743812561,
+              0.19016675651073456
+            ],
+            "method": "wall clock; warmed calls; CUDA synchronization; no CUDA graphs"
+          },
+          "build_and_first_call_ms": 16302.501913160086,
+          "dynamo_counters": {},
+          "engine_size_bytes": 24381236,
+          "engine": "/workspace/gpu-benchmarking-suite/results/runpod/compiler/resnet18.trt",
+          "speedup_vs_eager": 12.21593210816565
+        }
+      },
+      "dynamo_explain": {
+        "graph_count": 1,
+        "graph_break_count": 0,
+        "op_count": 69,
+        "break_reasons": []
+      }
+    }
+  },
+  "failures": []
+}

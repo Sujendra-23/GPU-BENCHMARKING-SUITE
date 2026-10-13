@@ -1,0 +1,282 @@
+{
+  "label": "edge-style, not Jetson",
+  "metadata": {
+    "timestamp_utc": "2026-10-13T07:21:53.956512+00:00",
+    "platform": "Linux-6.8.0-117-generic-x86_64-with-glibc2.35",
+    "python": "3.11.10 (main, Sep  7 2024, 18:35:41) [GCC 11.4.0]",
+    "packages": {
+      "torch": "2.8.0",
+      "tensorrt": "10.12.0.36"
+    },
+    "nvidia_smi": "NVIDIA GeForce RTX 4090, 580.159.04, 24564 MiB",
+    "git_commit": null,
+    "git_dirty": null,
+    "source_sha256": {
+      "harness/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._benchmark.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._edge_profile.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._experiment_report.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._kernel_benchmark.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._measurement.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._nsight_counters.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._onnx_utils.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._perf_per_watt.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._power_monitor.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._prepare_whisper_data.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._profile_kernels.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._tensorrt_utils.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._validate.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/._whisper.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "harness/__init__.py": "22ee8771700cd19a7cc8513db21f3f3b172ec436e71a5a7c421d2902e5dde911",
+      "harness/benchmark.py": "59c2b319df004cb6d601536cf1245237ca6d5ea5bd19c1e4864a8dadaff5f5d4",
+      "harness/edge_profile.py": "072b1ebadb1e693cae784b140e03c14e00fbcaaca5ceddbf95a6d735e23c746d",
+      "harness/experiment_report.py": "441b2e6e1efc91a69a23073ae4f61caed070dd12b43b038ce141ab9288e39812",
+      "harness/extension_report.py": "bf4588ca89aa0fd39210a204a6a79d386629f0cb7c2b0f4b314228d44fb0903f",
+      "harness/kernel_benchmark.py": "8aca8c37245683836015b7b73fe23cda63257523c9b41ff0c05bcb5d43b3a79e",
+      "harness/measurement.py": "f037b4ba1c5385b74bcf84f791874c8b1209857a9f3c3a250ce55e0e3142e624",
+      "harness/nsight_counters.py": "38afdb23371822b6cab75af3fc44141a64a03d0ca3e417b0af82dd0c8ee97afe",
+      "harness/onnx_utils.py": "10735629e61cebdd5848c3a80427a594d495c246e26832716adc61603a5569e5",
+      "harness/perf_per_watt.py": "3c51bfb165c956b9157e6bd0976b40b63ffc44f8fc6c0aa428a0b77b50a2d766",
+      "harness/power_monitor.py": "bb2b3e8b24944ba2d010b45b02e5661a5d0a1b7ad83e1c6b7575528f1e839437",
+      "harness/prepare_whisper_data.py": "611cb3c86fc34da65db7f14c22c5f6800c81dfcd8a1b3cde273553108aae6839",
+      "harness/profile_kernels.py": "a128e4629ff17a40d109d13582ee90681caa25f3e64139c1ac3541e7ccd3410b",
+      "harness/tensorrt_utils.py": "700421d42b5da8471f316c4a5cc11450a04ef108dc747bdc615de06ea19369ff",
+      "harness/validate.py": "042f95fb1de615e4c8f87da19c2e85457e2d308b53c948017b362d5c9d3ec303",
+      "harness/whisper.py": "98682c8ea3cbefebbff2a0b38932ae7356645a05510fe1e233567e355d7778f5",
+      "kernels/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/._contracts.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/__init__.py": "064f56c54a610d59f6ef74c4473f6ca8ab4591cef987acb52a66dfab00e5e6c3",
+      "kernels/contracts.py": "0486cd273008fe23f6871b17168445936d2c7c0de01299fc42adbd6168b50086",
+      "kernels/cuda/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/._fused.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/._fused_ops.cpp": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/._fused_ops.cu": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/._matmul.cu": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/cuda/__init__.py": "b136e0401a7cbd22a834a462123e3da9a0617411e4a13aacb7e90234367542ec",
+      "kernels/cuda/fused.py": "fa3897eca1a85b40d71d7ceb42270f9dd200c5a0224dc8eab8f95b131582da56",
+      "kernels/cuda/fused_ops.cpp": "059cbec727acaed2ef796410cb09607f2426f7730e671eb43c4b7031c0601179",
+      "kernels/cuda/fused_ops.cu": "4ca3d9b75fd40cc4b560fdfdc46c730cb67c64d39a81b3c9e3eddbf2059b138e",
+      "kernels/cuda/matmul.cu": "296e94a393948a331e17f98996ac7ecad74c455971fc461b9cad6ec3ded7cc98",
+      "kernels/hip/._matmul.hip.cpp": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/hip/matmul.hip.cpp": "c8344093d500a33381fef93ba13d949d053f67151d078cebcc9aa6602e01fb27",
+      "kernels/triton/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/triton/._attention.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/triton/._softmax.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "kernels/triton/__init__.py": "b9ae38031f1640264e447f60c3e8bc172e9895bd03f3392bbbf8e31ef3189dac",
+      "kernels/triton/attention.py": "37ca5c5a9c0af75dd539e2aa8bdded7a038bf11122b8ac67599c85f79934abd7",
+      "kernels/triton/softmax.py": "ad0f04e3590e1b852dbcbe372b74ec60fdb34eb86ad1a95cc5c9585c9c924aad",
+      "compilers/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "compilers/._jax_jit.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "compilers/._torch_compile.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "compilers/._torch_tensorrt_block.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "compilers/__init__.py": "5ad2593265c904ecda27c9dedf42cc6e0c32d3eeb313e0fdbba291f3f619df5a",
+      "compilers/jax_jit.py": "e9276c211fcee1faa2d0208a35477113c2785345f1c3a9321d7fe2fdc544dbea",
+      "compilers/torch_compile.py": "44010d66a3f7d0f465a724bd472c72ad0f1da7d53ff59094c13ba99ead040b97",
+      "compilers/torch_tensorrt_block.py": "1db2e3fe27860ebb6c148a9f8cc1c2206ecb4df25c9df4f1afe96eafa3df3579",
+      "serving/.___init__.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "serving/._benchmark.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "serving/._run.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "serving/__init__.py": "c24eef08bf558a6a4411a35af1eda651fcaddd87327d1bde7c631db20063cbf8",
+      "serving/benchmark.py": "e7ced0889e62d7efe69fe8cc3e3752188ed801bce110591664a9c6edba39d971",
+      "serving/run.py": "ee3b14921ad5033985c8433eea738f4bcf263634da033fe17db2d72a5889b26a",
+      "training/._export_tensorrt.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "training/._train_distributed.py": "dbc52b572872916e35f29a4749739bb3d47a0c6caca508cb189d9373e8106600",
+      "training/export_tensorrt.py": "ee71c08a8b63f151d182cff56627aeb7cac2b8df25649bdb0d690fa414e1282a",
+      "training/train_distributed.py": "3675acec2342cb4046f185ee8abee3c9b251480668f9b838d1c77f3ff4975eba"
+    }
+  },
+  "config": {
+    "gpu": "0",
+    "power_limit": 200,
+    "model": "resnet18",
+    "precisions": "fp32,fp16,int8",
+    "frameworks": "tensorrt",
+    "engine_dir": "results/runpod/engines",
+    "iterations": 100,
+    "warmup": 10,
+    "out_dir": "results/runpod/edge"
+  },
+  "original": {
+    "uuid": "GPU-02caade4-d423-135f-2571-88e1ed715f72",
+    "current_watts": 450.0,
+    "min_watts": 150.0,
+    "max_watts": 450.0
+  },
+  "requested_limit_watts": 200,
+  "runs": {
+    "baseline": {
+      "command": [
+        "/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python",
+        "-m",
+        "harness.benchmark",
+        "--model",
+        "resnet18",
+        "--batch-sizes",
+        "1",
+        "--precisions",
+        "fp32,fp16,int8",
+        "--frameworks",
+        "tensorrt",
+        "--engine-dir",
+        "results/runpod/engines",
+        "--iterations",
+        "100",
+        "--warmup",
+        "10",
+        "--out",
+        "results/runpod/edge/baseline.csv"
+      ],
+      "returncode": 0,
+      "benchmark_csv": "results/runpod/edge/baseline.csv",
+      "power_samples": [
+        {
+          "timestamp": 1791876113.959422,
+          "power_util_clock_temperature": "54.85, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876114.2011428,
+          "power_util_clock_temperature": "55.66, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876114.441574,
+          "power_util_clock_temperature": "55.66, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876114.6731493,
+          "power_util_clock_temperature": "55.67, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876114.9152272,
+          "power_util_clock_temperature": "55.67, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876115.156706,
+          "power_util_clock_temperature": "55.79, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876115.3984785,
+          "power_util_clock_temperature": "55.79, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876115.6418161,
+          "power_util_clock_temperature": "45.15, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876115.8822892,
+          "power_util_clock_temperature": "45.15, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876116.1245804,
+          "power_util_clock_temperature": "54.23, 20, 2520, 43"
+        },
+        {
+          "timestamp": 1791876116.3655615,
+          "power_util_clock_temperature": "54.23, 20, 2520, 43"
+        },
+        {
+          "timestamp": 1791876116.6055455,
+          "power_util_clock_temperature": "54.23, 20, 2520, 43"
+        }
+      ],
+      "sampling_errors": [],
+      "power_method": "whole-board NVML power sampled during workload; not Jetson power/thermal behavior"
+    },
+    "cap-refused-uncapped": {
+      "command": [
+        "/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python",
+        "-m",
+        "harness.benchmark",
+        "--model",
+        "resnet18",
+        "--batch-sizes",
+        "1",
+        "--precisions",
+        "fp32,fp16,int8",
+        "--frameworks",
+        "tensorrt",
+        "--engine-dir",
+        "results/runpod/engines",
+        "--iterations",
+        "100",
+        "--warmup",
+        "10",
+        "--out",
+        "results/runpod/edge/cap-refused-uncapped.csv"
+      ],
+      "returncode": 0,
+      "benchmark_csv": "results/runpod/edge/cap-refused-uncapped.csv",
+      "power_samples": [
+        {
+          "timestamp": 1791876116.719831,
+          "power_util_clock_temperature": "65.25, 20, 2520, 41"
+        },
+        {
+          "timestamp": 1791876116.96252,
+          "power_util_clock_temperature": "65.25, 20, 2520, 41"
+        },
+        {
+          "timestamp": 1791876117.203213,
+          "power_util_clock_temperature": "57.46, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876117.445661,
+          "power_util_clock_temperature": "57.46, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876117.6820433,
+          "power_util_clock_temperature": "56.05, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876117.9233818,
+          "power_util_clock_temperature": "56.05, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876118.1657052,
+          "power_util_clock_temperature": "56.05, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876118.40633,
+          "power_util_clock_temperature": "56.05, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876118.6439345,
+          "power_util_clock_temperature": "57.63, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876118.8888094,
+          "power_util_clock_temperature": "57.63, 0, 2520, 41"
+        },
+        {
+          "timestamp": 1791876119.129362,
+          "power_util_clock_temperature": "59.71, 0, 2520, 41"
+        }
+      ],
+      "sampling_errors": [],
+      "power_method": "whole-board NVML power sampled during workload; not Jetson power/thermal behavior"
+    }
+  },
+  "cap_status": "refused_or_unverified",
+  "restore": {
+    "returncode": 4,
+    "stdout": "Failed to set power management limit for GPU 00000000:C1:00.0: Insufficient Permissions\nTerminating early due to previous errors.",
+    "stderr": ""
+  },
+  "cap_request": {
+    "returncode": 4,
+    "stdout": "Failed to set power management limit for GPU 00000000:C1:00.0: Insufficient Permissions\nTerminating early due to previous errors.",
+    "stderr": ""
+  },
+  "after_request": {
+    "uuid": "GPU-02caade4-d423-135f-2571-88e1ed715f72",
+    "current_watts": 450.0,
+    "min_watts": 150.0,
+    "max_watts": 450.0
+  },
+  "restored_limit": {
+    "uuid": "GPU-02caade4-d423-135f-2571-88e1ed715f72",
+    "current_watts": 450.0,
+    "min_watts": 150.0,
+    "max_watts": 450.0
+  },
+  "restore_verified": true
+}

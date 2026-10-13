@@ -1,0 +1,46 @@
+Wrote results/runpod/quantization/resnet18-data.json
+/workspace/gpu-benchmarking-suite/training/export_tensorrt.py:48: DeprecationWarning: You are using the legacy TorchScript-based ONNX export. Starting in PyTorch 2.9, the new torch.export-based ONNX exporter will be the default. To switch now, set dynamo=True in torch.onnx.export. This new exporter supports features like exporting LLMs with DynamicCache. We encourage you to try it and share feedback to help improve the experience. Learn more about the new export logic: https://pytorch.org/docs/stable/onnx_dynamo.html. For exporting control flow: https://pytorch.org/tutorials/beginner/onnx/export_control_flow_model_to_onnx_tutorial.html.
+  torch.onnx.export(model, inputs, str(onnx_path), input_names=list(input_names),
+[10/13/2026-07:18:59] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Wrote results/runpod/quantization/resnet18-fp32-layers.json
+resnet18 fp32: top1=59.38%, median=0.504 ms, 73.79 MiB
+Wrote results/runpod/quantization/benchmark.json
+[10/13/2026-07:19:23] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Wrote results/runpod/quantization/resnet18-fp16-layers.json
+resnet18 fp16: top1=59.38%, median=0.190 ms, 23.47 MiB
+Wrote results/runpod/quantization/benchmark.json
+Collecting tensor data and making histogram ...
+Finding optimal threshold for each tensor using 'entropy' algorithm ...
+Number of tensors : 39
+Number of histogram bins : 128 (The number may increase depends on the data it collects)
+Number of quantized bins : 128
+[10/13/2026-07:19:55] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Wrote results/runpod/quantization/resnet18-int8-layers.json
+resnet18 int8: top1=60.94%, median=0.186 ms, 12.57 MiB
+Wrote results/runpod/quantization/benchmark.json
+Wrote results/runpod/quantization/resnet50-data.json
+Downloading: "https://download.pytorch.org/models/resnet50-11ad3fa6.pth" to /root/.cache/torch/hub/checkpoints/resnet50-11ad3fa6.pth
+
+  0%|          | 0.00/97.8M [00:00<?, ?B/s]
+ 10%|█         | 9.88M/97.8M [00:00<00:00, 101MB/s]
+ 37%|███▋      | 35.9M/97.8M [00:00<00:00, 201MB/s]
+ 67%|██████▋   | 65.9M/97.8M [00:00<00:00, 252MB/s]
+ 92%|█████████▏| 90.0M/97.8M [00:00<00:00, 218MB/s]
+100%|██████████| 97.8M/97.8M [00:00<00:00, 222MB/s]
+[10/13/2026-07:20:16] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Wrote results/runpod/quantization/resnet50-fp32-layers.json
+resnet50 fp32: top1=82.03%, median=0.991 ms, 124.36 MiB
+Wrote results/runpod/quantization/benchmark.json
+[10/13/2026-07:20:59] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Wrote results/runpod/quantization/resnet50-fp16-layers.json
+resnet50 fp16: top1=82.03%, median=0.353 ms, 50.27 MiB
+Wrote results/runpod/quantization/benchmark.json
+Collecting tensor data and making histogram ...
+Finding optimal threshold for each tensor using 'entropy' algorithm ...
+Number of tensors : 104
+Number of histogram bins : 128 (The number may increase depends on the data it collects)
+Number of quantized bins : 128
+[10/13/2026-07:21:51] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Wrote results/runpod/quantization/resnet50-int8-layers.json
+resnet50 int8: top1=81.25%, median=0.364 ms, 27.17 MiB
+Wrote results/runpod/quantization/benchmark.json

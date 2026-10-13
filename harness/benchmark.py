@@ -1,22 +1,7 @@
-"""Benchmark harness comparing PyTorch, TensorFlow, and TensorRT inference
-across batch sizes and precisions, logging throughput, latency, and GPU
-utilization to a CSV report.
+"""Benchmark pretrained ResNet or Whisper-tiny with eager/compiled PyTorch, ONNX and TRT.
 
-This mirrors what NVIDIA's Performance Engineering / Deep Learning & HPC
-internship postings describe: "planning and executing GPU performance
-benchmarking across a wide range of HPC and DL frameworks... aggregating,
-analyzing, and generating written and visual reports."
-
-Real usage (on a machine with a GPU and these frameworks installed):
-
-    python benchmark.py --model resnet50 --batch-sizes 1,8,32,64 \
-        --precisions fp32,fp16 --frameworks torch,tensorrt
-
-On a machine without a GPU or these packages (like the sandbox this was
-built in), running with no arguments exercises the harness end-to-end
-against a tiny synthetic CPU model so the benchmarking/logging/reporting
-logic itself is verified without needing real hardware - see
-`self_test()` and the README for what that proves and doesn't prove.
+GPU runs fail explicitly when unavailable. Use --self-test for the synthetic
+NumPy CPU validation. See docs/runpod.md for engines, calibration and ASR data.
 """
 from __future__ import annotations
 
@@ -28,6 +13,10 @@ import sys
 import time
 from dataclasses import dataclass, asdict
 from typing import Callable, Iterable
+from pathlib import Path
+
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 
 @dataclass
@@ -40,6 +29,7 @@ class BenchResult:
     throughput_samples_per_sec: float
     gpu_util_percent: float | None
     gpu_power_watts: float | None
+    model: str = "resnet50"
 
 
 def _try_import(name: str):
@@ -75,7 +65,7 @@ def query_gpu_metrics() -> tuple[float | None, float | None]:
             stderr=subprocess.DEVNULL,
             timeout=2,
         ).decode().strip()
-        util_str, power_str = out.split(",")
+        util_str, power_str = out.splitlines()[0].split(",")
         return _parse_metric(util_str), _parse_metric(power_str)
     except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired, ValueError):
         # OSError (not just FileNotFoundError) matters here: if any earlier
@@ -120,79 +110,69 @@ def bench_one(framework: str, batch_size: int, precision: str,
         throughput_samples_per_sec=round(batch_size / (mean_lat / 1000.0), 2),
         gpu_util_percent=util,
         gpu_power_watts=power,
+        model="synthetic" if framework == "numpy-selftest" else "resnet50",
     )
 
 
 # --- Framework-specific runners -------------------------------------------
-# Each returns a zero-arg callable that runs one inference pass, or None if
-# that framework/model isn't available in the current environment.
+# Each returns a synchronized callable or raises if the requested runtime
+# or engine is unavailable; GPU workloads never substitute CPU rows.
 
-def build_torch_runner(model_name: str, batch_size: int, precision: str):
-    torch = _try_import("torch")
-    torchvision = _try_import("torchvision")
-    if torch is None or torchvision is None:
-        return None
-
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = getattr(torchvision.models, model_name)(weights=None).to(device).eval()
-    if precision == "fp16" and device == "cuda":
-        model = model.half()
-    dtype = torch.float16 if (precision == "fp16" and device == "cuda") else torch.float32
-    x = torch.randn(batch_size, 3, 224, 224, device=device, dtype=dtype)
-
+def build_torch_runner(model_name, batch_size, precision, compiled=False):
+    from harness.tensorrt_utils import require_cuda
+    from training.export_tensorrt import load_model
+    torch = require_cuda()
+    if precision not in ("fp32", "fp16"):
+        raise ValueError("Torch runners support fp32/fp16; use calibrated TensorRT engines for INT8")
+    model = load_model(model_name).cuda().eval()
+    dtype = torch.float16 if precision == "fp16" else torch.float32
+    model.to(dtype)
+    x = torch.randn(batch_size, 3, 224, 224, device="cuda", dtype=dtype)
+    if compiled:
+        model = torch.compile(model, backend="inductor", fullgraph=False)
+    with torch.inference_mode():
+        model(x)  # compilation is outside measured calls
+        torch.cuda.synchronize()
     def run_once():
-        with torch.no_grad():
+        with torch.inference_mode():
             model(x)
-        if device == "cuda":
-            torch.cuda.synchronize()
-
+        torch.cuda.synchronize()
     return run_once
 
 
-def build_tensorrt_runner(model_name: str, batch_size: int, precision: str):
-    # A full TensorRT build requires exporting the model to ONNX, then
-    # building a TensorRT engine with trtexec or the Python builder API
-    # (see training/export_tensorrt.py for that step). Here we just load
-    # a prebuilt engine if one exists, to keep this harness self-contained.
-    trt = _try_import("tensorrt")
-    if trt is None:
-        return None
-    import os
-    engine_path = f"engines/{model_name}_{precision}_bs{batch_size}.trt"
-    if not os.path.exists(engine_path):
-        return None
-
-    import pycuda.driver as cuda
-    import pycuda.autoinit  # noqa: F401  (initializes the CUDA context)
-    import numpy as np
-
-    logger = trt.Logger(trt.Logger.WARNING)
-    with open(engine_path, "rb") as f, trt.Runtime(logger) as runtime:
-        engine = runtime.deserialize_cuda_engine(f.read())
-    context = engine.create_execution_context()
-
-    # TensorRT 10+ addresses tensors by name (execute_async_v3) rather than
-    # a positional bindings list (execute_async_v2, removed in TensorRT 10).
-    input_name = engine.get_tensor_name(0)
-    output_name = engine.get_tensor_name(1)
-
-    input_shape = (batch_size, 3, 224, 224)
-    h_input = np.random.randn(*input_shape).astype(np.float32)
-    d_input = cuda.mem_alloc(h_input.nbytes)
-    output_shape = (batch_size, 1000)
-    h_output = np.empty(output_shape, dtype=np.float32)
-    d_output = cuda.mem_alloc(h_output.nbytes)
-    stream = cuda.Stream()
-
-    context.set_tensor_address(input_name, int(d_input))
-    context.set_tensor_address(output_name, int(d_output))
-
+def build_tensorrt_runner(model_name, batch_size, precision, engine_dir="engines"):
+    from pathlib import Path
+    from harness.tensorrt_utils import TensorRTRunner, require_cuda
+    torch = require_cuda()
+    path = Path(engine_dir) / f"{model_name}_{precision}_bs{batch_size}.trt"
+    if not path.exists():
+        raise FileNotFoundError(f"Build {path} with training.export_tensorrt first")
+    engine = TensorRTRunner(path)
+    shape, dtype = engine.inputs["input"]
+    x = torch.randn(shape, dtype=dtype, device="cuda")
     def run_once():
-        cuda.memcpy_htod_async(d_input, h_input, stream)
-        context.execute_async_v3(stream_handle=stream.handle)
-        cuda.memcpy_dtoh_async(h_output, d_output, stream)
-        stream.synchronize()
+        engine(input=x)
+        torch.cuda.synchronize()
+    return run_once
 
+
+def build_onnx_runner(model_name, batch_size, precision, onnx_dir="engines"):
+    from pathlib import Path
+    from harness.tensorrt_utils import require_cuda
+    from harness.onnx_utils import ONNXRunner
+    from training.export_tensorrt import export_model, load_model
+    torch = require_cuda()
+    if precision not in ("fp32", "fp16"):
+        raise ValueError("ONNX harness supports fp32/fp16")
+    dtype = torch.float16 if precision == "fp16" else torch.float32
+    model = load_model(model_name).cuda().to(dtype)
+    x = torch.randn(batch_size, 3, 224, 224, dtype=dtype, device="cuda")
+    path = Path(onnx_dir) / f"{model_name}_{precision}_bs{batch_size}.onnx"
+    export_model(model, x, path)
+    engine = ONNXRunner(path, {"output": (batch_size, 1000)})
+    def run_once():
+        engine(input=x)
+        torch.cuda.synchronize()
     return run_once
 
 
@@ -231,6 +211,8 @@ def write_csv(results: Iterable[BenchResult], path: str) -> None:
     if not results:
         print("no results to write", file=sys.stderr)
         return
+    from pathlib import Path
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=list(asdict(results[0]).keys()))
         writer.writeheader()
@@ -245,10 +227,29 @@ def main():
     parser.add_argument("--batch-sizes", default="1,8,32,64")
     parser.add_argument("--precisions", default="fp32,fp16")
     parser.add_argument("--frameworks", default="torch,tensorrt")
+    parser.add_argument("--engine-dir", default="engines")
+    parser.add_argument("--onnx-dir", default="engines")
+    parser.add_argument("--warmup", type=int, default=5)
+    parser.add_argument("--iterations", type=int, default=30)
+    parser.add_argument("--self-test", action="store_true", help="Explicit synthetic NumPy CPU test")
+    parser.add_argument("--audio-manifest")
+    parser.add_argument("--audio-samples", type=int, default=8)
+    parser.add_argument("--model-revision", default="main")
+    parser.add_argument("--max-new-tokens", type=int, default=96)
+    parser.add_argument("--asr-out-dir", default="results/whisper")
     parser.add_argument("--out", default="benchmark_report.csv")
     args = parser.parse_args()
 
     batch_sizes = [int(b) for b in args.batch_sizes.split(",")]
+    if min(batch_sizes) < 1 or args.iterations < 1 or args.warmup < 0 or args.audio_samples < 1 or args.max_new_tokens < 1:
+        parser.error("positive batch/iteration/sample/token counts and nonnegative warmup required")
+    if args.self_test:
+        write_csv(self_test(), args.out)
+        return
+    if args.model == "whisper-tiny":
+        from harness.whisper import benchmark
+        benchmark(args)
+        return
     precisions = args.precisions.split(",")
     frameworks = args.frameworks.split(",")
 
@@ -260,24 +261,23 @@ def main():
             for precision in precisions:
                 if framework == "torch":
                     runner = build_torch_runner(args.model, batch_size, precision)
+                elif framework == "torch.compile":
+                    runner = build_torch_runner(args.model, batch_size, precision, compiled=True)
                 elif framework == "tensorrt":
-                    runner = build_tensorrt_runner(args.model, batch_size, precision)
+                    runner = build_tensorrt_runner(args.model, batch_size, precision, args.engine_dir)
+                elif framework == "onnx":
+                    runner = build_onnx_runner(args.model, batch_size, precision, args.onnx_dir)
                 else:
-                    print(f"unknown framework: {framework}", file=sys.stderr)
-                    continue
+                    parser.error(f"unknown framework: {framework}")
                 if runner is None:
                     continue
                 any_real_runner = True
-                results.append(bench_one(framework, batch_size, precision, runner))
+                row = bench_one(framework, batch_size, precision, runner, args.warmup, args.iterations)
+                row.model = args.model
+                results.append(row)
 
     if not any_real_runner:
-        print(
-            "No GPU frameworks/hardware detected in this environment - "
-            "running the numpy CPU self-test instead so the harness itself "
-            "is still exercised end-to-end. See README.",
-            file=sys.stderr,
-        )
-        results = self_test()
+        raise RuntimeError("No real inference runners; use --self-test explicitly for CPU validation")
 
     for r in results:
         print(r)

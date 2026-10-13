@@ -1,0 +1,235 @@
+Wrote results/runpod/whisper/benchmark.json
+Whisper torch fp32 bs=1: WER=0.060, 231.11 ms
+/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/models/whisper/modeling_whisper.py:667: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if input_features.shape[-1] != expected_seq_length:
+/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/masking_utils.py:720: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if batch_size != position_ids.shape[0]:
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/workspace/gpu-benchmarking-suite/harness/benchmark.py", line 284, in <module>
+    main()
+  File "/workspace/gpu-benchmarking-suite/harness/benchmark.py", line 247, in main
+    benchmark(args)
+  File "/workspace/gpu-benchmarking-suite/harness/whisper.py", line 215, in benchmark
+    runner = reference if backend == 'torch' else ASRRunner(backend, model, processor, batch, precision, args.max_new_tokens, root / 'engines')
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/harness/whisper.py", line 121, in __init__
+    export_model(decoder, (self.ids, sample_hidden, self.position), dec_path,
+  File "/workspace/gpu-benchmarking-suite/training/export_tensorrt.py", line 44, in export_model
+    torch.onnx.export(model, inputs, str(onnx_path), input_names=list(input_names),
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/onnx/__init__.py", line 424, in export
+    export(
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/onnx/utils.py", line 522, in export
+    _export(
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/onnx/utils.py", line 1457, in _export
+    graph, params_dict, torch_out = _model_to_graph(
+                                    ^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/onnx/utils.py", line 1080, in _model_to_graph
+    graph, params, torch_out, module = _create_jit_graph(model, args)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/onnx/utils.py", line 964, in _create_jit_graph
+    graph, torch_out = _trace_and_get_graph_from_model(model, args)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/onnx/utils.py", line 871, in _trace_and_get_graph_from_model
+    trace_graph, torch_out, inputs_states = torch.jit._get_trace_graph(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/jit/_trace.py", line 1504, in _get_trace_graph
+    outs = ONNXTracedModule(
+           ^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/jit/_trace.py", line 138, in forward
+    graph, _out = torch._C._create_graph_by_tracing(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/jit/_trace.py", line 129, in wrapper
+    outs.append(self.inner(*trace_inputs))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1763, in _slow_forward
+    result = self.forward(*input, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/harness/whisper.py", line 83, in forward
+    states = self.decoder(input_ids=input_ids, encoder_hidden_states=hidden,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1763, in _slow_forward
+    result = self.forward(*input, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/models/whisper/modeling_whisper.py", line 900, in forward
+    causal_mask = create_causal_mask(
+                  ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/masking_utils.py", line 805, in create_causal_mask
+    causal_mask = mask_interface(
+                  ^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/masking_utils.py", line 491, in eager_mask
+    mask = sdpa_mask(
+           ^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/masking_utils.py", line 375, in sdpa_mask_recent_torch
+    causal_mask = _vmap_for_bhqkv(mask_function)(batch_arange, head_arange, cache_position, kv_arange)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/apis.py", line 202, in wrapped
+    return vmap_impl(
+           ^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 334, in vmap_impl
+    return _flat_vmap(
+           ^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 484, in _flat_vmap
+    batched_outputs = func(*batched_inputs, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/apis.py", line 202, in wrapped
+    return vmap_impl(
+           ^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 334, in vmap_impl
+    return _flat_vmap(
+           ^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 484, in _flat_vmap
+    batched_outputs = func(*batched_inputs, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/apis.py", line 202, in wrapped
+    return vmap_impl(
+           ^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 334, in vmap_impl
+    return _flat_vmap(
+           ^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 484, in _flat_vmap
+    batched_outputs = func(*batched_inputs, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/apis.py", line 202, in wrapped
+    return vmap_impl(
+           ^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 334, in vmap_impl
+    return _flat_vmap(
+           ^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/vmap.py", line 484, in _flat_vmap
+    batched_outputs = func(*batched_inputs, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/masking_utils.py", line 51, in and_mask
+    result = result & mask(batch_idx, head_idx, q_idx, kv_idx).to(result.device)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/masking_utils.py", line 136, in inner_mask
+    return packed_sequence_mask[batch_idx, q_idx] == packed_sequence_mask[batch_idx, kv_idx]
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_dynamo/_trace_wrapped_higher_order_op.py", line 141, in __torch_function__
+    return mod_index(args[0], index_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/autograd/function.py", line 586, in apply
+    return custom_function_call(cls, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 49, in __call__
+    return super().__call__(autograd_function, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 524, in __call__
+    return wrapper()
+           ^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 520, in wrapper
+    return self.dispatch(
+           ^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 383, in dispatch
+    return dispatch_functorch(self, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/pyfunctorch.py", line 312, in dispatch_functorch
+    return interpreter.process(op, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/pyfunctorch.py", line 139, in process
+    return kernel(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 300, in custom_function_call_vmap
+    return custom_function_call_vmap_generate_rule(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 384, in custom_function_call_vmap_generate_rule
+    outputs = custom_function_call(vmapped_function, *unwrapped_operands)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 49, in __call__
+    return super().__call__(autograd_function, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 524, in __call__
+    return wrapper()
+           ^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 520, in wrapper
+    return self.dispatch(
+           ^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 383, in dispatch
+    return dispatch_functorch(self, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/pyfunctorch.py", line 312, in dispatch_functorch
+    return interpreter.process(op, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/pyfunctorch.py", line 139, in process
+    return kernel(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 300, in custom_function_call_vmap
+    return custom_function_call_vmap_generate_rule(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 384, in custom_function_call_vmap_generate_rule
+    outputs = custom_function_call(vmapped_function, *unwrapped_operands)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 49, in __call__
+    return super().__call__(autograd_function, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 524, in __call__
+    return wrapper()
+           ^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 520, in wrapper
+    return self.dispatch(
+           ^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 383, in dispatch
+    return dispatch_functorch(self, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/pyfunctorch.py", line 312, in dispatch_functorch
+    return interpreter.process(op, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/pyfunctorch.py", line 139, in process
+    return kernel(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 300, in custom_function_call_vmap
+    return custom_function_call_vmap_generate_rule(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 384, in custom_function_call_vmap_generate_rule
+    outputs = custom_function_call(vmapped_function, *unwrapped_operands)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 49, in __call__
+    return super().__call__(autograd_function, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 524, in __call__
+    return wrapper()
+           ^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 520, in wrapper
+    return self.dispatch(
+           ^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_ops.py", line 383, in dispatch
+    return dispatch_functorch(self, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/pyfunctorch.py", line 312, in dispatch_functorch
+    return interpreter.process(op, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/pyfunctorch.py", line 139, in process
+    return kernel(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 300, in custom_function_call_vmap
+    return custom_function_call_vmap_generate_rule(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 384, in custom_function_call_vmap_generate_rule
+    outputs = custom_function_call(vmapped_function, *unwrapped_operands)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/_functorch/autograd_function.py", line 50, in __call__
+    return autograd_function.apply(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch/autograd/function.py", line 576, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: unordered_map::at

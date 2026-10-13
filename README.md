@@ -132,6 +132,17 @@ head dims 32/64/128, causal, shuffled page tables, GEMMs); the full suite
   architectures. The JAX/XLA and serving results above are from the earlier session
   and were not re-run.
 
+## Quantization, Torch-TensorRT, TensorRT-LLM, edge and ASR
+
+See [RunPod commands and rental requirements](docs/runpod.md) for calibrated
+ResNet-18/50 FP32/FP16/INT8 accuracy/latency/size reports, Qwen FP8 vLLM,
+LLaMA-style block/ResNet compiler comparisons with graph-break artifacts,
+TensorRT-LLM serving, a batch-1 “edge-style, not Jetson” power profile,
+Whisper-tiny ASR through ONNX/TensorRT/torch.compile, TP2 vLLM, and counter-access
+probing. GPU workloads fail explicitly; `harness.benchmark --self-test` is the
+labeled NumPy CPU check. The [new GPU report](results/runpod/report.md) distinguishes executed runs from
+TensorRT-LLM, TP2 and counter collection still pending other host resources.
+
 ## Layout
 
 ```
@@ -262,12 +273,11 @@ output from that run, not an estimate.
   ```
   BenchResult(framework='tensorrt', batch_size=8, precision='fp32', mean_latency_ms=1.9565, throughput_samples_per_sec=4088.98, gpu_power_watts=98.24)
   ```
-  fp16/int8 engine builds are not currently supported by this script:
-  TensorRT 10+ removed `BuilderFlag.FP16`/`INT8` in favor of a
-  "strongly-typed network" precision model (precision now comes from the
-  ONNX graph's own tensor dtypes, set via `NetworkDefinitionCreationFlag.STRONGLY_TYPED`,
-  rather than a global builder flag) — a real design change, not a rename,
-  so it's left as a follow-up rather than papered over.
+  The earlier run verified FP32 only. The current exporter builds FP16 and
+  calibrated INT8 with TensorRT 10.12; see [the new measured report](results/runpod/report.md).
+  FP16/INT8 builder flags are removed in TensorRT 11, not TensorRT 10.
+  The new implementation targets TensorRT 10 and uses explicit ONNX Q/DQ
+  for INT8, with floating fallback layers recorded in engine inspection.
 
 - **`training/train_distributed.py`** — this pod has a single GPU (one MIG
   slice), so true multi-GPU NCCL all-reduce across separate devices can't be
@@ -467,10 +477,8 @@ run_validation        success
 run_tensorrt_export   failed
 ```
 
-- **`run_benchmark`** genuinely succeeds: `harness/benchmark.py` detects no
-  `torch`/`tensorrt` GPU runners are available and falls through to its own
-  documented numpy CPU self-test path - a real code path in that script, not
-  something this DAG fakes - and writes a real
+- **`run_benchmark`** succeeds through the explicitly selected
+  `harness.benchmark --self-test` NumPy CPU path and writes a real
   `orchestration/output/benchmark_report.csv`.
 - **`run_validation`** genuinely succeeds: `--self-test` runs the actual
   pass/accuracy-fail/latency-fail/both-fail decision-logic checks in

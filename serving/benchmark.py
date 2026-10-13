@@ -1,4 +1,4 @@
-"""Closed-loop vLLM/SGLang load test with client latency and sampled KV usage."""
+"""Closed-loop vLLM/SGLang/TensorRT-LLM load test with client latency and sampled KV usage."""
 import argparse
 import asyncio
 import json
@@ -39,6 +39,21 @@ def percentile(values, fraction):
 
 def parse_metrics(text, backend):
     """Retain labels: cache fractions from different workers must not be summed."""
+    if backend == "tensorrt-llm":
+        # TRT-LLM 1.2 /metrics returns JSON iteration stats, not Prometheus.
+        rows = json.loads(text)
+        if not isinstance(rows, list):
+            raise ValueError("Expected TensorRT-LLM iteration-stat list")
+        samples = []
+        for row in rows:
+            cache = row.get("kvCacheStats", {})
+            used, capacity = cache.get("usedNumBlocks"), cache.get("maxNumBlocks")
+            if isinstance(used, (int, float)) and isinstance(capacity, (int, float)) and capacity > 0 and 0 <= used <= capacity:
+                samples.append({"name": "trtllm:kv_blocks_used_fraction", "labels": "", "fraction": used / capacity,
+                                "source_active": row.get("numActiveRequests", 0) > 0,
+                                "iteration": row.get("iter"), "used_blocks": used,
+                                "max_blocks": capacity, "tokens_per_block": cache.get("tokensPerBlock")})
+        return samples
     samples = []
     for line in text.splitlines():
         match = re.match(r'^([\w:]+)(\{.*\})?\s+([^\s]+)', line)
@@ -75,7 +90,7 @@ async def request(client, base_url, model, request_id, input_tokens, output_toke
     result = RequestResult(request_id)
     payload = {"model": model, "prompt": make_prompt(request_id, input_tokens, seed),
                "max_tokens": output_tokens, "temperature": 0, "ignore_eos": True,
-               "stream": True, "stream_options": {"include_usage": True}}
+               "add_special_tokens": False, "stream": True, "stream_options": {"include_usage": True}}
     start = time.perf_counter()
     first = None
     usage = None
@@ -101,6 +116,8 @@ async def request(client, base_url, model, request_id, input_tokens, output_toke
         prompt = usage.get("prompt_tokens")
         if not isinstance(count, int) or count < 1 or not isinstance(prompt, int) or prompt != input_tokens:
             raise ValueError("Invalid completion count or server prompt length differs from requested length")
+        if count != output_tokens:
+            raise ValueError(f"Requested {output_tokens} output tokens, received {count}; fixed-length workload violated")
         result.ttft_ms = (first - start) * 1000
         result.latency_ms = (end - start) * 1000
         result.completion_tokens = count
@@ -166,10 +183,14 @@ async def benchmark_level(client, args, concurrency):
         end = time.perf_counter()
         stop.set()
         await task
+    if args.backend == "tensorrt-llm":
+        await sample()  # drain final iteration stats; source_active marks active iterations
     duration = end - start
     successful = [r for r in results if r.error is None]
     total = sum(r.completion_tokens for r in successful)
-    fractions = [g["fraction"] for s in samples if start <= s["time"] <= end for g in s["gauges"]]
+    fractions = [g["fraction"] for s in samples for g in s["gauges"]
+                 if (g.get("source_active", False) if args.backend == "tensorrt-llm"
+                     else start <= s["time"] <= end)]
     peak = max(fractions) if fractions else None
     for sample_row in samples:
         sample_row["elapsed_seconds"] = sample_row.pop("time") - start
@@ -184,6 +205,9 @@ async def benchmark_level(client, args, concurrency):
             "decode_tps_p50": percentile([r.decode_tokens_per_second for r in successful
                                            if r.decode_tokens_per_second is not None], .5),
             "kv_cache": {"configured_capacity_bytes": args.kv_capacity_bytes,
+                         "capacity_scope": getattr(args, "kv_capacity_scope", "per-rank"),
+                         "estimated_peak_used_bytes_scope": "maximum observed fraction times per-rank capacity; not aggregate GPU memory",
+                         "tensor_parallel_size": getattr(args, "tensor_parallel_size", 1),
                          "peak_sampled_usage_fraction": peak,
                          "estimated_peak_used_bytes": round(peak * args.kv_capacity_bytes)
                          if peak is not None and args.kv_capacity_bytes else None,
@@ -210,7 +234,7 @@ async def run(args):
             levels.append(row)
             print(f"{args.backend} c={concurrency}: TTFT p50={row['ttft_p50_ms']} ms, "
                   f"{row['output_tokens_per_second']:.2f} output tok/s, failed={row['failed']}")
-    write_json(args.out, {"metadata": metadata(["httpx", "vllm", "sglang", "torch", "triton", "transformers"]),
+    write_json(args.out, {"metadata": metadata(["httpx", "vllm", "sglang", "tensorrt_llm", "torch", "triton", "transformers"]),
                          "config": vars(args), "server_models": models,
                          "method": "closed-loop; client TTFT to first nonempty text; server usage token counts",
                          "kv_method": "sampled cache fraction times explicitly configured capacity; estimate",
@@ -222,7 +246,8 @@ async def run(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--backend", choices=["vllm", "sglang"], required=True)
+    parser.add_argument("--backend", choices=["vllm", "sglang", "tensorrt-llm"], required=True)
+    parser.add_argument("--tensor-parallel-size", type=int, choices=[1, 2], default=1)
     parser.add_argument("--base-url", default="http://127.0.0.1:8000")
     parser.add_argument("--metrics-url")
     parser.add_argument("--model", choices=[MODEL], default=MODEL)
@@ -235,7 +260,7 @@ def main():
     parser.add_argument("--timeout", type=float, default=120)
     parser.add_argument("--metrics-interval", type=float, default=.1)
     parser.add_argument("--kv-capacity-bytes", type=positive_int, required=True,
-                        help="Actual configured single-GPU KV pool capacity, not total VRAM")
+                        help="Configured KV payload bytes per rank (TP=2 shards KV heads); not total VRAM")
     parser.add_argument("--out", default="results/serving/latest.json")
     args = parser.parse_args()
     if args.timeout <= 0 or args.metrics_interval <= 0 or args.requests < max(args.concurrency):

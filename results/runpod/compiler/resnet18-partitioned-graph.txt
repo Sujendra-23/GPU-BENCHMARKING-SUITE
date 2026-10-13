@@ -1,0 +1,4 @@
+graph():
+    %x : [num_users=1] = placeholder[target=x]
+    %_run_on_acc_0 : [num_users=1] = call_module[target=_run_on_acc_0](args = (%x,), kwargs = {})
+    return (_run_on_acc_0,)

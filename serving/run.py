@@ -14,15 +14,34 @@ from harness.measurement import int_list, positive_int, write_json
 from serving.benchmark import KV_BYTES_PER_TOKEN, MODEL, MODEL_REVISION, run
 
 
+def run_name(args):
+    return f"{args.backend}-{args.quantization}-tp{args.tensor_parallel_size}"
+
+
+def kv_capacity(args):
+    # Qwen has two KV heads. TP=2 shards them across two ranks (no replication).
+    return args.kv_capacity_tokens * KV_BYTES_PER_TOKEN // args.tensor_parallel_size
+
+
 def server_command(args):
     if args.backend == "vllm":
-        return [sys.executable, "-m", "vllm.entrypoints.openai.api_server",
+        command = [sys.executable, "-m", "vllm.entrypoints.openai.api_server",
                 "--model", MODEL, "--revision", MODEL_REVISION,
                 "--host", "127.0.0.1", "--port", str(args.port),
                 "--dtype", "half", "--kv-cache-dtype", "auto", "--max-model-len", "2048",
                 "--max-num-seqs", str(max(args.concurrency)), "--no-enable-prefix-caching",
-                "--kv-cache-memory-bytes", str(args.kv_capacity_tokens * KV_BYTES_PER_TOKEN),
-                "--enforce-eager"]
+                "--kv-cache-memory-bytes", str(kv_capacity(args)),
+                "--tensor-parallel-size", str(args.tensor_parallel_size), "--enforce-eager"]
+        if args.quantization == "fp8":
+            command.extend(["--quantization", "fp8"])
+        return command
+    if args.backend == "tensorrt-llm":
+        executable = Path(sys.executable).parent / "trtllm-serve"
+        return [str(executable), MODEL, "--revision", MODEL_REVISION,
+                "--backend", "pytorch", "--host", "127.0.0.1", "--port", str(args.port),
+                "--tp_size", "1", "--max_seq_len", "2048",
+                "--max_batch_size", str(max(args.concurrency)),
+                "--max_num_tokens", "2048", "--config", str(args.trtllm_config)]
     return [sys.executable, "-m", "sglang.launch_server", "--model-path", MODEL,
             "--revision", MODEL_REVISION,
             "--host", "127.0.0.1", "--port", str(args.port), "--dtype", "float16",
@@ -35,7 +54,9 @@ def server_command(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--backend", choices=["vllm", "sglang"], required=True)
+    parser.add_argument("--backend", choices=["vllm", "sglang", "tensorrt-llm"], required=True)
+    parser.add_argument("--quantization", choices=["none", "fp8"], default="none")
+    parser.add_argument("--tensor-parallel-size", type=int, choices=[1, 2], default=1)
     parser.add_argument("--port", type=positive_int, default=8000)
     parser.add_argument("--concurrency", type=int_list, default=[1, 4, 8, 16])
     parser.add_argument("--requests", type=positive_int, default=64)
@@ -49,15 +70,34 @@ def main():
         parser.error("port must be <= 65535")
     if args.requests < max(args.concurrency) or args.input_tokens + args.output_tokens > 2048:
         parser.error("requests must cover concurrency; prompt + output must fit 2048 tokens")
+    if args.backend != "vllm" and (args.quantization != "none" or args.tensor_parallel_size != 1):
+        parser.error("FP8 and TP=2 runs are implemented for vLLM only")
+    import torch
+    if torch.cuda.device_count() < args.tensor_parallel_size:
+        parser.error(f"Need {args.tensor_parallel_size} visible CUDA GPUs; use a separate two-GPU pod for TP=2")
+    if args.quantization == "fp8" and torch.cuda.get_device_capability()[0] < 8:
+        parser.error("FP8 requires supported NVIDIA hardware; use Ada/Hopper or newer")
     root = Path(args.out_dir)
     root.mkdir(parents=True, exist_ok=True)
+    name = run_name(args)
+    if args.backend == "tensorrt-llm":
+        args.trtllm_config = str((root / f"{name}-config.yaml").resolve())
+        Path(args.trtllm_config).write_text(
+            "dtype: float16\n"
+            "enable_iter_perf_stats: true\n"
+            "cuda_graph_config: null\n"
+            "kv_cache_config:\n"
+            f"  max_tokens: {args.kv_capacity_tokens}\n"
+            "  enable_block_reuse: false\n")
     command = server_command(args)
     args.model, args.base_url = MODEL, f"http://127.0.0.1:{args.port}"
     args.model_revision = MODEL_REVISION
     args.metrics_url, args.metrics_interval, args.timeout = None, .1, 120
-    args.kv_capacity_bytes = args.kv_capacity_tokens * KV_BYTES_PER_TOKEN
+    args.kv_capacity_bytes = kv_capacity(args)
+    args.kv_capacity_scope = "per-rank; KV heads sharded, no replication for Qwen TP=2"
+    args.trtllm_runtime = "pytorch (TensorRT-LLM executor, not a serialized TensorRT engine)" if args.backend == "tensorrt-llm" else None
     args.seed, args.warmup = 7, 2
-    args.out = str(root / f"{args.backend}.json")
+    args.out = str(root / f"{name}.json")
     # Never attach to an unrelated service already listening on this port.
     import socket
     with socket.socket() as probe:
@@ -65,11 +105,11 @@ def main():
             probe.bind(("127.0.0.1", args.port))
         except OSError:
             parser.error(f"Port {args.port} is occupied; choose a free port")
-    write_json(root / f"{args.backend}-launch.json", {"command": command, "config": vars(args)})
+    write_json(root / f"{name}-launch.json", {"command": command, "config": vars(args)})
     env = os.environ.copy()
     env["VLLM_USE_V1"] = "1"
     env["DO_NOT_TRACK"] = "1"
-    with (root / f"{args.backend}-server.log").open("w") as log:
+    with (root / f"{name}-server.log").open("w") as log:
         process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT,
                                    start_new_session=True, env=env)
         try:

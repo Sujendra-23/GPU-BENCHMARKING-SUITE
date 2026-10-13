@@ -1,0 +1,4 @@
+Running quantization: ['/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python', '-u', '-m', 'training.export_tensorrt', '--suite', '--batch-size', '1', '--calibration-dir', 'data/imagenette2-160/train', '--eval-dir', 'data/imagenette2-160/val', '--class-index', 'training/imagenette-class-index.json', '--dataset-label', 'Imagenette-160 held-out validation; 10-class subset, original 1000 logits', '--calibration-samples', '64', '--eval-samples', '128', '--engine-dir', 'results/runpod/engines', '--out-dir', 'results/runpod/quantization']
+Wrote results/runpod/status.json
+Running edge: ['/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python', '-u', '-m', 'harness.edge_profile', '--power-limit', '200', '--model', 'resnet18', '--engine-dir', 'results/runpod/engines', '--out-dir', 'results/runpod/edge']
+Wrote results/runpod/status.json

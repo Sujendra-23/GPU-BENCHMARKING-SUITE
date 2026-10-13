@@ -1,0 +1,2 @@
+Running whisper: ['/workspace/gpu-benchmarking-suite/.venv-gpu/bin/python', '-u', '-m', 'harness.benchmark', '--model', 'whisper-tiny', '--batch-sizes', '1', '--frameworks', 'torch,onnx,tensorrt,torch.compile', '--precisions', 'fp32', '--audio-manifest', 'data/whisper/manifest.jsonl', '--audio-samples', '4', '--warmup', '1', '--iterations', '3', '--out', 'results/runpod/whisper.csv', '--asr-out-dir', 'results/runpod/whisper']
+Wrote results/runpod/status.json

@@ -1,0 +1,31 @@
+Unable to import quantization op. Please install modelopt library (https://github.com/NVIDIA/TensorRT-Model-Optimizer?tab=readme-ov-file#installation) to add support for compiling quantized models
+Unable to import quantize op. Please install modelopt library (https://github.com/NVIDIA/TensorRT-Model-Optimizer?tab=readme-ov-file#installation) to add support for compiling quantized models
+TensorRT-LLM is not installed. Please install TensorRT-LLM or set TRTLLM_PLUGINS_PATH to the directory containing libnvinfer_plugin_tensorrt_llm.so to use converters for torch.distributed ops
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/llama-block-graph-breaks.json
+llama-block eager: 0.757 ms
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json
+llama-block torch.compile: 0.374 ms
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json
+llama-block torch-tensorrt: 0.176 ms
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json
+[10/13/2026-07:17:31] [TRT] [W] Detected layernorm nodes in FP16.
+[10/13/2026-07:17:31] [TRT] [W] Running layernorm after self-attention with FP16 Reduce or Pow may cause overflow. Forcing Reduce or Pow Layers in FP32 precision, or exporting the model to use INormalizationLayer (available with ONNX opset >= 17) can help preserving accuracy.
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/llama-block-native-layers.json
+[10/13/2026-07:17:41] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+llama-block native-tensorrt: 0.070 ms
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/resnet18-graph-breaks.json
+resnet18 eager: 2.309 ms
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json
+resnet18 torch.compile: 1.301 ms
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json
+WARNING:py.warnings:/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/torch_tensorrt/dynamo/utils.py:275: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.detach().clone() or sourceTensor.detach().clone().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  torch.tensor(inputs),
+
+resnet18 torch-tensorrt: 0.281 ms
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/resnet18-native-layers.json
+[10/13/2026-07:18:23] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+resnet18 native-tensorrt: 0.189 ms
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json
+Wrote /workspace/gpu-benchmarking-suite/results/runpod/compiler/benchmark.json

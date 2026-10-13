@@ -1,0 +1,17 @@
+Wrote results/runpod/whisper/benchmark.json
+Whisper torch fp32 bs=1: WER=0.060, 115.04 ms
+/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/models/whisper/modeling_whisper.py:667: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if input_features.shape[-1] != expected_seq_length:
+Wrote results/runpod/whisper/benchmark.json
+Whisper onnx fp32 bs=1: WER=0.060, 51.45 ms
+/workspace/gpu-benchmarking-suite/.venv-gpu/lib/python3.11/site-packages/transformers/models/whisper/modeling_whisper.py:667: TracerWarning: Converting a tensor to a Python boolean might cause the trace to be incorrect. We can't record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!
+  if input_features.shape[-1] != expected_seq_length:
+[10/13/2026-07:31:19] [TRT] [W] ModelImporter.cpp:534: Make sure input input_ids has Int64 binding.
+[10/13/2026-07:31:19] [TRT] [W] ModelImporter.cpp:534: Make sure input position has Int64 binding.
+[10/13/2026-07:31:24] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/13/2026-07:31:24] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+Wrote results/runpod/whisper/benchmark.json
+Whisper tensorrt fp32 bs=1: WER=0.060, 26.59 ms
+Wrote results/runpod/whisper/benchmark.json
+Whisper torch.compile fp32 bs=1: WER=0.060, 67.39 ms
+wrote 4 rows to results/runpod/whisper.csv

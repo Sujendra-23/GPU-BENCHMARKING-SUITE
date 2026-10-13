@@ -1,6 +1,3 @@
-torch>=2.2
-torchvision>=0.17
-tensorrt>=8.6
-pycuda>=2024.1
-onnx>=1.16
-numpy>=1.26
+# Full single-GPU inference/quantization/compiler/ASR environment.
+# Serving runtimes have their own requirements under serving/.
+-r requirements-gpu-extensions.txt

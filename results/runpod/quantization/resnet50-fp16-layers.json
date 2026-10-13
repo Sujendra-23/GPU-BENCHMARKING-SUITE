@@ -1,0 +1,4411 @@
+{
+  "Layers": [
+    {
+      "Name": "Reformatting CopyNode for Input Tensor 0 to /conv1/Conv + /relu/Relu",
+      "LayerType": "Reformat",
+      "Inputs": [
+        {
+          "Name": "input",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            3,
+            224,
+            224
+          ],
+          "Format/Datatype": "Row major linear FP32"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "Reformatted Input Tensor 0 to /conv1/Conv + /relu/Relu",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            3,
+            224,
+            224
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 4 == 0"
+        }
+      ],
+      "ParameterType": "Reformat",
+      "Origin": "REFORMAT",
+      "TacticValue": "0x0000000000000000",
+      "StreamId": 0,
+      "Metadata": ""
+    },
+    {
+      "Name": "/conv1/Conv + /relu/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "Reformatted Input Tensor 0 to /conv1/Conv + /relu/Relu",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            3,
+            224,
+            224
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 4 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            112,
+            112
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        7,
+        7
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        3,
+        3
+      ],
+      "PostPadding": [
+        3,
+        3
+      ],
+      "Stride": [
+        2,
+        2
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 64,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 9408
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 64
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x32x64_stage1_warpsize4x1x1_g1_tensor16x8x16_aligna8_alignc8",
+      "TacticValue": "0x280b0ad3c23d8442",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /conv1/Conv]\u001e[ONNX Layer: /relu/Relu]"
+    },
+    {
+      "Name": "/maxpool/MaxPool",
+      "LayerType": "CaskPooling",
+      "Inputs": [
+        {
+          "Name": "/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            112,
+            112
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/maxpool/MaxPool_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Pooling",
+      "PoolingType": "MAX",
+      "WindowSize": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        2,
+        2
+      ],
+      "BlendFactor": 0,
+      "AverageCountExcludesPadding": 1,
+      "TacticName": "sm50_xmma_pooling_max_nhwc_FP16FP32_WINDOWSIZE_3_NOT_PROPAGATE_NAN_2D",
+      "TacticValue": "0xee73a603ebea4565",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /maxpool/MaxPool]"
+    },
+    {
+      "Name": "/layer1/layer1.0/conv1/Conv + /layer1/layer1.0/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/maxpool/MaxPool_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.0/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 64,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 4096
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 64
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x000000000002080f",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.0/conv1/Conv]\u001e[ONNX Layer: /layer1/layer1.0/relu/Relu]"
+    },
+    {
+      "Name": "/layer1/layer1.0/conv2/Conv + /layer1/layer1.0/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.0/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.0/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 64,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 36864
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 64
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0xe1ff5ad20f5c6bf6",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.0/conv2/Conv]\u001e[ONNX Layer: /layer1/layer1.0/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer1/layer1.0/conv3/Conv",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.0/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.0/conv3/Conv_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 16384
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 0,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "NONE",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize128x64x32_stage5_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020677",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.0/conv3/Conv]"
+    },
+    {
+      "Name": "/layer1/layer1.0/downsample/downsample.0/Conv + /layer1/layer1.0/Add + /layer1/layer1.0/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/maxpool/MaxPool_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer1/layer1.0/conv3/Conv_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 16384
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "ampere_h16816gemm_128x64_ldg8_relu_stages_32x6_nn_v1",
+      "TacticValue": "0x0000000000020278",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.0/downsample/downsample.0/Conv]\u001e[ONNX Layer: /layer1/layer1.0/Add]\u001e[ONNX Layer: /layer1/layer1.0/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer1/layer1.1/conv1/Conv + /layer1/layer1.1/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.1/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 64,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 16384
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 64
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.1/conv1/Conv]\u001e[ONNX Layer: /layer1/layer1.1/relu/Relu]"
+    },
+    {
+      "Name": "/layer1/layer1.1/conv2/Conv + /layer1/layer1.1/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.1/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.1/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 64,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 36864
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 64
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0xe1ff5ad20f5c6bf6",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.1/conv2/Conv]\u001e[ONNX Layer: /layer1/layer1.1/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer1/layer1.1/conv3/Conv + /layer1/layer1.1/Add + /layer1/layer1.1/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.1/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer1/layer1.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 16384
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "ampere_h16816gemm_128x64_ldg8_relu_stages_32x6_nn_v1",
+      "TacticValue": "0x0000000000020278",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.1/conv3/Conv]\u001e[ONNX Layer: /layer1/layer1.1/Add]\u001e[ONNX Layer: /layer1/layer1.1/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer1/layer1.2/conv1/Conv + /layer1/layer1.2/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.2/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 64,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 16384
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 64
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.2/conv1/Conv]\u001e[ONNX Layer: /layer1/layer1.2/relu/Relu]"
+    },
+    {
+      "Name": "/layer1/layer1.2/conv2/Conv + /layer1/layer1.2/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.2/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.2/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 64,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 36864
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 64
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0xe1ff5ad20f5c6bf6",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.2/conv2/Conv]\u001e[ONNX Layer: /layer1/layer1.2/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer1/layer1.2/conv3/Conv + /layer1/layer1.2/Add + /layer1/layer1.2/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.2/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            64,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer1/layer1.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer1/layer1.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 16384
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "ampere_h16816gemm_128x64_ldg8_relu_stages_32x6_nn_v1",
+      "TacticValue": "0x0000000000020278",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer1/layer1.2/conv3/Conv]\u001e[ONNX Layer: /layer1/layer1.2/Add]\u001e[ONNX Layer: /layer1/layer1.2/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.0/downsample/downsample.0/Conv",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.0/downsample/downsample.0/Conv_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        2,
+        2
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 131072
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 0,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "NONE",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage4_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x4a81ea1e51436a30",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.0/downsample/downsample.0/Conv]"
+    },
+    {
+      "Name": "/layer2/layer2.0/conv1/Conv + /layer2/layer2.0/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer1/layer1.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.0/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 128,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 32768
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 128
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x000000000002080f",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.0/conv1/Conv]\u001e[ONNX Layer: /layer2/layer2.0/relu/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.0/conv2/Conv + /layer2/layer2.0/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.0/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            56,
+            56
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.0/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        2,
+        2
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 128,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 147456
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 128
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0xe1ff5ad20f5c6bf6",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.0/conv2/Conv]\u001e[ONNX Layer: /layer2/layer2.0/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.0/conv3/Conv + /layer2/layer2.0/Add + /layer2/layer2.0/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.0/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer2/layer2.0/downsample/downsample.0/Conv_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 65536
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "ampere_h16816gemm_64x64_ldg8_relu_stages_64x5_nn_v1",
+      "TacticValue": "0x0000000000020a10",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.0/conv3/Conv]\u001e[ONNX Layer: /layer2/layer2.0/Add]\u001e[ONNX Layer: /layer2/layer2.0/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.1/conv1/Conv + /layer2/layer2.1/relu/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.1/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 128,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 65536
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 128
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16_t1r1s1",
+      "TacticValue": "0x2aa016c86360697f",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.1/conv1/Conv]\u001e[ONNX Layer: /layer2/layer2.1/relu/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.1/conv2/Conv + /layer2/layer2.1/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.1/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.1/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 128,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 147456
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 128
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0xe1ff5ad20f5c6bf6",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.1/conv2/Conv]\u001e[ONNX Layer: /layer2/layer2.1/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.1/conv3/Conv + /layer2/layer2.1/Add + /layer2/layer2.1/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.1/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer2/layer2.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 65536
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "ampere_h16816gemm_64x64_ldg8_relu_stages_64x5_nn_v1",
+      "TacticValue": "0x0000000000020a10",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.1/conv3/Conv]\u001e[ONNX Layer: /layer2/layer2.1/Add]\u001e[ONNX Layer: /layer2/layer2.1/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.2/conv1/Conv + /layer2/layer2.2/relu/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.2/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 128,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 65536
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 128
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16_t1r1s1",
+      "TacticValue": "0x2aa016c86360697f",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.2/conv1/Conv]\u001e[ONNX Layer: /layer2/layer2.2/relu/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.2/conv2/Conv + /layer2/layer2.2/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.2/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.2/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 128,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 147456
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 128
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0xe1ff5ad20f5c6bf6",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.2/conv2/Conv]\u001e[ONNX Layer: /layer2/layer2.2/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.2/conv3/Conv + /layer2/layer2.2/Add + /layer2/layer2.2/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.2/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer2/layer2.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 65536
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "ampere_h16816gemm_64x64_ldg8_relu_stages_64x5_nn_v1",
+      "TacticValue": "0x0000000000020a10",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.2/conv3/Conv]\u001e[ONNX Layer: /layer2/layer2.2/Add]\u001e[ONNX Layer: /layer2/layer2.2/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.3/conv1/Conv + /layer2/layer2.3/relu/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.3/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 128,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 65536
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 128
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16_t1r1s1",
+      "TacticValue": "0x2aa016c86360697f",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.3/conv1/Conv]\u001e[ONNX Layer: /layer2/layer2.3/relu/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.3/conv2/Conv + /layer2/layer2.3/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.3/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.3/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 128,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 147456
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 128
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0xe1ff5ad20f5c6bf6",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.3/conv2/Conv]\u001e[ONNX Layer: /layer2/layer2.3/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer2/layer2.3/conv3/Conv + /layer2/layer2.3/Add + /layer2/layer2.3/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.3/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            128,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer2/layer2.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer2/layer2.3/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 65536
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "ampere_h16816gemm_64x64_ldg8_relu_stages_64x5_nn_v1",
+      "TacticValue": "0x0000000000020a10",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer2/layer2.3/conv3/Conv]\u001e[ONNX Layer: /layer2/layer2.3/Add]\u001e[ONNX Layer: /layer2/layer2.3/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.0/downsample/downsample.0/Conv",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.3/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.0/downsample/downsample.0/Conv_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        2,
+        2
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 1024,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 524288
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 1024
+      },
+      "HasBias": 1,
+      "HasReLU": 0,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "NONE",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_indexed_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage4_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x4a81ea1e51436a30",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.0/downsample/downsample.0/Conv]"
+    },
+    {
+      "Name": "/layer3/layer3.0/conv1/Conv + /layer3/layer3.0/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer2/layer2.3/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.0/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 131072
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize64x64x64_stage4_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x00000000000204f0",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.0/conv1/Conv]\u001e[ONNX Layer: /layer3/layer3.0/relu/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.0/conv2/Conv + /layer3/layer3.0/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.0/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            28,
+            28
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.0/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        2,
+        2
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 589824
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x5820b3dda403c4d0",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.0/conv2/Conv]\u001e[ONNX Layer: /layer3/layer3.0/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.0/conv3/Conv + /layer3/layer3.0/Add + /layer3/layer3.0/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.0/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer3/layer3.0/downsample/downsample.0/Conv_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 1024,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 1024
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.0/conv3/Conv]\u001e[ONNX Layer: /layer3/layer3.0/Add]\u001e[ONNX Layer: /layer3/layer3.0/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.1/conv1/Conv + /layer3/layer3.1/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.1/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020787",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.1/conv1/Conv]\u001e[ONNX Layer: /layer3/layer3.1/relu/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.1/conv2/Conv + /layer3/layer3.1/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.1/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.1/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 589824
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x5820b3dda403c4d0",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.1/conv2/Conv]\u001e[ONNX Layer: /layer3/layer3.1/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.1/conv3/Conv + /layer3/layer3.1/Add + /layer3/layer3.1/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.1/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer3/layer3.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 1024,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 1024
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.1/conv3/Conv]\u001e[ONNX Layer: /layer3/layer3.1/Add]\u001e[ONNX Layer: /layer3/layer3.1/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.2/conv1/Conv + /layer3/layer3.2/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.2/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020787",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.2/conv1/Conv]\u001e[ONNX Layer: /layer3/layer3.2/relu/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.2/conv2/Conv + /layer3/layer3.2/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.2/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.2/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 589824
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x5820b3dda403c4d0",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.2/conv2/Conv]\u001e[ONNX Layer: /layer3/layer3.2/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.2/conv3/Conv + /layer3/layer3.2/Add + /layer3/layer3.2/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.2/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer3/layer3.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 1024,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 1024
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.2/conv3/Conv]\u001e[ONNX Layer: /layer3/layer3.2/Add]\u001e[ONNX Layer: /layer3/layer3.2/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.3/conv1/Conv + /layer3/layer3.3/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.3/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020787",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.3/conv1/Conv]\u001e[ONNX Layer: /layer3/layer3.3/relu/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.3/conv2/Conv + /layer3/layer3.3/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.3/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.3/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 589824
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x5820b3dda403c4d0",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.3/conv2/Conv]\u001e[ONNX Layer: /layer3/layer3.3/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.3/conv3/Conv + /layer3/layer3.3/Add + /layer3/layer3.3/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.3/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer3/layer3.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.3/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 1024,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 1024
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.3/conv3/Conv]\u001e[ONNX Layer: /layer3/layer3.3/Add]\u001e[ONNX Layer: /layer3/layer3.3/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.4/conv1/Conv + /layer3/layer3.4/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.3/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.4/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020787",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.4/conv1/Conv]\u001e[ONNX Layer: /layer3/layer3.4/relu/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.4/conv2/Conv + /layer3/layer3.4/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.4/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.4/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 589824
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x5820b3dda403c4d0",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.4/conv2/Conv]\u001e[ONNX Layer: /layer3/layer3.4/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.4/conv3/Conv + /layer3/layer3.4/Add + /layer3/layer3.4/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.4/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer3/layer3.3/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.4/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 1024,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 1024
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.4/conv3/Conv]\u001e[ONNX Layer: /layer3/layer3.4/Add]\u001e[ONNX Layer: /layer3/layer3.4/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.5/conv1/Conv + /layer3/layer3.5/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.4/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.5/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020787",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.5/conv1/Conv]\u001e[ONNX Layer: /layer3/layer3.5/relu/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.5/conv2/Conv + /layer3/layer3.5/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.5/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.5/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 256,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 589824
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 256
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x5820b3dda403c4d0",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.5/conv2/Conv]\u001e[ONNX Layer: /layer3/layer3.5/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer3/layer3.5/conv3/Conv + /layer3/layer3.5/Add + /layer3/layer3.5/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.5/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            256,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer3/layer3.4/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer3/layer3.5/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 1024,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 262144
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 1024
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer3/layer3.5/conv3/Conv]\u001e[ONNX Layer: /layer3/layer3.5/Add]\u001e[ONNX Layer: /layer3/layer3.5/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.0/downsample/downsample.0/Conv",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.5/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.0/downsample/downsample.0/Conv_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        2,
+        2
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 2048,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 2097152
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 2048
+      },
+      "HasBias": 1,
+      "HasReLU": 0,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "NONE",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16",
+      "TacticValue": "0x5820b3dda403c4d0",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.0/downsample/downsample.0/Conv]"
+    },
+    {
+      "Name": "/layer4/layer4.0/conv1/Conv + /layer4/layer4.0/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer3/layer3.5/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            1024,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.0/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 524288
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.0/conv1/Conv]\u001e[ONNX Layer: /layer4/layer4.0/relu/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.0/conv2/Conv + /layer4/layer4.0/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.0/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            14,
+            14
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.0/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        2,
+        2
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 2359296
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16_t1r3s3",
+      "TacticValue": "0xa033e20ae9f412b2",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.0/conv2/Conv]\u001e[ONNX Layer: /layer4/layer4.0/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.0/conv3/Conv + /layer4/layer4.0/Add + /layer4/layer4.0/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.0/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer4/layer4.0/downsample/downsample.0/Conv_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 2048,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 1048576
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 2048
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.0/conv3/Conv]\u001e[ONNX Layer: /layer4/layer4.0/Add]\u001e[ONNX Layer: /layer4/layer4.0/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.1/conv1/Conv + /layer4/layer4.1/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.1/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 1048576
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x000000000002072e",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.1/conv1/Conv]\u001e[ONNX Layer: /layer4/layer4.1/relu/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.1/conv2/Conv + /layer4/layer4.1/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.1/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.1/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 2359296
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16_t1r3s3",
+      "TacticValue": "0xa033e20ae9f412b2",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.1/conv2/Conv]\u001e[ONNX Layer: /layer4/layer4.1/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.1/conv3/Conv + /layer4/layer4.1/Add + /layer4/layer4.1/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.1/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer4/layer4.0/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 2048,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 1048576
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 2048
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.1/conv3/Conv]\u001e[ONNX Layer: /layer4/layer4.1/Add]\u001e[ONNX Layer: /layer4/layer4.1/relu_2/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.2/conv1/Conv + /layer4/layer4.2/relu/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.2/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 1048576
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16",
+      "TacticValue": "0x000000000002072e",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.2/conv1/Conv]\u001e[ONNX Layer: /layer4/layer4.2/relu/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.2/conv2/Conv + /layer4/layer4.2/relu_1/Relu",
+      "LayerType": "CaskConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.2/relu/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.2/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        3,
+        3
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        1,
+        1
+      ],
+      "PostPadding": [
+        1,
+        1
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 512,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 2359296
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 512
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 0,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_fprop_implicit_gemm_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage5_warpsize2x2x1_g1_tensor16x8x16_t1r3s3",
+      "TacticValue": "0xa033e20ae9f412b2",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.2/conv2/Conv]\u001e[ONNX Layer: /layer4/layer4.2/relu_1/Relu]"
+    },
+    {
+      "Name": "/layer4/layer4.2/conv3/Conv + /layer4/layer4.2/Add + /layer4/layer4.2/relu_2/Relu",
+      "LayerType": "CaskGemmConvolution",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.2/relu_1/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            512,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        },
+        {
+          "Name": "/layer4/layer4.1/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/layer4/layer4.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Convolution",
+      "Kernel": [
+        1,
+        1
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "Dilation": [
+        1,
+        1
+      ],
+      "OutMaps": 2048,
+      "Groups": 1,
+      "Weights": {
+        "Type": "Half",
+        "Count": 1048576
+      },
+      "Bias": {
+        "Type": "Half",
+        "Count": 2048
+      },
+      "HasBias": 1,
+      "HasReLU": 1,
+      "HasSparseWeights": 0,
+      "HasDynamicFilter": 0,
+      "HasDynamicBias": 0,
+      "HasResidual": 1,
+      "ConvXAsActInputIdx": -1,
+      "BiasAsActInputIdx": -1,
+      "ResAsActInputIdx": -1,
+      "Activation": "RELU",
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_tn_n_tilesize64x32x64_stage7_warpsize4x1x1_tensor16x8x16",
+      "TacticValue": "0x0000000000020758",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /layer4/layer4.2/conv3/Conv]\u001e[ONNX Layer: /layer4/layer4.2/Add]\u001e[ONNX Layer: /layer4/layer4.2/relu_2/Relu]"
+    },
+    {
+      "Name": "/avgpool/GlobalAveragePool",
+      "LayerType": "CaskPooling",
+      "Inputs": [
+        {
+          "Name": "/layer4/layer4.2/relu_2/Relu_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            7,
+            7
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "/avgpool/GlobalAveragePool_output_0",
+          "Location": "Device",
+          "Dimensions": [
+            1,
+            2048,
+            1,
+            1
+          ],
+          "Format/Datatype": "Channel major FP16 format where channel % 8 == 0"
+        }
+      ],
+      "ParameterType": "Pooling",
+      "PoolingType": "AVERAGE",
+      "WindowSize": [
+        7,
+        7
+      ],
+      "PaddingMode": "kEXPLICIT_ROUND_DOWN",
+      "PrePadding": [
+        0,
+        0
+      ],
+      "PostPadding": [
+        0,
+        0
+      ],
+      "Stride": [
+        1,
+        1
+      ],
+      "BlendFactor": 0,
+      "AverageCountExcludesPadding": 1,
+      "TacticName": "sm50_xmma_pooling_fw_4d_FP16FP32NHWC_Average_FastDiv_CAlign4",
+      "TacticValue": "0x56d7b61f084f251e",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /avgpool/GlobalAveragePool]"
+    },
+    {
+      "Name": "/fc/Gemm_myl56_0",
+      "LayerType": "gemm",
+      "Inputs": [
+        {
+          "Name": "/avgpool/GlobalAveragePool_output_0",
+          "Dimensions": [
+            1,
+            2048
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__myln_k_arg__bb1_2_myl56",
+          "Dimensions": [
+            1,
+            1000
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "sm50_xmma_cublas_gemvx_f16f16_f16_f16_tn_n_int32_unit_n_launch_param16x32x32_strided_unit_stride",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /fc/Gemm]"
+    },
+    {
+      "Name": "__myl_Cast_myl56_1",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "__myln_k_arg__bb1_2_myl56",
+          "Dimensions": [
+            1,
+            1000
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "output",
+          "Dimensions": [
+            1,
+            1000
+          ],
+          "Format/Datatype": "Float"
+        }
+      ],
+      "TacticName": "__myl_Cast_0x33c744558abe44511fee3fa6338a6b82",
+      "StreamId": 0,
+      "Metadata": ""
+    }
+  ],
+  "Bindings": [
+    "input",
+    "output"
+  ]
+}

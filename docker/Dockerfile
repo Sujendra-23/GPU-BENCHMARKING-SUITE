@@ -6,7 +6,11 @@ WORKDIR /workspace
 COPY harness/ ./harness/
 COPY training/ ./training/
 COPY kernels/ ./kernels/
-COPY requirements.txt .
+COPY compilers/ ./compilers/
+COPY serving/ ./serving/
+COPY scripts/ ./scripts/
+COPY docs/ ./docs/
+COPY requirements*.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 

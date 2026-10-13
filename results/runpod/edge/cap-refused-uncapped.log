@@ -1,0 +1,7 @@
+[10/13/2026-07:21:58] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/13/2026-07:21:58] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+[10/13/2026-07:21:58] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+BenchResult(framework='tensorrt', batch_size=1, precision='fp32', mean_latency_ms=0.5068, p95_latency_ms=0.5101, throughput_samples_per_sec=1973.29, gpu_util_percent=0.0, gpu_power_watts=57.63, model='resnet18')
+BenchResult(framework='tensorrt', batch_size=1, precision='fp16', mean_latency_ms=0.1897, p95_latency_ms=0.1955, throughput_samples_per_sec=5271.11, gpu_util_percent=0.0, gpu_power_watts=57.63, model='resnet18')
+BenchResult(framework='tensorrt', batch_size=1, precision='int8', mean_latency_ms=0.1877, p95_latency_ms=0.1953, throughput_samples_per_sec=5326.62, gpu_util_percent=0.0, gpu_power_watts=57.63, model='resnet18')
+wrote 3 rows to results/runpod/edge/cap-refused-uncapped.csv

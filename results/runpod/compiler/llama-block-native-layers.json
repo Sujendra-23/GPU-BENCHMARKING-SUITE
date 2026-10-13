@@ -1,0 +1,372 @@
+{
+  "Layers": [
+    {
+      "Name": "__myl_MoveMulMeanAddSqrtDivMulMul_myl0_0",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "input",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        },
+        {
+          "Name": "input",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__mye10693_2_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "__myl_MoveMulMeanAddSqrtDivMulMul_0x1377d7d3e9a71ac2b3f5c7054958915c",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /norm1/Mul]\u001f[ONNX Layer: /norm1/ReduceMean]\u001f[ONNX Layer: /norm1/Sqrt]\u001f[ONNX Layer: /norm1/Add]\u001f[ONNX Layer: /norm1/Mul_1]\u001f[ONNX Layer: /norm1/Mul_2]\u001f[ONNX Layer: /norm1/Div]"
+    },
+    {
+      "Name": "/v/MatMul+/k/MatMul+/q/MatMul_myl0_1",
+      "LayerType": "gemm",
+      "Inputs": [
+        {
+          "Name": "__mye10693_2_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__mye10693_myl0",
+          "Dimensions": [
+            3,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "ampere_h16816gemm_64x64_ldg8_stages_64x5_nn_v1",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /v/MatMul]\u001f[ONNX Layer: /k/MatMul]\u001f[ONNX Layer: /q/MatMul]"
+    },
+    {
+      "Name": "__myl_TranSlicNegSlicConcMulMulAddTranReshMove_myl0_2",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "__mye10693_myl0",
+          "Dimensions": [
+            1,
+            128,
+            8,
+            64
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__mye10567_4_myl0",
+          "Dimensions": [
+            8,
+            64,
+            128
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "__myl_TranSlicNegSlicConcMulMulAddTranReshMove_0xbd2304771edde6a990d82ddfe46a1421",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /Reshape_1]\u001e[ONNX Layer: /Transpose_1]\u001f[ONNX Layer: /Slice_3]\u001f[ONNX Layer: /Slice_2]\u001f[ONNX Layer: /Concat_1]\u001f[ONNX Layer: /Mul_7]\u001f[ONNX Layer: /Add_3]\u001f[ONNX Layer: /Mul_6]\u001f[ONNX Layer: /MatMul]\u001f[ONNX Layer: /Transpose_3]\u001f[ONNX Layer: /Neg_1]"
+    },
+    {
+      "Name": "__myl_TranSlicNegSlicConcMulMulAddReshMove_myl0_3",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "__mye10693_myl0",
+          "Dimensions": [
+            1,
+            128,
+            8,
+            64
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__mye10567_5_myl0",
+          "Dimensions": [
+            8,
+            128,
+            64
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "__myl_TranSlicNegSlicConcMulMulAddReshMove_0xfcc3434a80900d4b29462b67bd7875cb",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /Reshape]\u001e[ONNX Layer: /Transpose]\u001f[ONNX Layer: /Slice_1]\u001f[ONNX Layer: /Slice]\u001f[ONNX Layer: /Concat]\u001f[ONNX Layer: /Mul_3]\u001f[ONNX Layer: /Add_1]\u001f[ONNX Layer: /Mul_2]\u001f[ONNX Layer: /MatMul]\u001f[ONNX Layer: /Neg]"
+    },
+    {
+      "Name": "_gemm_mha_v2_myl0_4",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "__mye10567_5_myl0",
+          "Dimensions": [
+            8,
+            128,
+            64
+          ],
+          "Format/Datatype": "Half"
+        },
+        {
+          "Name": "__mye10567_4_myl0",
+          "Dimensions": [
+            8,
+            64,
+            128
+          ],
+          "Format/Datatype": "Half"
+        },
+        {
+          "Name": "__mye10693_myl0",
+          "Dimensions": [
+            8,
+            128,
+            64
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__mye10567_myl0",
+          "Dimensions": [
+            8,
+            128,
+            64
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "_gemm_mha_v2_0x2347c0c616df3aa45dc25ba26f92ff17",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /Softmax]\u001f[ONNX Layer: /MatMul_1]\u001f[ONNX Layer: /Add_4]\u001f[ONNX Layer: /Div_2]\u001f[ONNX Layer: /MatMul]"
+    },
+    {
+      "Name": "__myl_FcAdd_myl0_5",
+      "LayerType": "fusion",
+      "Inputs": [
+        {
+          "Name": "input",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        },
+        {
+          "Name": "__mye10567_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__myln_k_arg__bb1_7_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16_by_fusion_tactic",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /o/MatMul]\u001f[ONNX Layer: /Add_5]"
+    },
+    {
+      "Name": "__myl_MulMeanAddSqrtDivMulMul_myl0_6",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "__myln_k_arg__bb1_7_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        },
+        {
+          "Name": "__myln_k_arg__bb1_7_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        },
+        {
+          "Name": "__myln_k_arg__bb1_7_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__mye10682_8_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "__myl_MulMeanAddSqrtDivMulMul_0x3366e29427d60aec9698a486aa4fe0b6",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /norm2/Mul]\u001f[ONNX Layer: /norm2/ReduceMean]\u001f[ONNX Layer: /norm2/Sqrt]\u001f[ONNX Layer: /norm2/Add]\u001f[ONNX Layer: /norm2/Mul_1]\u001f[ONNX Layer: /norm2/Mul_2]\u001f[ONNX Layer: /norm2/Div]"
+    },
+    {
+      "Name": "/up/MatMul+/gate/MatMul_myl0_7",
+      "LayerType": "gemm",
+      "Inputs": [
+        {
+          "Name": "__mye10682_8_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__mye10682_myl0",
+          "Dimensions": [
+            1,
+            128,
+            2752
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "ampere_h16816gemm_64x64_ldg8_stages_64x5_tn_v1",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /up/MatMul]\u001f[ONNX Layer: /gate/MatMul]"
+    },
+    {
+      "Name": "__myl_SiluMul_myl0_8",
+      "LayerType": "kgen",
+      "Inputs": [
+        {
+          "Name": "__mye10682_myl0",
+          "Dimensions": [
+            1,
+            128,
+            1376
+          ],
+          "Format/Datatype": "Half"
+        },
+        {
+          "Name": "__mye10682_myl0",
+          "Dimensions": [
+            1,
+            128,
+            1376
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "__myln_k_arg__bb1_10_myl0",
+          "Dimensions": [
+            1,
+            128,
+            1376
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "__myl_SiluMul_0x74a68fdc82c74a56daca7774fb06fdb1",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /Mul_8]\u001f[ONNX Layer: /Sigmoid]\u001f[ONNX Layer: /Mul_9]"
+    },
+    {
+      "Name": "__myl_FcAdd_myl0_9",
+      "LayerType": "fusion",
+      "Inputs": [
+        {
+          "Name": "__myln_k_arg__bb1_7_myl0",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        },
+        {
+          "Name": "__myln_k_arg__bb1_10_myl0",
+          "Dimensions": [
+            1,
+            128,
+            1376
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "Outputs": [
+        {
+          "Name": "output",
+          "Dimensions": [
+            1,
+            128,
+            512
+          ],
+          "Format/Datatype": "Half"
+        }
+      ],
+      "TacticName": "sm80_xmma_gemm_f16f16_f16f16_f16_nn_n_tilesize32x32x64_stage6_warpsize2x2x1_tensor16x8x16_by_fusion_tactic",
+      "StreamId": 0,
+      "Metadata": "[ONNX Layer: /down/MatMul]\u001f[ONNX Layer: /Add_6]"
+    }
+  ],
+  "Bindings": [
+    "input",
+    "output"
+  ]
+}

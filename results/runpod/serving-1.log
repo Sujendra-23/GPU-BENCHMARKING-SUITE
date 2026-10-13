@@ -1,0 +1,6 @@
+Wrote results/runpod/serving/vllm-fp8-tp1-launch.json
+vllm c=1: TTFT p50=16.794539988040924 ms, 77.16 output tok/s, failed=0
+vllm c=4: TTFT p50=26.24899335205555 ms, 289.14 output tok/s, failed=0
+vllm c=8: TTFT p50=38.19188289344311 ms, 563.95 output tok/s, failed=0
+vllm c=16: TTFT p50=58.488599956035614 ms, 1097.79 output tok/s, failed=0
+Wrote results/runpod/serving/vllm-fp8-tp1.json
